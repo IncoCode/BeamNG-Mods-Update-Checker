@@ -107,12 +107,12 @@ namespace BeamNGModsUpdateChecker
             this.upd.saveThreads();
         }
 
-        private void showUpdNot( int updatesCount )
+        private void showUpdNot( int updatesCount, bool showBalloon = true )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
             niTray.Text = string.Format( strings.updatesCount, updatesCount );
             ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
-            if ( updatesCount > 0 )
+            if ( updatesCount > 0 && showBalloon )
             {
                 niTray.BalloonTipIcon = ToolTipIcon.Info;
                 niTray.BalloonTipTitle = strings.updatesFound;
@@ -190,6 +190,7 @@ namespace BeamNGModsUpdateChecker
                 lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
                 lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
                 this.upd.makeRead( link );
+                this.showUpdNot( this.upd.getUnreadThreads(), false );
             }
         }
 
@@ -231,6 +232,7 @@ namespace BeamNGModsUpdateChecker
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
                     this.upd.makeRead( link );
+                    this.showUpdNot( this.upd.getUnreadThreads(), false );
                 }
             }
         }

@@ -205,6 +205,16 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        /// <summary>
+        /// Unread threads
+        /// </summary>
+        /// <returns>Returns the value of unread threads</returns>
+        public int getUnreadThreads()
+        {
+            List<Topic> unread = this.threads.FindAll( p => p.Read == false );
+            return unread.Count;
+        }
+
         #endregion
 
         #region Save/Load

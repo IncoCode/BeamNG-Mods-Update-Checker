@@ -33,12 +33,30 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        private bool IsStartupItem()
+        {
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
+            if ( rkApp.GetValue( "BeamNGModsUpdateChecker" ) == null )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void btnOk_Click( object sender, EventArgs e )
         {
             this.MainForm.minimizeWhenStart = cbMinimizeToTray.Checked;
             this.MainForm.updInterval = (int)nudUpdInterval.Value;
             this.addRemoveStartup( cbAutorun.Checked );
             this.Close();
+        }
+
+        private void frmOptions_Load( object sender, EventArgs e )
+        {
+            cbAutorun.Checked = this.IsStartupItem();
         }
     }
 }
