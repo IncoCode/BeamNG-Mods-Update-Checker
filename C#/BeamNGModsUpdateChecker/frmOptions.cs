@@ -57,6 +57,8 @@ namespace BeamNGModsUpdateChecker
         private void frmOptions_Load( object sender, EventArgs e )
         {
             cbAutorun.Checked = this.IsStartupItem();
+            cbMinimizeToTray.Checked = this.MainForm.minimizeWhenStart;
+            nudUpdInterval.Value = this.MainForm.updInterval;
         }
     }
 }
