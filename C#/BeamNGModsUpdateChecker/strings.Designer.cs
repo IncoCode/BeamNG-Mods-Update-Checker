@@ -61,6 +61,15 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Проверка обновлений....
+        /// </summary>
+        internal static string checkingForUpdates {
+            get {
+                return ResourceManager.GetString("checkingForUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Приложение будет перезапущено! Продолжить?.
         /// </summary>
         internal static string restartApp {

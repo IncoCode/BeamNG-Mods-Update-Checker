@@ -102,6 +102,8 @@ namespace BeamNGModsUpdateChecker
 
         private void checkUpdates()
         {
+            ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
+            Application.DoEvents();
             int updatesCount = this.upd.checkUpdates();
             this.showUpdNot( updatesCount );
             this.upd.saveThreads();
