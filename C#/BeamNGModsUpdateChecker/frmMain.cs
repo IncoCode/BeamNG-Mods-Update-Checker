@@ -105,6 +105,7 @@ namespace BeamNGModsUpdateChecker
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
             niTray.Text = string.Format( strings.updatesCount, updatesCount );
+            ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
             if ( updatesCount > 0 )
             {
                 niTray.BalloonTipIcon = ToolTipIcon.Info;
@@ -219,7 +220,7 @@ namespace BeamNGModsUpdateChecker
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
                     this.upd.makeRead( link );
-                }                
+                }
             }
         }
 

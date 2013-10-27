@@ -51,9 +51,12 @@
             this.tsmiExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ssStatus = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
             this.cmsTray.SuspendLayout();
+            this.ssStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -195,10 +198,23 @@
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
+            // ssStatus
+            // 
+            resources.ApplyResources(this.ssStatus, "ssStatus");
+            this.ssStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.ssStatus.Name = "ssStatus";
+            // 
+            // toolStripStatusLabel1
+            // 
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ssStatus);
             this.Controls.Add(this.lvThreads);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.msMenu);
@@ -211,6 +227,8 @@
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.cmsTray.ResumeLayout(false);
+            this.ssStatus.ResumeLayout(false);
+            this.ssStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +257,8 @@
         private System.Windows.Forms.ToolStripMenuItem языкLanguageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip ssStatus;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
