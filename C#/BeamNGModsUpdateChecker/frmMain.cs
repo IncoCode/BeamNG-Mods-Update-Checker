@@ -211,12 +211,15 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiMakeRead_Click( object sender, EventArgs e )
         {
-            if ( lvThreads.SelectedItems.Count == 1 )
+            if ( lvThreads.SelectedItems.Count > 0 )
             {
-                string link = lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].Text;
-                lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
-                lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
-                this.upd.makeRead( link );
+                for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
+                {
+                    string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
+                    lvThreads.SelectedItems[ i ].BackColor = Color.White;
+                    lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
+                    this.upd.makeRead( link );
+                }                
             }
         }
 

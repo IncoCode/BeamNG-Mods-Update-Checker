@@ -15,6 +15,7 @@ namespace BeamNGModsUpdateChecker
         public string Link { get; set; }
         public string Title { get; set; }
         public string EditMsg { get; set; }
+        public DateTime EditMsgDate { get; set; }
         public bool Read { get; set; }
 
         #region Constructors
@@ -39,27 +40,35 @@ namespace BeamNGModsUpdateChecker
         public DateTime strToDate( string str )
         {
             DateTime dt = DateTime.Now;
-            Regex regex = new Regex( "([0-9]+) (Hour(s)?|Day(s)?|Minute(s)?|Week(s)?) Ago" );
+            Regex regex = new Regex( "([0-9]+) (Hour(s)?|Day(s)?|Minute(s)?|Week(s)?) Ago at ([0-9]+):([0-9]+) (AM|PM)" );
             Match match = regex.Match( str );
             if ( match.Success )
             {
                 double num = double.Parse( match.Groups[ 1 ].ToString() );
                 string s = match.Groups[ 2 ].ToString();
+                string h = int.Parse( match.Groups[ 7 ].ToString() ).ToString();
+                string m = int.Parse( match.Groups[ 8 ].ToString() ).ToString();
+                string ap = match.Groups[ 9 ].ToString();
+                string timeS = h + ":" + m + " " + ap;
                 if ( s.IndexOf( "Hour" ) >= 0 )
                 {
                     dt = dt.AddHours( -num );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
                 else if ( s.IndexOf( "Day" ) >= 0 )
                 {
                     dt = dt.AddDays( -num );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
                 else if ( s.IndexOf( "Minute" ) >= 0 )
                 {
                     dt = dt.AddMinutes( -num );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
                 else if ( s.IndexOf( "Week" ) >= 0 )
                 {
                     dt = dt.AddDays( -num * 7 );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
             }
             else
@@ -156,11 +165,12 @@ namespace BeamNGModsUpdateChecker
             if ( !string.IsNullOrEmpty( editMsg ) )
             {
                 DateTime dtNew = this.strToDate( editMsg );
-                DateTime dtOld = ( this.EditMsg != null ) ? this.strToDate( this.EditMsg ) : new DateTime();
+                DateTime dtOld = ( this.EditMsg != null ) ? this.EditMsgDate : new DateTime();
                 if ( dtNew > dtOld )
                 {
                     result = true;
                     this.EditMsg = editMsg;
+                    this.EditMsgDate = dtNew;
                 }
             }
             return result;

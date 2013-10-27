@@ -142,7 +142,7 @@ namespace BeamNGModsUpdateChecker
                     thread.Read = false;
                     updEvent( this, args );
                 }
-                Thread.Sleep( 200 );
+                Thread.Sleep( 50 );
             }
             return updatesCount;
         }

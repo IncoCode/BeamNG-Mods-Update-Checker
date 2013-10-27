@@ -29,7 +29,7 @@ namespace BeamNGModsUpdateChecker
             {
                 string link = links[ i ];
                 this.upd.addThread( link );
-                Thread.Sleep( 200 );
+                Thread.Sleep( 50 );
             }
             this.Close();
         }
