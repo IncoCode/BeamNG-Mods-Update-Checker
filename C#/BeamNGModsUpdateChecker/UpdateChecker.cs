@@ -164,6 +164,10 @@ namespace BeamNGModsUpdateChecker
             {
                 link = link.Substring( 0, link.IndexOf( "?" ) );
             }
+            if ( link.IndexOf( "/page" ) >= 0 )
+            {
+                link = link.Substring( 0, link.IndexOf( "/page" ) );
+            }
             if ( !this.threads.Contains( new Topic { Link = link } ) )
             {
                 this.threads.Add( new Topic( link, this.cookieJar ) );
