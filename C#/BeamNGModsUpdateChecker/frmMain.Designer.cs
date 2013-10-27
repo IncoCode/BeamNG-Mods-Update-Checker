@@ -42,6 +42,7 @@
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddThreads = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.языкLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.русскийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +125,7 @@
             resources.ApplyResources(this.msMenu, "msMenu");
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
+            this.tsmiOptions,
             this.языкLanguageToolStripMenuItem});
             this.msMenu.Name = "msMenu";
             // 
@@ -139,6 +141,12 @@
             resources.ApplyResources(this.tsmiAddThreads, "tsmiAddThreads");
             this.tsmiAddThreads.Name = "tsmiAddThreads";
             this.tsmiAddThreads.Click += new System.EventHandler(this.tsmiAddThreads_Click);
+            // 
+            // tsmiOptions
+            // 
+            resources.ApplyResources(this.tsmiOptions, "tsmiOptions");
+            this.tsmiOptions.Name = "tsmiOptions";
+            this.tsmiOptions.Click += new System.EventHandler(this.tsmiOptions_Click);
             // 
             // языкLanguageToolStripMenuItem
             // 
@@ -162,8 +170,7 @@
             // 
             // tmrUpd
             // 
-            this.tmrUpd.Enabled = true;
-            this.tmrUpd.Interval = 1800000;
+            this.tmrUpd.Interval = 1000;
             this.tmrUpd.Tick += new System.EventHandler(this.tmrUpd_Tick);
             // 
             // niTray
@@ -259,6 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
         private System.Windows.Forms.StatusStrip ssStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOptions;
     }
 }
 

@@ -16,6 +16,8 @@ namespace BeamNGModsUpdateChecker
     public partial class frmMain : Form
     {
         public string lang = "en-GB";
+        public int updInterval = 30;
+        public bool minimizeWhenStart = false;
 
         UpdateChecker upd;
         string login = "";
@@ -73,6 +75,8 @@ namespace BeamNGModsUpdateChecker
             ini.Write( "Login", this.login, "Auth" );
             ini.Write( "Password", this.password, "Auth" );
             ini.Write( "Lang", lang, "Options" );
+            ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
+            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
         }
 
         private void loadSettings()
@@ -81,6 +85,8 @@ namespace BeamNGModsUpdateChecker
             this.login = ini.Read( "Login", "Auth", "" );
             this.password = ini.Read( "Password", "Auth", "" );
             this.lang = ini.Read( "Lang", "Options", lang );
+            this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
+            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
         }
 
         private void updProgress( object sender, UpdEventArgs e )
@@ -136,7 +142,11 @@ namespace BeamNGModsUpdateChecker
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
             this.upd.loadThreads();
             this.printAllThreads();
-            this.checkUpdates();
+            tmrUpd.Start();
+            if ( this.minimizeWhenStart )
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         private void frmMain_FormClosing( object sender, FormClosingEventArgs e )
@@ -185,6 +195,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
+            tmrUpd.Interval = this.updInterval * 60 * 1000;
             this.checkUpdates();
         }
 
@@ -237,6 +248,12 @@ namespace BeamNGModsUpdateChecker
         private void русскийToolStripMenuItem_Click( object sender, EventArgs e )
         {
             this.changeLanguage( "ru-RU" );
+        }
+
+        private void tsmiOptions_Click( object sender, EventArgs e )
+        {
+            frmOptions frm = new frmOptions( this );
+            frm.ShowDialog();
         }
     }
 }
