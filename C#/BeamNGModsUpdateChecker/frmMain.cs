@@ -97,21 +97,21 @@ namespace BeamNGModsUpdateChecker
         private void checkUpdates()
         {
             int updatesCount = this.upd.checkUpdates();
-            if ( updatesCount > 0 )
-            {
-                this.showUpdNot( updatesCount );
-                this.upd.saveThreads();
-            }
+            this.showUpdNot( updatesCount );
+            this.upd.saveThreads();
         }
 
         private void showUpdNot( int updatesCount )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
             niTray.Text = string.Format( strings.updatesCount, updatesCount );
-            niTray.BalloonTipIcon = ToolTipIcon.Info;
-            niTray.BalloonTipTitle = strings.updatesFound;
-            niTray.BalloonTipText = string.Format( strings.updatesCount, updatesCount );
-            niTray.ShowBalloonTip( 2500 );
+            if ( updatesCount > 0 )
+            {
+                niTray.BalloonTipIcon = ToolTipIcon.Info;
+                niTray.BalloonTipTitle = strings.updatesFound;
+                niTray.BalloonTipText = string.Format( strings.updatesCount, updatesCount );
+                niTray.ShowBalloonTip( 2500 );
+            }
         }
 
         private void lvColAutosize()
