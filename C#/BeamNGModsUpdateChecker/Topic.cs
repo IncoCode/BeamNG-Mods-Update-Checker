@@ -31,24 +31,35 @@ namespace BeamNGModsUpdateChecker
 
         #endregion
 
+        /// <summary>
+        /// Converts forum date to DateTime object
+        /// </summary>
+        /// <param name="str">Forum date string</param>
+        /// <returns></returns>
         public DateTime strToDate( string str )
         {
             DateTime dt = DateTime.Now;
-            Regex regex = new Regex( "([0-9]+) (Hour(s)?|Day(s)?|Minute(s)?) Ago" );
+            Regex regex = new Regex( "([0-9]+) (Hour(s)?|Day(s)?|Minute(s)?|Week(s)?) Ago" );
             Match match = regex.Match( str );
             if ( match.Success )
             {
-                if ( match.Groups[ 2 ].ToString().IndexOf( "Hour" ) >= 0 )
+                double num = double.Parse( match.Groups[ 1 ].ToString() );
+                string s = match.Groups[ 2 ].ToString();
+                if ( s.IndexOf( "Hour" ) >= 0 )
                 {
-                    dt = dt.AddHours( -double.Parse( match.Groups[ 1 ].ToString() ) );
+                    dt = dt.AddHours( -num );
                 }
-                else if ( match.Groups[ 2 ].ToString().IndexOf( "Day" ) >= 0 )
+                else if ( s.IndexOf( "Day" ) >= 0 )
                 {
-                    dt = dt.AddDays( -double.Parse( match.Groups[ 1 ].ToString() ) );
+                    dt = dt.AddDays( -num );
                 }
-                else if ( match.Groups[ 2 ].ToString().IndexOf( "Minute" ) >= 0 )
+                else if ( s.IndexOf( "Minute" ) >= 0 )
                 {
-                    dt = dt.AddMinutes( -double.Parse( match.Groups[ 1 ].ToString() ) );
+                    dt = dt.AddMinutes( -num );
+                }
+                else if ( s.IndexOf( "Week" ) >= 0 )
+                {
+                    dt = dt.AddDays( -num * 7 );
                 }
             }
             else
@@ -61,6 +72,11 @@ namespace BeamNGModsUpdateChecker
             return dt;
         }
 
+        /// <summary>
+        /// Updates thread title
+        /// </summary>
+        /// <param name="cookieJar">Cookies</param>
+        /// <returns></returns>
         public bool updTitle( CookieContainer cookieJar )
         {
             bool result = false;
@@ -81,6 +97,11 @@ namespace BeamNGModsUpdateChecker
             return result;
         }
 
+        /// <summary>
+        /// Updates edit message of first post
+        /// </summary>
+        /// <param name="cookieJar"></param>
+        /// <returns></returns>
         public bool updEditMsg( CookieContainer cookieJar )
         {
             bool result = false;

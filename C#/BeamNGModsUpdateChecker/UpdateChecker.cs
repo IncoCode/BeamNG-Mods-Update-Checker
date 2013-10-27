@@ -28,6 +28,11 @@ namespace BeamNGModsUpdateChecker
 
         #region Additional methods
 
+        /// <summary>
+        /// MD5 hash
+        /// </summary>
+        /// <param name="input">Some string</param>
+        /// <returns>Returns MD5 hash</returns>
         public static string GetMd5Hash( string input )
         {
             MD5 md5Hash = MD5.Create();
@@ -113,6 +118,10 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        /// <summary>
+        /// Check for updates
+        /// </summary>
+        /// <returns>Returns the number of updates</returns>
         public int checkUpdates()
         {
             UpdEventArgs args = new UpdEventArgs();
@@ -140,6 +149,11 @@ namespace BeamNGModsUpdateChecker
 
         #region Working with threads
 
+        /// <summary>
+        /// Adds thread
+        /// </summary>
+        /// <param name="link">Link to the thread</param>
+        /// <returns>Returns the value indicating on success of addition</returns>
         public bool addThread( string link )
         {
             if ( !link.StartsWith( "http://" ) )
@@ -161,6 +175,10 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        /// <summary>
+        /// Removes thread
+        /// </summary>
+        /// <param name="link">Link to the thread</param>
         public void removeThread( string link )
         {
             int index = this.threads.FindIndex( p => p.Link == link );
@@ -170,6 +188,10 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        /// <summary>
+        /// Marks thread as read
+        /// </summary>
+        /// <param name="link">Link to the thread</param>
         public void makeRead( string link )
         {
             int index = this.threads.FindIndex( p => p.Link == link );
@@ -181,7 +203,7 @@ namespace BeamNGModsUpdateChecker
 
         #endregion
 
-        #region Save
+        #region Save/Load
 
         public void saveThreads()
         {
@@ -193,11 +215,14 @@ namespace BeamNGModsUpdateChecker
 
         public void loadThreads()
         {
-            string s = File.ReadAllText( this.progPath + @"\Threads.json" );
-            var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
-            if ( threads.Threads != null )
+            if ( File.Exists( this.progPath + @"\Threads.json" ) )
             {
-                this.threads = threads.Threads;
+                string s = File.ReadAllText( this.progPath + @"\Threads.json" );
+                var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
+                if ( threads.Threads != null )
+                {
+                    this.threads = threads.Threads;
+                }
             }
         }
 
