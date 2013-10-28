@@ -144,7 +144,7 @@ namespace BeamNGModsUpdateChecker
                 }
                 Thread.Sleep( 50 );
             }
-            return updatesCount;
+            return updatesCount + this.getUnreadThreads();
         }
 
         #region Working with threads
