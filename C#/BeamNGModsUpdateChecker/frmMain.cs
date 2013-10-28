@@ -259,5 +259,17 @@ namespace BeamNGModsUpdateChecker
             frmOptions frm = new frmOptions( this );
             frm.ShowDialog();
         }
+
+        private void tsmiMarkAllRead_Click( object sender, EventArgs e )
+        {
+            for ( int i = 0; i < this.upd.Threads.Count; i++ )
+            {
+                string link = this.upd.Threads[ i ].Link;
+                lvThreads.Items[ i ].BackColor = Color.White;
+                lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
+                this.upd.makeRead( link );
+            }
+            this.showUpdNot( this.upd.getUnreadThreads(), false );
+        }
     }
 }

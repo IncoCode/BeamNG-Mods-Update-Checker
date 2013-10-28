@@ -155,10 +155,16 @@
     <value>143, 76</value>
   </data>
   <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>201, 22</value>
   </data>
   <data name="tsmiAddThreads.Text" xml:space="preserve">
     <value>Add threads</value>
+  </data>
+  <data name="tsmiMarkAllRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 22</value>
+  </data>
+  <data name="tsmiMarkAllRead.Text" xml:space="preserve">
+    <value>Mark all threads as read</value>
   </data>
   <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>

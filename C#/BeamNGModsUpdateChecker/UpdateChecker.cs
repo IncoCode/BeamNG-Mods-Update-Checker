@@ -125,7 +125,6 @@ namespace BeamNGModsUpdateChecker
         public int checkUpdates()
         {
             UpdEventArgs args = new UpdEventArgs();
-            int updatesCount = 0;
             for ( int i = 0; i < this.threads.Count; i++ )
             {
                 Topic thread = this.threads[ i ];
@@ -138,13 +137,12 @@ namespace BeamNGModsUpdateChecker
                 args.thread = thread;
                 if ( titleChanged )
                 {
-                    updatesCount++;
                     thread.Read = false;
                     updEvent( this, args );
                 }
                 Thread.Sleep( 50 );
             }
-            return updatesCount + this.getUnreadThreads();
+            return this.getUnreadThreads();
         }
 
         #region Working with threads

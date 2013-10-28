@@ -175,6 +175,73 @@ namespace BeamNGModsUpdateChecker
             return result;
         }
 
+        public bool updAttachments( CookieContainer cookieJar )
+        {
+            bool result = false;
+            var client = new RestClient( this.Link );
+            client.CookieContainer = cookieJar;
+            var request = new RestRequest( Method.GET );
+            IRestResponse response = client.Execute( request );
+
+            var h = new HtmlAgilityPack.HtmlDocument();
+            h.LoadHtml( response.Content );
+            var posts = h.GetElementbyId( "posts" );
+            var post = posts.ChildNodes[ 1 ];
+            HtmlNode postdetails = null;
+            for ( int i = 0; i < post.ChildNodes.Count; i++ )
+            {
+                if ( post.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postdetails" )
+                {
+                    postdetails = post.ChildNodes[ i ];
+                    break;
+                }
+            }
+            HtmlNode postbody = null;
+            for ( int i = 0; i < postdetails.ChildNodes.Count; i++ )
+            {
+                string lol = post.ChildNodes[ i ].GetAttributeValue( "class", "" );
+                if ( postdetails.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postbody" )
+                {
+                    postbody = postdetails.ChildNodes[ i ];
+                    break;
+                }
+            }
+            //postbody.
+
+            HtmlNode after_content = null;
+            for ( int i = 0; i < postbody.ChildNodes.Count; i++ )
+            {
+                if ( postbody.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "after_content" )
+                {
+                    after_content = postbody.ChildNodes[ i ];
+                    break;
+                }
+            }
+            HtmlNode lastedited = null;
+            for ( int i = 0; i < after_content.ChildNodes.Count; i++ )
+            {
+                if ( after_content.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postcontent lastedited" )
+                {
+                    lastedited = after_content.ChildNodes[ i ];
+                    break;
+                }
+            }
+            string editMsg = ( lastedited != null ) ? lastedited.InnerText : "";
+            editMsg = editMsg.Trim( ' ', '\n', '\r', '\t' );
+            if ( !string.IsNullOrEmpty( editMsg ) )
+            {
+                DateTime dtNew = this.strToDate( editMsg );
+                DateTime dtOld = ( this.EditMsg != null ) ? this.EditMsgDate : new DateTime();
+                if ( dtNew > dtOld && this.EditMsg != editMsg )
+                {
+                    result = true;
+                    this.EditMsg = editMsg;
+                    this.EditMsgDate = dtNew;
+                }
+            }
+            return result;
+        }
+
         public bool Equals( Topic obj )
         {
             return this.Link.Equals( obj.Link );
