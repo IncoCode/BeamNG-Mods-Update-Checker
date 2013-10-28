@@ -136,7 +136,7 @@ namespace BeamNGModsUpdateChecker
                 bool titleChanged = thread.updTitle( this.cookieJar );
                 bool editMsgChanged = thread.updEditMsg( this.cookieJar );
                 args.thread = thread;
-                if ( titleChanged || editMsgChanged )
+                if ( titleChanged )
                 {
                     updatesCount++;
                     thread.Read = false;

@@ -50,21 +50,23 @@ namespace BeamNGModsUpdateChecker
                 string m = int.Parse( match.Groups[ 8 ].ToString() ).ToString();
                 string ap = match.Groups[ 9 ].ToString();
                 string timeS = h + ":" + m + " " + ap;
-                if ( s.IndexOf( "Hour" ) >= 0 )
+                if ( s.IndexOf( "Minute" ) >= 0 )
+                {
+                    dt = dt.AddMinutes( -num );
+                }
+                else if ( s.IndexOf( "Hour" ) >= 0 )
                 {
                     dt = dt.AddHours( -num );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
                 else if ( s.IndexOf( "Day" ) >= 0 )
                 {
                     dt = dt.AddDays( -num );
-                }
-                else if ( s.IndexOf( "Minute" ) >= 0 )
-                {
-                    dt = dt.AddMinutes( -num );
+                    dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
                 }
                 else if ( s.IndexOf( "Week" ) >= 0 )
                 {
-                    dt = dt.AddDays( -num * 7 );                    
+                    dt = dt.AddDays( -num * 7 );
                 }
                 dt = dt.Date + Convert.ToDateTime( timeS ).TimeOfDay;
             }
@@ -163,7 +165,7 @@ namespace BeamNGModsUpdateChecker
             {
                 DateTime dtNew = this.strToDate( editMsg );
                 DateTime dtOld = ( this.EditMsg != null ) ? this.EditMsgDate : new DateTime();
-                if ( dtNew > dtOld )
+                if ( dtNew > dtOld && this.EditMsg != editMsg )
                 {
                     result = true;
                     this.EditMsg = editMsg;
