@@ -26,8 +26,13 @@ namespace BeamNGModsUpdateChecker
             this.Link = link;
             this.Read = true;
             this.Attachments = new List<Attachment>();
-            this.updTitle( cookieJar );
-            this.updAttachments( cookieJar );
+
+            var client = new RestClient( this.Link );
+            client.CookieContainer = cookieJar;
+            var request = new RestRequest( Method.GET );
+            IRestResponse response = client.Execute( request );
+            this.updTitle( cookieJar, response.Content );
+            this.updAttachments( cookieJar, response.Content );
         }
 
         #endregion
@@ -37,16 +42,11 @@ namespace BeamNGModsUpdateChecker
         /// </summary>
         /// <param name="cookieJar">Cookies</param>
         /// <returns></returns>
-        public bool updTitle( CookieContainer cookieJar )
+        public bool updTitle( CookieContainer cookieJar, string content )
         {
             bool result = false;
-            var client = new RestClient( this.Link );
-            client.CookieContainer = cookieJar;
-            var request = new RestRequest( Method.GET );
-            IRestResponse response = client.Execute( request );
-
             var h = new HtmlAgilityPack.HtmlDocument();
-            h.LoadHtml( response.Content );
+            h.LoadHtml( content );
             HtmlNodeCollection nodes = h.DocumentNode.SelectNodes( "//title" );
             string title = nodes[ 0 ].InnerText;
             if ( title != this.Title )
@@ -57,7 +57,7 @@ namespace BeamNGModsUpdateChecker
             return result;
         }        
 
-        public bool updAttachments( CookieContainer cookieJar )
+        public bool updAttachments( CookieContainer cookieJar, string content )
         {
             bool result = false;
 

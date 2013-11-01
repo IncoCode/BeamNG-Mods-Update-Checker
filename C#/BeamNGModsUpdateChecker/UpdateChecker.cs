@@ -138,9 +138,12 @@ namespace BeamNGModsUpdateChecker
                 {
                     this.auth();
                 }
-                bool titleChanged = thread.updTitle( this.cookieJar );
-                //bool editMsgChanged = thread.updEditMsg( this.cookieJar );
-                bool attachmentsChanged = thread.updAttachments( this.cookieJar );
+                var client = new RestClient( thread.Link );
+                client.CookieContainer = cookieJar;
+                var request = new RestRequest( Method.GET );
+                IRestResponse response = client.Execute( request );
+                bool titleChanged = thread.updTitle( this.cookieJar, response.Content );
+                bool attachmentsChanged = thread.updAttachments( this.cookieJar, response.Content );
                 args.thread = thread;
                 if ( titleChanged || attachmentsChanged )
                 {
