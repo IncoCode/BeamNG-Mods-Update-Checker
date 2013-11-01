@@ -130,6 +130,9 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 104</value>
+  </data>
   <data name="tsmiLAddThread.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 22</value>
   </data>
@@ -160,9 +163,6 @@
   <data name="tsmiRemove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 104</value>
-  </data>
   <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
   </data>
@@ -192,6 +192,24 @@
   </data>
   <data name="tsmiOptions.Text" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmiOfficialThread.Text" xml:space="preserve">
+    <value>Official thread</value>
+  </data>
+  <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmiRepository.Text" xml:space="preserve">
+    <value>Repository</value>
   </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 82</value>
@@ -2048,6 +2066,13 @@
   </data>
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Updates: 0</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tsmiCop.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsmiCop.Text" xml:space="preserve">
+    <value>By Incognito</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

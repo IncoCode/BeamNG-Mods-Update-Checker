@@ -41,6 +41,7 @@ namespace BeamNGModsUpdateChecker
         /// Updates thread title
         /// </summary>
         /// <param name="cookieJar">Cookies</param>
+        /// <param name="content">HTML</param>
         /// <returns></returns>
         public bool updTitle( CookieContainer cookieJar, string content )
         {
@@ -57,6 +58,12 @@ namespace BeamNGModsUpdateChecker
             return result;
         }        
 
+        /// <summary>
+        /// Updates first post attachments
+        /// </summary>
+        /// <param name="cookieJar">Cookies</param>
+        /// <param name="content">HTML</param>
+        /// <returns></returns>
         public bool updAttachments( CookieContainer cookieJar, string content )
         {
             bool result = false;

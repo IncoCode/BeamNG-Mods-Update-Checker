@@ -268,12 +268,12 @@ namespace BeamNGModsUpdateChecker
             tsmiExpand.PerformClick();
         }
 
-        private void englishToolStripMenuItem_Click( object sender, EventArgs e )
+        private void tsmiEnglish_Click( object sender, EventArgs e )
         {
             this.changeLanguage( "en-GB" );
         }
 
-        private void русскийToolStripMenuItem_Click( object sender, EventArgs e )
+        private void tsmiRussian_Click( object sender, EventArgs e )
         {
             this.changeLanguage( "ru-RU" );
         }
@@ -327,9 +327,14 @@ namespace BeamNGModsUpdateChecker
             tmrUpd.Start();
         }
 
-        private void добавитьТемыToolStripMenuItem_Click( object sender, EventArgs e )
+        private void tsmiAddT_Click( object sender, EventArgs e )
         {
             tsmiAddThreads.PerformClick();
+        }
+
+        private void tsmiRepository_Click( object sender, EventArgs e )
+        {
+            Process.Start( "https://bitbucket.org/IncoCode/beamng-mods-update-checker/overview" );
         }
     }
 }
