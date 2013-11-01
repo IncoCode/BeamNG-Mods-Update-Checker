@@ -150,6 +150,10 @@ namespace BeamNGModsUpdateChecker
                             }
                         }
                     }
+                    if ( this.Attachments == null )
+                    {
+                        this.Attachments = new List<Attachment>();
+                    }
                     if ( !attachmentsList.SequenceEqual( this.Attachments, new Attachment() ) )
                     {
                         result = true;
