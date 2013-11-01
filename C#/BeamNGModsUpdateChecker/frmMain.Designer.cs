@@ -36,13 +36,16 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmsThreadsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiLAddThread = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiMakeRead = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMakeUnread = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddThreads = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMarkAllRead = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.языкLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +54,8 @@
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExpand = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.добавитьТемыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ssStatus = new System.Windows.Forms.StatusStrip();
@@ -94,7 +99,9 @@
             resources.ApplyResources(this.cmsThreadsMenu, "cmsThreadsMenu");
             this.cmsThreadsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiLAddThread,
+            this.toolStripMenuItem3,
             this.tsmiMakeRead,
+            this.tsmiMakeUnread,
             this.toolStripMenuItem1,
             this.tsmiRemove});
             this.cmsThreadsMenu.Name = "cmsThreadsMenu";
@@ -105,11 +112,22 @@
             this.tsmiLAddThread.Name = "tsmiLAddThread";
             this.tsmiLAddThread.Click += new System.EventHandler(this.tsmiLAddThread_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            // 
             // tsmiMakeRead
             // 
             resources.ApplyResources(this.tsmiMakeRead, "tsmiMakeRead");
             this.tsmiMakeRead.Name = "tsmiMakeRead";
             this.tsmiMakeRead.Click += new System.EventHandler(this.tsmiMakeRead_Click);
+            // 
+            // tsmiMakeUnread
+            // 
+            resources.ApplyResources(this.tsmiMakeUnread, "tsmiMakeUnread");
+            this.tsmiMakeUnread.Name = "tsmiMakeUnread";
+            this.tsmiMakeUnread.Click += new System.EventHandler(this.tsmiMakeUnread_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -136,7 +154,8 @@
             resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAddThreads,
-            this.tsmiMarkAllRead});
+            this.tsmiMarkAllRead,
+            this.tsmiRefresh});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             // 
             // tsmiAddThreads
@@ -150,6 +169,12 @@
             resources.ApplyResources(this.tsmiMarkAllRead, "tsmiMarkAllRead");
             this.tsmiMarkAllRead.Name = "tsmiMarkAllRead";
             this.tsmiMarkAllRead.Click += new System.EventHandler(this.tsmiMarkAllRead_Click);
+            // 
+            // tsmiRefresh
+            // 
+            resources.ApplyResources(this.tsmiRefresh, "tsmiRefresh");
+            this.tsmiRefresh.Name = "tsmiRefresh";
+            this.tsmiRefresh.Click += new System.EventHandler(this.tsmiRefresh_Click);
             // 
             // tsmiOptions
             // 
@@ -193,6 +218,8 @@
             resources.ApplyResources(this.cmsTray, "cmsTray");
             this.cmsTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiExpand,
+            this.toolStripMenuItem4,
+            this.добавитьТемыToolStripMenuItem,
             this.toolStripMenuItem2,
             this.tsmiExit});
             this.cmsTray.Name = "cmsTray";
@@ -202,6 +229,17 @@
             resources.ApplyResources(this.tsmiExpand, "tsmiExpand");
             this.tsmiExpand.Name = "tsmiExpand";
             this.tsmiExpand.Click += new System.EventHandler(this.tsmiExpand_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            // 
+            // добавитьТемыToolStripMenuItem
+            // 
+            resources.ApplyResources(this.добавитьТемыToolStripMenuItem, "добавитьТемыToolStripMenuItem");
+            this.добавитьТемыToolStripMenuItem.Name = "добавитьТемыToolStripMenuItem";
+            this.добавитьТемыToolStripMenuItem.Click += new System.EventHandler(this.добавитьТемыToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -277,6 +315,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem tsmiOptions;
         private System.Windows.Forms.ToolStripMenuItem tsmiMarkAllRead;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRefresh;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMakeUnread;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem добавитьТемыToolStripMenuItem;
     }
 }
 

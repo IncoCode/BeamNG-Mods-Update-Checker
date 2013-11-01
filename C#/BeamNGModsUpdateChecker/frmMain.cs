@@ -153,7 +153,7 @@ namespace BeamNGModsUpdateChecker
                 }
             }
             catch
-            {                
+            {
                 MessageBox.Show( "Unable to send a request!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
                 Environment.Exit( 0 );
             }
@@ -207,7 +207,7 @@ namespace BeamNGModsUpdateChecker
                 Process.Start( link );
                 lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
                 lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
-                this.upd.makeRead( link );
+                this.upd.changeReadStatus( link, true );
                 this.showUpdNot( this.upd.getUnreadThreads(), false );
             }
         }
@@ -256,7 +256,7 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
-                    this.upd.makeRead( link );
+                    this.upd.changeReadStatus( link, true );
                     this.showUpdNot( this.upd.getUnreadThreads(), false );
                 }
                 this.upd.saveThreads();
@@ -291,10 +291,45 @@ namespace BeamNGModsUpdateChecker
                 string link = this.upd.Threads[ i ].Link;
                 lvThreads.Items[ i ].BackColor = Color.White;
                 lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
-                this.upd.makeRead( link );
+                this.upd.changeReadStatus( link, true );
             }
             this.upd.saveThreads();
             this.showUpdNot( this.upd.getUnreadThreads(), false );
+        }
+
+        private void tsmiMakeUnread_Click( object sender, EventArgs e )
+        {
+            if ( lvThreads.SelectedItems.Count > 0 )
+            {
+                for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
+                {
+                    string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
+                    lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
+                    lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
+                    this.upd.changeReadStatus( link, false );
+                    this.showUpdNot( this.upd.getUnreadThreads(), false );
+                }
+                this.upd.saveThreads();
+            }
+        }
+
+        private void tsmiRefresh_Click( object sender, EventArgs e )
+        {
+            tmrUpd.Stop();
+            try
+            {
+                this.checkUpdates();                
+            }
+            catch
+            {
+                return;
+            }
+            tmrUpd.Start();
+        }
+
+        private void добавитьТемыToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            tsmiAddThreads.PerformClick();
         }
     }
 }

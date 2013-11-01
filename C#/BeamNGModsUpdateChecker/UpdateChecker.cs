@@ -217,15 +217,16 @@ namespace BeamNGModsUpdateChecker
         }
 
         /// <summary>
-        /// Marks thread as read
+        /// Change read status of thread
         /// </summary>
-        /// <param name="link">Link to the thread</param>
-        public void makeRead( string link )
+        /// <param name="link"></param>
+        /// <param name="read"></param>
+        public void changeReadStatus( string link, bool read )
         {
             int index = this.threads.FindIndex( p => p.Link == link );
             if ( index >= 0 )
             {
-                this.threads[ index ].Read = true;
+                this.threads[ index ].Read = read;
             }
         }
 
