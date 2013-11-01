@@ -142,12 +142,20 @@ namespace BeamNGModsUpdateChecker
                 frm.ShowDialog();
             }
             this.upd = new UpdateChecker( this.login, this.password, Application.StartupPath );
-            bool isAuth = this.upd.auth();
-            while ( !isAuth )
+            try
             {
-                frm = new frmEnterPassword( this );
-                frm.ShowDialog();
-                isAuth = this.upd.auth( this.login, this.password );
+                bool isAuth = this.upd.auth();
+                while ( !isAuth )
+                {
+                    frm = new frmEnterPassword( this );
+                    frm.ShowDialog();
+                    isAuth = this.upd.auth( this.login, this.password );
+                }
+            }
+            catch
+            {                
+                MessageBox.Show( "Unable to send a request!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                Environment.Exit( 0 );
             }
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
             this.upd.loadThreads();
@@ -207,7 +215,14 @@ namespace BeamNGModsUpdateChecker
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
             tmrUpd.Interval = this.updInterval * 60 * 1000;
-            this.checkUpdates();
+            try
+            {
+                this.checkUpdates();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void tsmiExit_Click( object sender, EventArgs e )
@@ -244,6 +259,7 @@ namespace BeamNGModsUpdateChecker
                     this.upd.makeRead( link );
                     this.showUpdNot( this.upd.getUnreadThreads(), false );
                 }
+                this.upd.saveThreads();
             }
         }
 
@@ -277,6 +293,7 @@ namespace BeamNGModsUpdateChecker
                 lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
                 this.upd.makeRead( link );
             }
+            this.upd.saveThreads();
             this.showUpdNot( this.upd.getUnreadThreads(), false );
         }
     }

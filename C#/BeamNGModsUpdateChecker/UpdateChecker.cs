@@ -45,6 +45,22 @@ namespace BeamNGModsUpdateChecker
             return sb.ToString();
         }
 
+        public static string sendGet( string url, CookieContainer cookieJar )
+        {
+            try
+            {
+                var client = new RestClient( url );
+                client.CookieContainer = cookieJar;
+                var request = new RestRequest( Method.GET );
+                IRestResponse response = client.Execute( request );
+                return response.Content;
+            }
+            catch
+            {
+                throw new Exception( "Unable to send a request!" );
+            }
+        }
+
         #endregion
 
         #region Fields
@@ -73,26 +89,33 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns the value indicating success of authorization</returns>
         public bool auth()
         {
-            RestClient client = new RestClient( "http://www.beamng.com/login.php?do=login" );
-            client.CookieContainer = this.cookieJar;
-            RestRequest request = new RestRequest( Method.POST );
-            request.AddParameter( "do", "login" );
-            request.AddParameter( "url", "login.php?do=logout" );
-            request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
-            request.AddParameter( "vb_login_md5password_utf", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
-            request.AddParameter( "s", "" );
-            request.AddParameter( "securitytoken", "guest" );
-            request.AddParameter( "vb_login_username", Crypto.DecryptPassword( this.login ) );
-            request.AddParameter( "cookieuser", "1" );
-            IRestResponse response = client.Execute( request );
-            string content = response.Content;
-            if ( content.IndexOf( "Thank you for logging in" ) >= 0 )
+            try
             {
-                return true;
+                RestClient client = new RestClient( "http://www.beamng.com/login.php?do=login" );
+                client.CookieContainer = this.cookieJar;
+                RestRequest request = new RestRequest( Method.POST );
+                request.AddParameter( "do", "login" );
+                request.AddParameter( "url", "login.php?do=logout" );
+                request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
+                request.AddParameter( "vb_login_md5password_utf", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
+                request.AddParameter( "s", "" );
+                request.AddParameter( "securitytoken", "guest" );
+                request.AddParameter( "vb_login_username", Crypto.DecryptPassword( this.login ) );
+                request.AddParameter( "cookieuser", "1" );
+                IRestResponse response = client.Execute( request );
+                string content = response.Content;
+                if ( content.IndexOf( "Thank you for logging in" ) >= 0 )
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch
             {
-                return false;
+                throw new Exception( "Unable to send a request!" );
             }
         }
 
@@ -109,11 +132,7 @@ namespace BeamNGModsUpdateChecker
         /// <returns></returns>
         private bool isNeedAuth()
         {
-            var client = new RestClient( "http://www.beamng.com/forum/" );
-            client.CookieContainer = this.cookieJar;
-            var request = new RestRequest( Method.GET );
-            IRestResponse response = client.Execute( request );
-            string content = response.Content;
+            string content = UpdateChecker.sendGet( "http://www.beamng.com/forum/", this.cookieJar );
             if ( content.IndexOf( "Welcome," ) >= 0 )
             {
                 return false;
@@ -138,12 +157,9 @@ namespace BeamNGModsUpdateChecker
                 {
                     this.auth();
                 }
-                var client = new RestClient( thread.Link );
-                client.CookieContainer = cookieJar;
-                var request = new RestRequest( Method.GET );
-                IRestResponse response = client.Execute( request );
-                bool titleChanged = thread.updTitle( this.cookieJar, response.Content );
-                bool attachmentsChanged = thread.updAttachments( this.cookieJar, response.Content );
+                string content = UpdateChecker.sendGet( thread.Link, this.cookieJar );
+                bool titleChanged = thread.updTitle( this.cookieJar, content );
+                bool attachmentsChanged = thread.updAttachments( this.cookieJar, content );
                 args.thread = thread;
                 if ( titleChanged || attachmentsChanged )
                 {

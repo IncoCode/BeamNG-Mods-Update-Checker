@@ -60,14 +60,8 @@ namespace BeamNGModsUpdateChecker
         public bool updAttachments( CookieContainer cookieJar, string content )
         {
             bool result = false;
-
-            var client = new RestClient( this.Link );
-            client.CookieContainer = cookieJar;
-            var request = new RestRequest( Method.GET );
-            IRestResponse response = client.Execute( request );
-
             HtmlDocument h = new HtmlAgilityPack.HtmlDocument();
-            h.LoadHtml( response.Content );
+            h.LoadHtml( content );
             HtmlNode posts = h.GetElementbyId( "posts" );
             HtmlNode post = posts.ChildNodes[ 1 ];
             HtmlNode postdetails = null;
