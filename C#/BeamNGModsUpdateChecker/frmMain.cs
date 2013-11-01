@@ -135,12 +135,20 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_Load( object sender, EventArgs e )
         {
+            frmEnterPassword frm = null;
             if ( string.IsNullOrEmpty( this.login ) || string.IsNullOrEmpty( this.password ) )
             {
-                frmEnterPassword frm = new frmEnterPassword( this );
+                frm = new frmEnterPassword( this );
                 frm.ShowDialog();
             }
             this.upd = new UpdateChecker( this.login, this.password, Application.StartupPath );
+            bool isAuth = this.upd.auth();
+            while ( !isAuth )
+            {
+                frm = new frmEnterPassword( this );
+                frm.ShowDialog();
+                isAuth = this.upd.auth( this.login, this.password );
+            }
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
             this.upd.loadThreads();
             this.printAllThreads();

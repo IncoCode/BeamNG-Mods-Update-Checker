@@ -65,7 +65,6 @@ namespace BeamNGModsUpdateChecker
             this.password = password;
             this.progPath = progPath;
             this.threads = new List<Topic>();
-            this.auth();
         }
 
         /// <summary>
@@ -74,9 +73,9 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns the value indicating success of authorization</returns>
         public bool auth()
         {
-            var client = new RestClient( "http://www.beamng.com/login.php?do=login" );
+            RestClient client = new RestClient( "http://www.beamng.com/login.php?do=login" );
             client.CookieContainer = this.cookieJar;
-            var request = new RestRequest( Method.POST );
+            RestRequest request = new RestRequest( Method.POST );
             request.AddParameter( "do", "login" );
             request.AddParameter( "url", "login.php?do=logout" );
             request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
@@ -95,6 +94,13 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
+        }
+
+        public bool auth( string login, string password )
+        {
+            this.login = login;
+            this.password = password;
+            return this.auth();
         }
 
         /// <summary>
@@ -133,9 +139,10 @@ namespace BeamNGModsUpdateChecker
                     this.auth();
                 }
                 bool titleChanged = thread.updTitle( this.cookieJar );
-                bool editMsgChanged = thread.updEditMsg( this.cookieJar );
+                //bool editMsgChanged = thread.updEditMsg( this.cookieJar );
+                bool attachmentsChanged = thread.updAttachments( this.cookieJar );
                 args.thread = thread;
-                if ( titleChanged )
+                if ( titleChanged || attachmentsChanged )
                 {
                     thread.Read = false;
                     updEvent( this, args );
