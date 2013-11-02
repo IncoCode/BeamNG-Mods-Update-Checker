@@ -239,6 +239,7 @@ namespace BeamNGModsUpdateChecker
                     this.upd.removeThread( link );
                 }
                 this.printAllThreads();
+                this.showUpdNot( this.upd.getUnreadThreads(), false );
             }
         }
 
@@ -293,9 +294,9 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
-                    this.upd.changeReadStatus( link, true );
-                    this.showUpdNot( this.upd.getUnreadThreads(), false );
+                    this.upd.changeReadStatus( link, true );                    
                 }
+                this.showUpdNot( this.upd.getUnreadThreads(), false );
                 this.upd.saveThreads();
             }
         }
@@ -343,9 +344,9 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
-                    this.upd.changeReadStatus( link, false );
-                    this.showUpdNot( this.upd.getUnreadThreads(), false );
+                    this.upd.changeReadStatus( link, false );                    
                 }
+                this.showUpdNot( this.upd.getUnreadThreads(), false );
                 this.upd.saveThreads();
             }
         }
