@@ -66,6 +66,7 @@
             this.ssStatus = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.pbCheckUpd = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
             this.cmsTray.SuspendLayout();
@@ -161,6 +162,7 @@
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAddThreads,
             this.tsmiMarkAllRead,
+            this.toolStripMenuItem6,
             this.tsmiRefresh});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
@@ -308,6 +310,11 @@
             this.pbCheckUpd.Name = "pbCheckUpd";
             resources.ApplyResources(this.pbCheckUpd, "pbCheckUpd");
             // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+            // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
@@ -370,6 +377,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem tsmiCop;
         private System.Windows.Forms.ToolStripProgressBar pbCheckUpd;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
     }
 }
 

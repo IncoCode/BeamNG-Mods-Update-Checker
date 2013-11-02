@@ -23,6 +23,7 @@ namespace BeamNGModsUpdateChecker
         string login = "";
         string password = "";
         double[] lvColProp = { 0.6, 0.4 };
+        bool isUpdating = false;
 
         public frmMain()
         {
@@ -109,11 +110,17 @@ namespace BeamNGModsUpdateChecker
 
         private void checkUpdates()
         {
+            if ( this.isUpdating )
+            {
+                return;
+            }
+            this.isUpdating = true;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
             this.Invoke( new MethodInvoker( delegate()
                 {
                     pbCheckUpd.Visible = true;
                 } ) );
+            lvThreads.Enabled = false;
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
             Application.DoEvents();
             try
@@ -129,6 +136,7 @@ namespace BeamNGModsUpdateChecker
                 {
                     pbCheckUpd.Visible = false;
                 } ) );
+                this.isUpdating = false;
             }
         }
 
@@ -239,7 +247,6 @@ namespace BeamNGModsUpdateChecker
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
             tmrUpd.Interval = this.updInterval * 60 * 1000;
-            lvThreads.Enabled = false;
             Thread thr = new Thread( this.checkUpdates );
             thr.Start();
         }
