@@ -264,7 +264,12 @@ namespace BeamNGModsUpdateChecker
             var threads = new JSONClasses.ThreadsRoot();
             threads.Threads = this.threads;
             string s = JsonConvert.SerializeObject( threads );
-            File.WriteAllText( this.progPath + @"\Threads.json", s );
+            string fileName = this.progPath + @"\Threads.json";
+            if ( File.Exists( fileName ) )
+            {
+                File.Move( fileName, fileName + ".bak" );
+            }
+            File.WriteAllText( fileName, s );
         }
 
         public void loadThreads()
