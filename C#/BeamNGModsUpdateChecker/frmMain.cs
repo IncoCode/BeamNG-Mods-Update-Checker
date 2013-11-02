@@ -29,6 +29,7 @@ namespace BeamNGModsUpdateChecker
             this.loadSettings();
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
             InitializeComponent();
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         public void changeLanguage( string lang )
@@ -91,7 +92,7 @@ namespace BeamNGModsUpdateChecker
 
         private void updProgress( object sender, UpdEventArgs e )
         {
-            var lvi = lvThreads.FindItemWithText( e.thread.Link );
+            ListViewItem lvi = lvThreads.FindItemWithText( e.thread.Link );
             if ( lvi != null )
             {
                 lvi.Text = e.thread.Title;
@@ -100,13 +101,28 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        private void checkUpdProgress( object sender, CheckUpdEventArgs e )
+        {
+            pbCheckUpd.Maximum = e.maxProgress;
+            pbCheckUpd.Value = e.progress;
+        }
+
         private void checkUpdates()
         {
+            this.Invoke( new MethodInvoker( delegate()
+                {
+                    pbCheckUpd.Visible = true;
+                } ) );
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
             Application.DoEvents();
             int updatesCount = this.upd.checkUpdates();
             this.showUpdNot( updatesCount );
             this.upd.saveThreads();
+            lvThreads.Enabled = true;
+            this.Invoke( new MethodInvoker( delegate()
+            {
+                pbCheckUpd.Visible = false;
+            } ) );
         }
 
         private void showUpdNot( int updatesCount, bool showBalloon = true )
@@ -158,6 +174,7 @@ namespace BeamNGModsUpdateChecker
                 Environment.Exit( 0 );
             }
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
+            upd.checkUpdEvent += new EventHandler<CheckUpdEventArgs>( checkUpdProgress );
             this.upd.loadThreads();
             this.printAllThreads();
             tmrUpd.Start();
@@ -215,9 +232,11 @@ namespace BeamNGModsUpdateChecker
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
             tmrUpd.Interval = this.updInterval * 60 * 1000;
+            lvThreads.Enabled = false;
             try
             {
-                this.checkUpdates();
+                Thread thr = new Thread( this.checkUpdates );
+                thr.Start();
             }
             catch
             {
@@ -318,7 +337,7 @@ namespace BeamNGModsUpdateChecker
             tmrUpd.Stop();
             try
             {
-                this.checkUpdates();                
+                this.checkUpdates();
             }
             catch
             {

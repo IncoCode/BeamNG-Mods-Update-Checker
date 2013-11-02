@@ -56,7 +56,7 @@ namespace BeamNGModsUpdateChecker
                 this.Title = title;
             }
             return result;
-        }        
+        }
 
         /// <summary>
         /// Updates first post attachments

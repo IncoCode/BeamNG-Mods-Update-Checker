@@ -17,6 +17,12 @@ namespace BeamNGModsUpdateChecker
         public Topic thread { get; set; }
     }
 
+    public class CheckUpdEventArgs : EventArgs
+    {
+        public int progress { get; set; }
+        public int maxProgress { get; set; }
+    }
+
     public class UpdateChecker
     {
         List<Topic> threads;
@@ -25,6 +31,7 @@ namespace BeamNGModsUpdateChecker
         string progPath;
         CookieContainer cookieJar = new CookieContainer();
         public event EventHandler<UpdEventArgs> updEvent = delegate { };
+        public event EventHandler<CheckUpdEventArgs> checkUpdEvent = delegate { };
 
         #region Additional methods
 
@@ -150,6 +157,8 @@ namespace BeamNGModsUpdateChecker
         public int checkUpdates()
         {
             UpdEventArgs args = new UpdEventArgs();
+            CheckUpdEventArgs checkUpdArgs = new CheckUpdEventArgs();
+            checkUpdArgs.maxProgress = this.threads.Count - 1;
             for ( int i = 0; i < this.threads.Count; i++ )
             {
                 Topic thread = this.threads[ i ];
@@ -166,6 +175,8 @@ namespace BeamNGModsUpdateChecker
                     thread.Read = false;
                     updEvent( this, args );
                 }
+                checkUpdArgs.progress = i;
+                checkUpdEvent( this, checkUpdArgs );
                 Thread.Sleep( 50 );
             }
             return this.getUnreadThreads();
@@ -191,6 +202,10 @@ namespace BeamNGModsUpdateChecker
             if ( link.IndexOf( "/page" ) >= 0 )
             {
                 link = link.Substring( 0, link.IndexOf( "/page" ) );
+            }
+            if ( !link.StartsWith( "http://www.beamng.com/" ) )
+            {
+                return false;
             }
             if ( !this.threads.Contains( new Topic { Link = link } ) )
             {

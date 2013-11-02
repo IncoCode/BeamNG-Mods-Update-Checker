@@ -65,6 +65,7 @@
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ssStatus = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pbCheckUpd = new System.Windows.Forms.ToolStripProgressBar();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
             this.cmsTray.SuspendLayout();
@@ -292,7 +293,8 @@
             // ssStatus
             // 
             this.ssStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.pbCheckUpd});
             resources.ApplyResources(this.ssStatus, "ssStatus");
             this.ssStatus.Name = "ssStatus";
             // 
@@ -300,6 +302,11 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            // 
+            // pbCheckUpd
+            // 
+            this.pbCheckUpd.Name = "pbCheckUpd";
+            resources.ApplyResources(this.pbCheckUpd, "pbCheckUpd");
             // 
             // frmMain
             // 
@@ -362,6 +369,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRepository;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem tsmiCop;
+        private System.Windows.Forms.ToolStripProgressBar pbCheckUpd;
     }
 }
 
