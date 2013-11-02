@@ -115,14 +115,20 @@ namespace BeamNGModsUpdateChecker
                 } ) );
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
             Application.DoEvents();
-            int updatesCount = this.upd.checkUpdates();
-            this.showUpdNot( updatesCount );
-            this.upd.saveThreads();
-            lvThreads.Enabled = true;
-            this.Invoke( new MethodInvoker( delegate()
+            try
             {
-                pbCheckUpd.Visible = false;
-            } ) );
+                int updatesCount = this.upd.checkUpdates();
+                this.showUpdNot( updatesCount );
+                this.upd.saveThreads();
+            }
+            finally
+            {
+                lvThreads.Enabled = true;
+                this.Invoke( new MethodInvoker( delegate()
+                {
+                    pbCheckUpd.Visible = false;
+                } ) );
+            }
         }
 
         private void showUpdNot( int updatesCount, bool showBalloon = true )
@@ -233,15 +239,8 @@ namespace BeamNGModsUpdateChecker
         {
             tmrUpd.Interval = this.updInterval * 60 * 1000;
             lvThreads.Enabled = false;
-            try
-            {
-                Thread thr = new Thread( this.checkUpdates );
-                thr.Start();
-            }
-            catch
-            {
-                return;
-            }
+            Thread thr = new Thread( this.checkUpdates );
+            thr.Start();
         }
 
         private void tsmiExit_Click( object sender, EventArgs e )
@@ -335,14 +334,8 @@ namespace BeamNGModsUpdateChecker
         private void tsmiRefresh_Click( object sender, EventArgs e )
         {
             tmrUpd.Stop();
-            try
-            {
-                this.checkUpdates();
-            }
-            catch
-            {
-                return;
-            }
+            Thread thr = new Thread( this.checkUpdates );
+            thr.Start();
             tmrUpd.Start();
         }
 
