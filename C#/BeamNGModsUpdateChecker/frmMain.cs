@@ -142,7 +142,7 @@ namespace BeamNGModsUpdateChecker
                 this.Invoke( new MethodInvoker( delegate()
                 {
                     pbCheckUpd.Visible = false;
-                } ) );                
+                } ) );
             }
         }
 
@@ -176,7 +176,12 @@ namespace BeamNGModsUpdateChecker
             if ( string.IsNullOrEmpty( this.login ) || string.IsNullOrEmpty( this.password ) )
             {
                 frm = new frmEnterPassword( this );
-                frm.ShowDialog();
+                DialogResult dr = frm.ShowDialog();
+                if ( dr == DialogResult.Cancel )
+                {
+                    Environment.Exit( 0 );
+                    return;
+                }
             }
             this.upd = new UpdateChecker( this.login, this.password, Application.StartupPath );
             try
