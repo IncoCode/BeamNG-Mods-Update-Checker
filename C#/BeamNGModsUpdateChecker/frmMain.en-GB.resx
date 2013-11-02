@@ -181,6 +181,9 @@
   <data name="tsmiMarkAllRead.Text" xml:space="preserve">
     <value>Mark all threads as read</value>
   </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 6</value>
+  </data>
   <data name="tsmiRefresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 22</value>
   </data>
@@ -200,16 +203,22 @@
     <value>Help</value>
   </data>
   <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="tsmiOfficialThread.Text" xml:space="preserve">
     <value>Official thread</value>
   </data>
   <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="tsmiRepository.Text" xml:space="preserve">
     <value>Repository</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 6</value>
+  </data>
+  <data name="tsmiCop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
   </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 82</value>
@@ -2067,12 +2076,14 @@
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Updates: 0</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tsmiCop.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>485, 27</value>
   </data>
-  <data name="tsmiCop.Text" xml:space="preserve">
-    <value>By Incognito</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Search:</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

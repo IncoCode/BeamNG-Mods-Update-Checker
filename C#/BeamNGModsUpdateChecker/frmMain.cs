@@ -51,17 +51,21 @@ namespace BeamNGModsUpdateChecker
             this.password = Crypto.EncryptPassword( password );
         }
 
-        private void printAllThreads()
+        private void printAllThreads( List<Topic> threads = null )
         {
             lvThreads.Items.Clear();
-            for ( int i = 0; i < this.upd.Threads.Count; i++ )
+            if ( threads == null )
             {
-                ListViewItem lvi = new ListViewItem( this.upd.Threads[ i ].Title );
+                threads = this.upd.Threads;
+            }
+            for ( int i = 0; i < threads.Count; i++ )
+            {
+                ListViewItem lvi = new ListViewItem( threads[ i ].Title );
                 lvi.UseItemStyleForSubItems = false;
                 ListViewItem.ListViewSubItem lvisi = new ListViewItem.ListViewSubItem();
-                lvisi.Text = this.upd.Threads[ i ].Link;
+                lvisi.Text = threads[ i ].Link;
                 lvisi.ForeColor = Color.Blue;
-                if ( !this.upd.Threads[ i ].Read )
+                if ( !threads[ i ].Read )
                 {
                     lvi.BackColor = Color.GreenYellow;
                     lvisi.BackColor = Color.GreenYellow;
@@ -121,6 +125,7 @@ namespace BeamNGModsUpdateChecker
                     pbCheckUpd.Visible = true;
                 } ) );
             lvThreads.Enabled = false;
+            tbKeyword.Enabled = false;
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
             Application.DoEvents();
             try
@@ -132,11 +137,12 @@ namespace BeamNGModsUpdateChecker
             finally
             {
                 lvThreads.Enabled = true;
+                tbKeyword.Enabled = true;
+                this.isUpdating = false;
                 this.Invoke( new MethodInvoker( delegate()
                 {
                     pbCheckUpd.Visible = false;
-                } ) );
-                this.isUpdating = false;
+                } ) );                
             }
         }
 
@@ -355,6 +361,12 @@ namespace BeamNGModsUpdateChecker
         private void tsmiRepository_Click( object sender, EventArgs e )
         {
             Process.Start( "https://bitbucket.org/IncoCode/beamng-mods-update-checker/overview" );
+        }
+
+        private void tbKeyword_TextChanged( object sender, EventArgs e )
+        {
+            string keyword = tbKeyword.Text;
+            this.printAllThreads( this.upd.searchThreads( keyword ) );
         }
     }
 }

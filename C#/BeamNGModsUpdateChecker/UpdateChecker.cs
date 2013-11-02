@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -257,6 +258,18 @@ namespace BeamNGModsUpdateChecker
 
         #endregion
 
+        public List<Topic> searchThreads( string keyword )
+        {
+            if ( string.IsNullOrEmpty( keyword ) )
+            {
+                return null;
+            }
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            return this.threads.FindAll( p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
+                || p.Link.Contains( keyword ) );
+        }
+
+
         #region Save/Load
 
         public void saveThreads()
@@ -265,9 +278,14 @@ namespace BeamNGModsUpdateChecker
             threads.Threads = this.threads;
             string s = JsonConvert.SerializeObject( threads );
             string fileName = this.progPath + @"\Threads.json";
+            string fileNameBak = fileName + ".bak";
             if ( File.Exists( fileName ) )
             {
-                File.Move( fileName, fileName + ".bak" );
+                if ( File.Exists( fileNameBak ) )
+                {
+                    File.Delete( fileNameBak );
+                }
+                File.Move( fileName, fileNameBak );
             }
             File.WriteAllText( fileName, s );
         }
