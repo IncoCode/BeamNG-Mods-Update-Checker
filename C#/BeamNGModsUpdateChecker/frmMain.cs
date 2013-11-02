@@ -109,6 +109,7 @@ namespace BeamNGModsUpdateChecker
 
         private void checkUpdates()
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
             this.Invoke( new MethodInvoker( delegate()
                 {
                     pbCheckUpd.Visible = true;
