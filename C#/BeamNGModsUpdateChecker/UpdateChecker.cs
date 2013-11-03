@@ -256,8 +256,11 @@ namespace BeamNGModsUpdateChecker
             return unread.Count;
         }
 
-        #endregion
-
+        /// <summary>
+        /// Searching threads
+        /// </summary>
+        /// <param name="keyword">Search keyword</param>
+        /// <returns>Found threads</returns>
         public List<Topic> searchThreads( string keyword )
         {
             if ( string.IsNullOrEmpty( keyword ) )
@@ -269,6 +272,7 @@ namespace BeamNGModsUpdateChecker
                 || p.Link.Contains( keyword ) );
         }
 
+        #endregion
 
         #region Save/Load
 
@@ -292,9 +296,10 @@ namespace BeamNGModsUpdateChecker
 
         public void loadThreads()
         {
-            if ( File.Exists( this.progPath + @"\Threads.json" ) )
+            string fileName = this.progPath + @"\Threads.json";
+            if ( File.Exists( fileName ) )
             {
-                string s = File.ReadAllText( this.progPath + @"\Threads.json" );
+                string s = File.ReadAllText( fileName );
                 var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
                 if ( threads.Threads != null )
                 {
