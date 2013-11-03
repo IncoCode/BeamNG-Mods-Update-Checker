@@ -232,6 +232,7 @@
             // 
             this.tsmiOfficialThread.Name = "tsmiOfficialThread";
             resources.ApplyResources(this.tsmiOfficialThread, "tsmiOfficialThread");
+            this.tsmiOfficialThread.Click += new System.EventHandler(this.tsmiOfficialThread_Click);
             // 
             // tsmiRepository
             // 

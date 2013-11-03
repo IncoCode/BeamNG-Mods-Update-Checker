@@ -84,7 +84,7 @@ namespace BeamNGModsUpdateChecker
             ini.Write( "Password", this.password, "Auth" );
             ini.Write( "Lang", lang, "Options" );
             ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
-            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );            
+            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
             ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
             ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
         }
@@ -96,7 +96,7 @@ namespace BeamNGModsUpdateChecker
             this.password = ini.Read( "Password", "Auth", "" );
             this.lang = ini.Read( "Lang", "Options", lang );
             this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
-            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );            
+            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
             int mainFormWidth = int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
             int mainFormHeight = int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
             Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
@@ -380,6 +380,11 @@ namespace BeamNGModsUpdateChecker
         {
             string keyword = tbKeyword.Text;
             this.printAllThreads( this.upd.searchThreads( keyword ) );
+        }
+
+        private void tsmiOfficialThread_Click( object sender, EventArgs e )
+        {
+            Process.Start( "http://www.beamng.com/threads/4920-Mods-Update-Checker?p=54900#post54900" );
         }
     }
 }
