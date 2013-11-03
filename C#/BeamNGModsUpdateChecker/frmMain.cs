@@ -24,6 +24,7 @@ namespace BeamNGModsUpdateChecker
         string password = "";
         double[] lvColProp = { 0.6, 0.4 };
         bool isUpdating = false;
+        Size mainFormSize = new Size( 748, 456 );
 
         public frmMain()
         {
@@ -31,6 +32,7 @@ namespace BeamNGModsUpdateChecker
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            this.Size = this.mainFormSize;
         }
 
         public void changeLanguage( string lang )
@@ -82,7 +84,9 @@ namespace BeamNGModsUpdateChecker
             ini.Write( "Password", this.password, "Auth" );
             ini.Write( "Lang", lang, "Options" );
             ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
-            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
+            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );            
+            ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
+            ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
         }
 
         private void loadSettings()
@@ -92,7 +96,11 @@ namespace BeamNGModsUpdateChecker
             this.password = ini.Read( "Password", "Auth", "" );
             this.lang = ini.Read( "Lang", "Options", lang );
             this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
-            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
+            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );            
+            int mainFormWidth = int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
+            int mainFormHeight = int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
+            Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
+            this.mainFormSize = mainFormSize;
         }
 
         private void updProgress( object sender, UpdEventArgs e )
@@ -294,7 +302,7 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
-                    this.upd.changeReadStatus( link, true );                    
+                    this.upd.changeReadStatus( link, true );
                 }
                 this.showUpdNot( this.upd.getUnreadThreads(), false );
                 this.upd.saveThreads();
@@ -344,7 +352,7 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
-                    this.upd.changeReadStatus( link, false );                    
+                    this.upd.changeReadStatus( link, false );
                 }
                 this.showUpdNot( this.upd.getUnreadThreads(), false );
                 this.upd.saveThreads();
