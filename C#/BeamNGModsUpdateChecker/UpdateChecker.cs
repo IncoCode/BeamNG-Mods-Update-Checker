@@ -192,6 +192,10 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns the value indicating on success of addition</returns>
         public bool addThread( string link )
         {
+            if ( string.IsNullOrEmpty( link ) )
+            {
+                return false;
+            }
             if ( !link.StartsWith( "http://" ) )
             {
                 link = "http://" + link;
