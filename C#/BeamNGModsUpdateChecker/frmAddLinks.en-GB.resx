@@ -127,6 +127,12 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Links (one link per line):</value>
   </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 13</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Adding links... Stay tuned :D</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add threads</value>
   </data>
