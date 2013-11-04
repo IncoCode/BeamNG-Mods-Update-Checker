@@ -160,13 +160,13 @@ namespace BeamNGModsUpdateChecker
             UpdEventArgs args = new UpdEventArgs();
             CheckUpdEventArgs checkUpdArgs = new CheckUpdEventArgs();
             checkUpdArgs.maxProgress = this.threads.Count - 1;
+            if ( this.isNeedAuth() )
+            {
+                this.auth();
+            }
             for ( int i = 0; i < this.threads.Count; i++ )
             {
                 Topic thread = this.threads[ i ];
-                if ( this.isNeedAuth() )
-                {
-                    this.auth();
-                }
                 string content = UpdateChecker.sendGet( thread.Link, this.cookieJar );
                 bool titleChanged = thread.updTitle( this.cookieJar, content );
                 bool attachmentsChanged = thread.updAttachments( this.cookieJar, content );

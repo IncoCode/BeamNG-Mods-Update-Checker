@@ -13,7 +13,7 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class frmAddLinks : Form
     {
-        UpdateChecker upd;        
+        UpdateChecker upd;
 
         public frmAddLinks( UpdateChecker upd, frmMain MainForm )
         {
@@ -22,16 +22,28 @@ namespace BeamNGModsUpdateChecker
             this.upd = upd;
         }
 
-        private void btnAdd_Click( object sender, EventArgs e )
+        private void addLinks()
         {
             string[] links = tbLinks.Lines;
+            pb1.Maximum = links.Length;
             for ( int i = 0; i < links.Length; i++ )
             {
                 string link = links[ i ];
                 this.upd.addThread( link );
                 Thread.Sleep( 50 );
+                pb1.PerformStep();
             }
             this.Close();
+        }
+
+        private void btnAdd_Click( object sender, EventArgs e )
+        {
+            pb1.Value = 0;
+            tbLinks.Enabled = false;
+            btnAdd.Enabled = false;
+            lblStatus.Show();
+            Thread thr = new Thread( this.addLinks );
+            thr.Start();
         }
     }
 }

@@ -229,82 +229,82 @@
     <value>17, 17</value>
   </metadata>
   <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="tsmiAddThreads.Text" xml:space="preserve">
     <value>Добавить темы</value>
   </data>
   <data name="tsmiMarkAllRead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="tsmiMarkAllRead.Text" xml:space="preserve">
     <value>Отметить все темы прочитанными</value>
   </data>
   <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 6</value>
+    <value>258, 6</value>
   </data>
   <data name="tsmiRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="tsmiRefresh.Text" xml:space="preserve">
     <value>Проверить обновления</value>
   </data>
   <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>45, 20</value>
   </data>
   <data name="файлToolStripMenuItem.Text" xml:space="preserve">
     <value>Темы</value>
   </data>
   <data name="tsmiOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+    <value>51, 20</value>
   </data>
   <data name="tsmiOptions.Text" xml:space="preserve">
     <value>Опции</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="русскийToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="русскийToolStripMenuItem.Text" xml:space="preserve">
     <value>Русский</value>
   </data>
   <data name="языкLanguageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 20</value>
+    <value>102, 20</value>
   </data>
   <data name="языкLanguageToolStripMenuItem.Text" xml:space="preserve">
     <value>Язык / Language</value>
   </data>
   <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>182, 22</value>
   </data>
   <data name="tsmiOfficialThread.Text" xml:space="preserve">
     <value>Официальная тема</value>
   </data>
   <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>182, 22</value>
   </data>
   <data name="tsmiRepository.Text" xml:space="preserve">
     <value>Репозиторий</value>
   </data>
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>179, 6</value>
   </data>
   <data name="tsmiCop.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="tsmiCop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>182, 22</value>
   </data>
   <data name="tsmiCop.Text" xml:space="preserve">
     <value>By Incognito</value>
   </data>
   <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
+    <value>59, 20</value>
   </data>
   <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
     <value>Помощь</value>
@@ -2205,7 +2205,7 @@
     <value>553, 17</value>
   </metadata>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
+    <value>82, 17</value>
   </data>
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Обновлений: 0</value>
@@ -4127,7 +4127,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>BeamNG Mods Update Checker v1.0.0 Alpha 1</value>
+    <value>BeamNG Mods Update Checker v1.0.0 Alpha 2</value>
   </data>
   <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
