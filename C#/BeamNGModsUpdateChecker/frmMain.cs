@@ -25,6 +25,7 @@ namespace BeamNGModsUpdateChecker
         double[] lvColProp = { 0.6, 0.4 };
         bool isUpdating = false;
         Size mainFormSize = new Size( 748, 456 );
+        Thread updThread = null;
 
         public frmMain()
         {
@@ -174,10 +175,14 @@ namespace BeamNGModsUpdateChecker
                 lvThreads.Enabled = true;
                 tbKeyword.Enabled = true;
                 this.isUpdating = false;
-                this.Invoke( new MethodInvoker( delegate()
+                try
                 {
-                    pbCheckUpd.Visible = false;
-                } ) );
+                    this.Invoke( new MethodInvoker( delegate()
+                    {
+                        pbCheckUpd.Visible = false;
+                    } ) );
+                }
+                catch { }
             }
         }
 
@@ -215,7 +220,7 @@ namespace BeamNGModsUpdateChecker
                 if ( dr == DialogResult.Cancel )
                 {
                     niTray.Dispose();
-                    Environment.Exit( 0 );                    
+                    Environment.Exit( 0 );
                     return;
                 }
             }
@@ -230,9 +235,9 @@ namespace BeamNGModsUpdateChecker
                     if ( dr == DialogResult.Cancel )
                     {
                         niTray.Dispose();
-                        Environment.Exit( 0 );                        
+                        Environment.Exit( 0 );
                         return;
-                    }                    
+                    }
                     isAuth = this.upd.auth( this.login, this.password );
                 }
             }
@@ -264,6 +269,10 @@ namespace BeamNGModsUpdateChecker
             this.saveThreads();
             this.saveSettings();
             niTray.Dispose();
+            if ( this.updThread != null )
+            {
+                this.updThread.Abort();
+            }
         }
 
         private void tsmiAddThreads_Click( object sender, EventArgs e )
@@ -309,8 +318,8 @@ namespace BeamNGModsUpdateChecker
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
             tmrUpd.Interval = this.updInterval * 60 * 1000;
-            Thread thr = new Thread( this.checkUpdates );
-            thr.Start();
+            this.updThread = new Thread( this.checkUpdates );
+            this.updThread.Start();
         }
 
         private void tsmiExit_Click( object sender, EventArgs e )
@@ -404,8 +413,8 @@ namespace BeamNGModsUpdateChecker
         private void tsmiRefresh_Click( object sender, EventArgs e )
         {
             tmrUpd.Stop();
-            Thread thr = new Thread( this.checkUpdates );
-            thr.Start();
+            this.updThread = new Thread( this.checkUpdates );
+            this.updThread.Start();
             tmrUpd.Start();
         }
 
