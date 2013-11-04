@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "BeamNG Mods Update Checker"
-#define MyAppVersion "1.0.0 Alpha 1"
+#define MyAppVersion "1.0.0 Alpha 2"
 #define MyAppPublisher "Incognito"
 #define MyAppExeName "BeamNGModsUpdateChecker.exe"
 
@@ -27,8 +27,8 @@ InternalCompressLevel=ultra
 CompressionThreads=2
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "english"; MessagesFile: "compiler:Default.isl"; InfoBeforeFile: "change_list-en.txt"
+Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"; InfoBeforeFile: "change_list-ru.txt"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"

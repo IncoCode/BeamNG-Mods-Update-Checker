@@ -1,0 +1,4 @@
+v1.0.0 Alpha 2:
+-Adding new links occurs in a separate thread.
+-Added handling of exceptions.
+-Fixed bugs.
