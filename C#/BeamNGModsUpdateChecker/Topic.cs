@@ -92,6 +92,10 @@ namespace BeamNGModsUpdateChecker
             }
             HtmlNodeCollection l = postbody.SelectNodes( "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
             HtmlNode attachments = null;
+            if ( l == null )
+            {
+                return result;
+            }
             for ( int i = 0; i < l.Count; i++ )
             {
                 if ( l[ i ].InnerHtml.IndexOf( "Attached Files" ) >= 0 )
@@ -162,7 +166,6 @@ namespace BeamNGModsUpdateChecker
                     }
                 }
             }
-
             return result;
         }
 
