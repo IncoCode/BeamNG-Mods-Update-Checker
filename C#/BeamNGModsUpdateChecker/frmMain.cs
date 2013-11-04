@@ -214,7 +214,8 @@ namespace BeamNGModsUpdateChecker
                 DialogResult dr = frm.ShowDialog();
                 if ( dr == DialogResult.Cancel )
                 {
-                    Environment.Exit( 0 );
+                    niTray.Dispose();
+                    Environment.Exit( 0 );                    
                     return;
                 }
             }
@@ -225,7 +226,13 @@ namespace BeamNGModsUpdateChecker
                 while ( !isAuth )
                 {
                     frm = new frmEnterPassword( this );
-                    frm.ShowDialog();
+                    DialogResult dr = frm.ShowDialog();
+                    if ( dr == DialogResult.Cancel )
+                    {
+                        niTray.Dispose();
+                        Environment.Exit( 0 );                        
+                        return;
+                    }                    
                     isAuth = this.upd.auth( this.login, this.password );
                 }
             }
@@ -264,6 +271,7 @@ namespace BeamNGModsUpdateChecker
             frm.ShowDialog();
             this.printAllThreads();
             this.saveThreads();
+            niTray.Dispose();
         }
 
         private void tsmiLAddThread_Click( object sender, EventArgs e )
