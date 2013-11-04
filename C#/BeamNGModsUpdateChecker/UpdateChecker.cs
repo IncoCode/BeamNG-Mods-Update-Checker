@@ -283,15 +283,22 @@ namespace BeamNGModsUpdateChecker
             string s = JsonConvert.SerializeObject( threads );
             string fileName = this.progPath + @"\Threads.json";
             string fileNameBak = fileName + ".bak";
-            if ( File.Exists( fileName ) )
+            try
             {
-                if ( File.Exists( fileNameBak ) )
+                if ( File.Exists( fileName ) )
                 {
-                    File.Delete( fileNameBak );
+                    if ( File.Exists( fileNameBak ) )
+                    {
+                        File.Delete( fileNameBak );
+                    }
+                    File.Move( fileName, fileNameBak );
                 }
-                File.Move( fileName, fileNameBak );
+                File.WriteAllText( fileName, s );
             }
-            File.WriteAllText( fileName, s );
+            catch
+            {
+                throw new Exception( "Save error!" );
+            }
         }
 
         public void loadThreads()
@@ -299,11 +306,19 @@ namespace BeamNGModsUpdateChecker
             string fileName = this.progPath + @"\Threads.json";
             if ( File.Exists( fileName ) )
             {
-                string s = File.ReadAllText( fileName );
-                var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
-                if ( threads.Threads != null )
+                try
                 {
-                    this.threads = threads.Threads;
+                    string s = File.ReadAllText( fileName );
+                    var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
+                    if ( threads.Threads != null )
+                    {
+                        this.threads = threads.Threads;
+                    }
+                }
+                catch
+                {
+                    this.threads = new List<Topic>();
+                    throw new Exception( "Load error!" );
                 }
             }
         }

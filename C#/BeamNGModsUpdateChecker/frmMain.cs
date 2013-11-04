@@ -79,28 +79,55 @@ namespace BeamNGModsUpdateChecker
 
         private void saveSettings()
         {
-            IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-            ini.Write( "Login", this.login, "Auth" );
-            ini.Write( "Password", this.password, "Auth" );
-            ini.Write( "Lang", lang, "Options" );
-            ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
-            ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
-            ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
-            ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
+            try
+            {
+                IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
+                ini.Write( "Login", this.login, "Auth" );
+                ini.Write( "Password", this.password, "Auth" );
+                ini.Write( "Lang", lang, "Options" );
+                ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
+                ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
+                ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
+                ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void loadSettings()
         {
-            IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-            this.login = ini.Read( "Login", "Auth", "" );
-            this.password = ini.Read( "Password", "Auth", "" );
-            this.lang = ini.Read( "Lang", "Options", lang );
-            this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
-            this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
-            int mainFormWidth = int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
-            int mainFormHeight = int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
-            Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
-            this.mainFormSize = mainFormSize;
+            try
+            {
+                IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
+                this.login = ini.Read( "Login", "Auth", "" );
+                this.password = ini.Read( "Password", "Auth", "" );
+                this.lang = ini.Read( "Lang", "Options", lang );
+                this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
+                this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
+                int mainFormWidth = int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
+                int mainFormHeight = int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
+                Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
+                this.mainFormSize = mainFormSize;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void saveThreads()
+        {
+            try
+            {
+                this.upd.saveThreads();
+            }
+            catch
+            {
+                MessageBox.Show( "Ошибка сохранения!", strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
         }
 
         private void updProgress( object sender, UpdEventArgs e )
@@ -131,6 +158,7 @@ namespace BeamNGModsUpdateChecker
             this.Invoke( new MethodInvoker( delegate()
                 {
                     pbCheckUpd.Visible = true;
+                    pbCheckUpd.Value = 0;
                 } ) );
             lvThreads.Enabled = false;
             tbKeyword.Enabled = false;
@@ -139,7 +167,7 @@ namespace BeamNGModsUpdateChecker
             {
                 int updatesCount = this.upd.checkUpdates();
                 this.showUpdNot( updatesCount );
-                this.upd.saveThreads();
+                this.saveThreads();
             }
             finally
             {
@@ -208,7 +236,14 @@ namespace BeamNGModsUpdateChecker
             }
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
             upd.checkUpdEvent += new EventHandler<CheckUpdEventArgs>( checkUpdProgress );
-            this.upd.loadThreads();
+            try
+            {
+                this.upd.loadThreads();
+            }
+            catch
+            {
+                MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
             this.printAllThreads();
             tmrUpd.Start();
             if ( this.minimizeWhenStart )
@@ -219,7 +254,7 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_FormClosing( object sender, FormClosingEventArgs e )
         {
-            this.upd.saveThreads();
+            this.saveThreads();
             this.saveSettings();
         }
 
@@ -228,7 +263,7 @@ namespace BeamNGModsUpdateChecker
             frmAddLinks frm = new frmAddLinks( this.upd, this );
             frm.ShowDialog();
             this.printAllThreads();
-            this.upd.saveThreads();
+            this.saveThreads();
         }
 
         private void tsmiLAddThread_Click( object sender, EventArgs e )
@@ -304,7 +339,7 @@ namespace BeamNGModsUpdateChecker
                     this.upd.changeReadStatus( link, true );
                 }
                 this.showUpdNot( this.upd.getUnreadThreads(), false );
-                this.upd.saveThreads();
+                this.saveThreads();
             }
         }
 
@@ -338,7 +373,7 @@ namespace BeamNGModsUpdateChecker
                 lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
                 this.upd.changeReadStatus( link, true );
             }
-            this.upd.saveThreads();
+            this.saveThreads();
             this.showUpdNot( this.upd.getUnreadThreads(), false );
         }
 
@@ -354,7 +389,7 @@ namespace BeamNGModsUpdateChecker
                     this.upd.changeReadStatus( link, false );
                 }
                 this.showUpdNot( this.upd.getUnreadThreads(), false );
-                this.upd.saveThreads();
+                this.saveThreads();
             }
         }
 
