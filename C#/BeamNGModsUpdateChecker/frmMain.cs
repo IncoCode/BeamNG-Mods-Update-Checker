@@ -125,7 +125,7 @@ namespace BeamNGModsUpdateChecker
             }
             catch
             {
-                MessageBox.Show( "Ошибка сохранения!", strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show( strings.saveThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
                 return;
             }
         }

@@ -97,6 +97,15 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Невозможно сохранить список тем!.
+        /// </summary>
+        internal static string saveThreadsError {
+            get {
+                return ResourceManager.GetString("saveThreadsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Обновлений: {0}.
         /// </summary>
         internal static string updatesCount {

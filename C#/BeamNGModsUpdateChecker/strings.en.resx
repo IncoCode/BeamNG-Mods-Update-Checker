@@ -120,8 +120,17 @@
   <data name="checkingForUpdates" xml:space="preserve">
     <value>Checking for updates...</value>
   </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="loadThreadsError" xml:space="preserve">
+    <value>Unable to load the threads list!</value>
+  </data>
   <data name="restartApp" xml:space="preserve">
     <value>The application will be restarted! Continue?</value>
+  </data>
+  <data name="saveThreadsError" xml:space="preserve">
+    <value>Unable to save the threads list!</value>
   </data>
   <data name="updatesCount" xml:space="preserve">
     <value>Updates: {0}</value>
