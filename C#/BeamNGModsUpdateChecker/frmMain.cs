@@ -263,6 +263,7 @@ namespace BeamNGModsUpdateChecker
         {
             this.saveThreads();
             this.saveSettings();
+            niTray.Dispose();
         }
 
         private void tsmiAddThreads_Click( object sender, EventArgs e )
@@ -271,7 +272,6 @@ namespace BeamNGModsUpdateChecker
             frm.ShowDialog();
             this.printAllThreads();
             this.saveThreads();
-            niTray.Dispose();
         }
 
         private void tsmiLAddThread_Click( object sender, EventArgs e )
