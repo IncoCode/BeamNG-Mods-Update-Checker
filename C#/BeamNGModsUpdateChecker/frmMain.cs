@@ -332,11 +332,13 @@ namespace BeamNGModsUpdateChecker
             this.Visible = true;
             this.ShowInTaskbar = true;
             this.WindowState = FormWindowState.Normal;
+            this.Size = this.mainFormSize;
         }
 
         private void frmMain_Resize( object sender, EventArgs e )
         {
             this.lvColAutosize();
+            this.mainFormSize = this.Size;
             if ( WindowState == FormWindowState.Minimized )
             {
                 this.Visible = false;

@@ -1,4 +1,2 @@
-v1.0.0 Alpha 2:
--Adding new links occurs in a separate thread.
--Added handling of exceptions.
--Fixed bugs.
+v1.0.0 Stable:
+-Fixed: changing the size of the form when you expand from the tray.
