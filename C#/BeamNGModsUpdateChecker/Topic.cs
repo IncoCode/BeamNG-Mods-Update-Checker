@@ -49,6 +49,11 @@ namespace BeamNGModsUpdateChecker
             var h = new HtmlAgilityPack.HtmlDocument();
             h.LoadHtml( content );
             HtmlNodeCollection nodes = h.DocumentNode.SelectNodes( "//title" );
+            if ( nodes == null )
+            {
+                return result;
+            }
+
             string title = nodes[ 0 ].InnerText;
             if ( title != this.Title )
             {
@@ -70,6 +75,11 @@ namespace BeamNGModsUpdateChecker
             HtmlDocument h = new HtmlAgilityPack.HtmlDocument();
             h.LoadHtml( content );
             HtmlNode posts = h.GetElementbyId( "posts" );
+            if ( posts == null )
+            {
+                return false;
+            }
+
             HtmlNode post = posts.ChildNodes[ 1 ];
             HtmlNode postdetails = null;
             for ( int i = 0; i < post.ChildNodes.Count; i++ )
