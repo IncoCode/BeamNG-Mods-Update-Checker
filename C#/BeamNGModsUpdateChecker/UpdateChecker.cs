@@ -89,6 +89,11 @@ namespace BeamNGModsUpdateChecker
             this.password = password;
             this.progPath = progPath;
             this.threads = new List<Topic>();
+            try
+            {
+                this.loadThreads();
+            }
+            catch { }
         }
 
         /// <summary>
