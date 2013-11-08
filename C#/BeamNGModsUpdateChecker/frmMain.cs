@@ -451,5 +451,18 @@ namespace BeamNGModsUpdateChecker
         {
             Process.Start( "http://www.beamng.com/threads/4920-Mods-Update-Checker?p=54900#post54900" );
         }
+
+        private void tsmiAbout_Click( object sender, EventArgs e )
+        {
+            MessageBox.Show( strings.copyright.FixNewLines(), strings.aboutProg, MessageBoxButtons.OK, MessageBoxIcon.Information );
+        }
+    }
+
+    public static class ExMethods
+    {
+        public static string FixNewLines( this string str )
+        {
+            return str.Replace( @"\n", Environment.NewLine );
+        }
     }
 }

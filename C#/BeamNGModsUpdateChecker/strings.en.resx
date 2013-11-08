@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="aboutProg" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="checkingForUpdates" xml:space="preserve">
     <value>Checking for updates...</value>
+  </data>
+  <data name="copyright" xml:space="preserve">
+    <value>Made by Incognito.\n\nLibs used:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/)</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Error</value>
