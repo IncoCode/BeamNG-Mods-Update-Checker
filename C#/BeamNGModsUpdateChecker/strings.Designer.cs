@@ -79,7 +79,7 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Написал Incognito.\n\nИспользовались библиотеки:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/).
+        ///   Ищет локализованную строку, похожую на Написал Incognito.\n\nИспользовались библиотеки:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/)\nHtml Agility Pack (http://htmlagilitypack.codeplex.com/).
         /// </summary>
         internal static string copyright {
             get {

@@ -124,7 +124,7 @@
     <value>Проверка обновлений...</value>
   </data>
   <data name="copyright" xml:space="preserve">
-    <value>Написал Incognito.\n\nИспользовались библиотеки:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/)</value>
+    <value>Написал Incognito.\n\nИспользовались библиотеки:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/)\nHtml Agility Pack (http://htmlagilitypack.codeplex.com/)</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Ошибка</value>
