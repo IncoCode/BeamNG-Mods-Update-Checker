@@ -88,8 +88,11 @@ namespace BeamNGModsUpdateChecker
                 ini.Write( "Lang", lang, "Options" );
                 ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
                 ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
-                ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
-                ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
+                if ( WindowState != FormWindowState.Minimized )
+                {
+                    ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
+                    ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
+                }
             }
             catch
             {
@@ -271,7 +274,14 @@ namespace BeamNGModsUpdateChecker
             niTray.Dispose();
             if ( this.updThread != null )
             {
-                this.updThread.Abort();
+                try
+                {
+                    this.updThread.Abort();
+                }
+                catch
+                {
+                    Environment.Exit( 0 );
+                }
             }
         }
 
@@ -339,6 +349,7 @@ namespace BeamNGModsUpdateChecker
         {
             this.lvColAutosize();
             this.mainFormSize = this.Size;
+            this.saveSettings();
             if ( WindowState == FormWindowState.Minimized )
             {
                 this.Visible = false;
