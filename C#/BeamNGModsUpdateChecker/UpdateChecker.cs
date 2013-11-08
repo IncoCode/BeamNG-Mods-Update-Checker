@@ -145,12 +145,19 @@ namespace BeamNGModsUpdateChecker
         /// <returns></returns>
         private bool isNeedAuth()
         {
-            string content = UpdateChecker.sendGet( "http://www.beamng.com/forum/", this.cookieJar );
-            if ( content.IndexOf( "Welcome," ) >= 0 )
+            try
             {
-                return false;
+                string content = UpdateChecker.sendGet( "http://www.beamng.com/forum/", this.cookieJar );
+                if ( content.IndexOf( "Welcome," ) >= 0 )
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch
             {
                 return true;
             }
@@ -172,15 +179,19 @@ namespace BeamNGModsUpdateChecker
             for ( int i = 0; i < this.threads.Count; i++ )
             {
                 Topic thread = this.threads[ i ];
-                string content = UpdateChecker.sendGet( thread.Link, this.cookieJar );
-                bool titleChanged = thread.updTitle( this.cookieJar, content );
-                bool attachmentsChanged = thread.updAttachments( this.cookieJar, content );
-                args.thread = thread;
-                if ( titleChanged || attachmentsChanged )
+                try
                 {
-                    thread.Read = false;
-                    updEvent( this, args );
+                    string content = UpdateChecker.sendGet( thread.Link, this.cookieJar );
+                    bool titleChanged = thread.updTitle( this.cookieJar, content );
+                    bool attachmentsChanged = thread.updAttachments( this.cookieJar, content );
+                    args.thread = thread;
+                    if ( titleChanged || attachmentsChanged )
+                    {
+                        thread.Read = false;
+                        updEvent( this, args );
+                    }
                 }
+                catch { }
                 checkUpdArgs.progress = i;
                 checkUpdEvent( this, checkUpdArgs );
                 Thread.Sleep( 50 );
