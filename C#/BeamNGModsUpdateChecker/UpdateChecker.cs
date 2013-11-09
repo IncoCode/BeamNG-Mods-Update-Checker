@@ -18,21 +18,17 @@ namespace BeamNGModsUpdateChecker
         public Topic thread { get; set; }
     }
 
-    public class CheckUpdEventArgs : EventArgs
-    {
-        public int progress { get; set; }
-        public int maxProgress { get; set; }
-    }
-
     public class UpdateChecker
     {
+        public event EventHandler<UpdEventArgs> updEvent = delegate { };
+
         List<Topic> threads;
         string login;
         string password;
         string progPath;
         CookieContainer cookieJar = new CookieContainer();
-        public event EventHandler<UpdEventArgs> updEvent = delegate { };
-        public event EventHandler<CheckUpdEventArgs> checkUpdEvent = delegate { };
+        volatile int updProgress;
+        volatile int updMaxProgress;
 
         #region Additional methods
 
@@ -78,6 +74,22 @@ namespace BeamNGModsUpdateChecker
             get
             {
                 return this.threads;
+            }
+        }
+
+        public int UpdProgress
+        {
+            get
+            {
+                return this.updProgress;
+            }
+        }
+
+        public int UpdMaxProgress
+        {
+            get
+            {
+                return this.updMaxProgress;
             }
         }
 
@@ -172,8 +184,8 @@ namespace BeamNGModsUpdateChecker
         public int checkUpdates()
         {
             UpdEventArgs args = new UpdEventArgs();
-            CheckUpdEventArgs checkUpdArgs = new CheckUpdEventArgs();
-            checkUpdArgs.maxProgress = this.threads.Count - 1;
+            this.updMaxProgress = this.threads.Count;
+            this.updProgress = 0;
             if ( this.isNeedAuth() )
             {
                 this.auth();
@@ -194,12 +206,10 @@ namespace BeamNGModsUpdateChecker
                     }
                 }
                 catch { }
-                checkUpdArgs.progress = i;
-                checkUpdEvent( this, checkUpdArgs );
+                this.updProgress++;
                 Thread.Sleep( 50 );
             }
             args = null;
-            checkUpdArgs = null;
             return this.getUnreadThreads();
         }
 

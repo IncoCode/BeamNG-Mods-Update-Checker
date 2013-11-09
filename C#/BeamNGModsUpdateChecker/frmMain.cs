@@ -145,12 +145,6 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void checkUpdProgress( object sender, CheckUpdEventArgs e )
-        {
-            pbCheckUpd.Maximum = e.maxProgress;
-            pbCheckUpd.Value = e.progress;
-        }
-
         private void checkUpdates()
         {
             if ( this.isUpdating )
@@ -183,6 +177,7 @@ namespace BeamNGModsUpdateChecker
                     this.Invoke( new MethodInvoker( delegate()
                     {
                         pbCheckUpd.Visible = false;
+                        tmrUpdProgress.Stop();
                     } ) );
                 }
                 catch { }
@@ -250,7 +245,6 @@ namespace BeamNGModsUpdateChecker
                 Environment.Exit( 0 );
             }
             upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
-            upd.checkUpdEvent += new EventHandler<CheckUpdEventArgs>( checkUpdProgress );
             try
             {
                 this.upd.loadThreads();
@@ -327,6 +321,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
+            tmrUpdProgress.Start();
             tmrUpd.Interval = this.updInterval * 60 * 1000;
             this.updThread = new Thread( this.checkUpdates );
             this.updThread.Start();
@@ -455,6 +450,12 @@ namespace BeamNGModsUpdateChecker
         private void tsmiAbout_Click( object sender, EventArgs e )
         {
             MessageBox.Show( strings.copyright.FixNewLines(), strings.aboutProg, MessageBoxButtons.OK, MessageBoxIcon.Information );
+        }
+
+        private void tmrUpdProgress_Tick( object sender, EventArgs e )
+        {
+            pbCheckUpd.Maximum = this.upd.UpdMaxProgress;
+            pbCheckUpd.Value = this.upd.UpdProgress;
         }
     }
 
