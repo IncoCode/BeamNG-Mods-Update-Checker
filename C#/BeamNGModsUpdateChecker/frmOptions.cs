@@ -25,11 +25,11 @@ namespace BeamNGModsUpdateChecker
             try
             {
                 RegistryKey rkApp = Registry.CurrentUser.OpenSubKey( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
-                if ( add )
+                if ( add && !this.IsStartupItem() )
                 {
                     rkApp.SetValue( "BeamNGModsUpdateChecker", Application.ExecutablePath.ToString() );
                 }
-                else
+                else if ( !add )
                 {
                     rkApp.DeleteValue( "BeamNGModsUpdateChecker", false );
                 }
