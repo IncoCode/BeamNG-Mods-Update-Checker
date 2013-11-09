@@ -117,6 +117,8 @@ namespace BeamNGModsUpdateChecker
                 request.AddParameter( "cookieuser", "1" );
                 IRestResponse response = client.Execute( request );
                 string content = response.Content;
+                client = null;
+                request = null;
                 if ( content.IndexOf( "Thank you for logging in" ) >= 0 )
                 {
                     return true;
@@ -196,6 +198,8 @@ namespace BeamNGModsUpdateChecker
                 checkUpdEvent( this, checkUpdArgs );
                 Thread.Sleep( 50 );
             }
+            args = null;
+            checkUpdArgs = null;
             return this.getUnreadThreads();
         }
 
@@ -212,9 +216,9 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
-            if ( !link.StartsWith( "http://" ) )
+            if ( !link.StartsWith( "http://www.beamng.com/" ) )
             {
-                link = "http://" + link;
+                return false;
             }
             if ( link.IndexOf( "?" ) >= 0 )
             {
@@ -223,10 +227,6 @@ namespace BeamNGModsUpdateChecker
             if ( link.IndexOf( "/page" ) >= 0 )
             {
                 link = link.Substring( 0, link.IndexOf( "/page" ) );
-            }
-            if ( !link.StartsWith( "http://www.beamng.com/" ) )
-            {
-                return false;
             }
             if ( !this.threads.Contains( new Topic { Link = link } ) )
             {
@@ -325,6 +325,7 @@ namespace BeamNGModsUpdateChecker
             {
                 throw new Exception( "Save error!" );
             }
+            threads = null;
         }
 
         public void loadThreads()
