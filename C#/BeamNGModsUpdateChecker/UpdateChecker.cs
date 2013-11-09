@@ -230,7 +230,13 @@ namespace BeamNGModsUpdateChecker
             }
             if ( !this.threads.Contains( new Topic { Link = link } ) )
             {
-                this.threads.Add( new Topic( link, this.cookieJar ) );
+                Topic topic = new Topic( link, this.cookieJar );
+                if ( string.IsNullOrEmpty( topic.Title ) )
+                {
+                    return false;
+                }
+
+                this.threads.Add( topic );
                 return true;
             }
             else
