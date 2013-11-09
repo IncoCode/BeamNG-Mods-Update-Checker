@@ -43,8 +43,8 @@
             // 
             // btnAdd
             // 
-            resources.ApplyResources(this.btnAdd, "btnAdd");
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.btnAdd, "btnAdd");
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -78,6 +78,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddLinks";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddLinks_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
