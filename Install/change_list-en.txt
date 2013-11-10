@@ -1,4 +1,3 @@
 v1.0.0 Stable:
--Fixed: changing the size of the form when you expand from the tray.
 -Fixed: the program crash, if no Internet connection.
 -Fixed some more bugs.
