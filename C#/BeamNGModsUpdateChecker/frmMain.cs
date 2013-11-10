@@ -281,6 +281,10 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiAddThreads_Click( object sender, EventArgs e )
         {
+            if ( this.isUpdating )
+            {
+                return;
+            }
             frmAddLinks frm = new frmAddLinks( this.upd, this );
             frm.ShowDialog();
             this.printAllThreads();
@@ -391,6 +395,10 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiMarkAllRead_Click( object sender, EventArgs e )
         {
+            if ( this.isUpdating )
+            {
+                return;
+            }
             for ( int i = 0; i < this.upd.Threads.Count; i++ )
             {
                 string link = this.upd.Threads[ i ].Link;
