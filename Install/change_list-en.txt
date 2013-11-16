@@ -1,3 +1,4 @@
-v1.0.0 Stable:
--Fixed: the program crash, if no Internet connection.
--Fixed some more bugs.
+v1.0.1 Stable:
+-Fixed: adding duplicate threads.
+-Added: decoding html characters.
+-Now prefixes concluded in "[" and "]".

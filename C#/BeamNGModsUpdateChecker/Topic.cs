@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using RestSharp;
@@ -45,6 +43,10 @@ namespace BeamNGModsUpdateChecker
         /// <returns></returns>
         public bool updTitle( CookieContainer cookieJar, string content )
         {
+            if ( this.Title != null )
+            {
+                this.Title = this.normalPrefix( this.Title );
+            }
             bool result = false;
             var h = new HtmlAgilityPack.HtmlDocument();
             h.LoadHtml( content );
@@ -54,11 +56,32 @@ namespace BeamNGModsUpdateChecker
                 return result;
             }
 
-            string title = nodes[ 0 ].InnerText;
+            string title = this.normalPrefix( WebUtility.HtmlDecode( nodes[ 0 ].InnerText ) );
             if ( title != this.Title )
             {
                 result = true;
                 this.Title = title;
+            }
+            return result;
+        }
+
+        private string normalPrefix( string str )
+        {
+            string result = str;
+            string[] prefixs = { @"\[WIP Beta released\]",
+                                   @"\[WIP\]", 
+                                   @"\[On Hold\]", 
+                                   @"\[Released\]", 
+                                   @"\[Cancelled\]", 
+                                   @"\[Old and Unsupported\]" };
+            Regex regex = new Regex( "(" + string.Join( "|", prefixs ) + ")" );
+            Match match = regex.Match( str );
+            if ( !match.Success )
+            {
+                regex = new Regex( "(" + string.Join( "|", prefixs ).Replace( "\\[", "" ).Replace( "\\]", "" ) + ")" );
+                match = regex.Match( str );
+                string findTag = match.Groups[ 1 ].ToString();
+                result = str.Replace( findTag, "[" + findTag + "]" );
             }
             return result;
         }
