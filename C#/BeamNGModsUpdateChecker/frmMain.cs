@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Ini;
@@ -19,13 +15,13 @@ namespace BeamNGModsUpdateChecker
         public int updInterval = 30;
         public bool minimizeWhenStart = false;
 
-        UpdateChecker upd;
-        string login = "";
-        string password = "";
-        double[] lvColProp = { 0.6, 0.4 };
-        bool isUpdating = false;
-        Size mainFormSize = new Size( 748, 456 );
-        Thread updThread = null;
+        private UpdateChecker upd;
+        private string login = "";
+        private string password = "";
+        private double[] lvColProp = { 0.6, 0.4 };
+        private bool isUpdating = false;
+        private Size mainFormSize = new Size( 748, 456 );
+        private Thread updThread = null;
 
         public frmMain()
         {

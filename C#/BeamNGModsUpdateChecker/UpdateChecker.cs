@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using Newtonsoft.Json;
 using RestSharp;
@@ -22,13 +21,13 @@ namespace BeamNGModsUpdateChecker
     {
         public event EventHandler<UpdEventArgs> updEvent = delegate { };
 
-        List<Topic> threads;
-        string login;
-        string password;
-        string progPath;
-        CookieContainer cookieJar = new CookieContainer();
-        volatile int updProgress;
-        volatile int updMaxProgress;
+        private List<Topic> threads;
+        private string login;
+        private string password;
+        private string progPath;
+        private CookieContainer cookieJar = new CookieContainer();
+        private volatile int updProgress;
+        private volatile int updMaxProgress;
 
         #region Additional methods
 
@@ -65,7 +64,7 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        #endregion
+        #endregion Additional methods
 
         #region Fields
 
@@ -93,7 +92,7 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        #endregion
+        #endregion Fields
 
         public UpdateChecker( string login, string password, string progPath )
         {
@@ -296,7 +295,7 @@ namespace BeamNGModsUpdateChecker
         /// Removes duplicate of threads
         /// </summary>
         public void removeDuplicates()
-        {            
+        {
             this.threads = this.threads.GroupBy( x => x.Link ).Select( y => y.First() ).ToList();
         }
 
@@ -316,7 +315,7 @@ namespace BeamNGModsUpdateChecker
                 || p.Link.Contains( keyword ) );
         }
 
-        #endregion
+        #endregion Working with threads
 
         #region Save/Load
 
@@ -368,6 +367,6 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        #endregion
+        #endregion Save/Load
     }
 }
