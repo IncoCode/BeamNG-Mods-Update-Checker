@@ -170,22 +170,28 @@
     <value>Threads</value>
   </data>
   <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>227, 22</value>
   </data>
   <data name="tsmiAddThreads.Text" xml:space="preserve">
     <value>Add threads</value>
   </data>
   <data name="tsmiMarkAllRead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>227, 22</value>
   </data>
   <data name="tsmiMarkAllRead.Text" xml:space="preserve">
     <value>Mark all threads as read</value>
   </data>
+  <data name="tsmiRemoveDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 22</value>
+  </data>
+  <data name="tsmiRemoveDuplicates.Text" xml:space="preserve">
+    <value>Removes duplicate of topics</value>
+  </data>
   <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 6</value>
+    <value>224, 6</value>
   </data>
   <data name="tsmiRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>227, 22</value>
   </data>
   <data name="tsmiRefresh.Text" xml:space="preserve">
     <value>Check for updates</value>
