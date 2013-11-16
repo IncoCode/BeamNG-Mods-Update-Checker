@@ -165,36 +165,6 @@
   <metadata name="cmsThreadsMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>131, 17</value>
   </metadata>
-  <data name="tsmiLAddThread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiLAddThread.Text" xml:space="preserve">
-    <value>Добавить темы</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
-  </data>
-  <data name="tsmiMakeRead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiMakeRead.Text" xml:space="preserve">
-    <value>Отменить прочитанным</value>
-  </data>
-  <data name="tsmiMakeUnread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiMakeUnread.Text" xml:space="preserve">
-    <value>Отметить непрочитанным</value>
-  </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
-  </data>
-  <data name="tsmiRemove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiRemove.Text" xml:space="preserve">
-    <value>Удалить</value>
-  </data>
   <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 104</value>
   </data>
@@ -225,6 +195,36 @@
   <data name="&gt;&gt;lvThreads.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="tsmiLAddThread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiLAddThread.Text" xml:space="preserve">
+    <value>Добавить темы</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
+  </data>
+  <data name="tsmiMakeRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiMakeRead.Text" xml:space="preserve">
+    <value>Отменить прочитанным</value>
+  </data>
+  <data name="tsmiMakeUnread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiMakeUnread.Text" xml:space="preserve">
+    <value>Отметить непрочитанным</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
+  </data>
+  <data name="tsmiRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiRemove.Text" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <metadata name="msMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -239,6 +239,12 @@
   </data>
   <data name="tsmiMarkAllRead.Text" xml:space="preserve">
     <value>Отметить все темы прочитанными</value>
+  </data>
+  <data name="tsmiRemoveDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 22</value>
+  </data>
+  <data name="tsmiRemoveDuplicates.Text" xml:space="preserve">
+    <value>Удалить дубликаты</value>
   </data>
   <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 6</value>
@@ -261,44 +267,11 @@
   <data name="tsmiOptions.Text" xml:space="preserve">
     <value>Опции</value>
   </data>
-  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
-  </data>
-  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="русскийToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
-  </data>
-  <data name="русскийToolStripMenuItem.Text" xml:space="preserve">
-    <value>Русский</value>
-  </data>
   <data name="языкLanguageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
   </data>
   <data name="языкLanguageToolStripMenuItem.Text" xml:space="preserve">
     <value>Язык</value>
-  </data>
-  <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="tsmiOfficialThread.Text" xml:space="preserve">
-    <value>Официальная тема</value>
-  </data>
-  <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="tsmiRepository.Text" xml:space="preserve">
-    <value>Репозиторий</value>
-  </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="tsmiAbout.Text" xml:space="preserve">
-    <value>О программе</value>
   </data>
   <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -330,6 +303,39 @@
   <data name="&gt;&gt;msMenu.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 22</value>
+  </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="русскийToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 22</value>
+  </data>
+  <data name="русскийToolStripMenuItem.Text" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="tsmiOfficialThread.Text" xml:space="preserve">
+    <value>Официальная тема</value>
+  </data>
+  <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="tsmiRepository.Text" xml:space="preserve">
+    <value>Репозиторий</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="tsmiAbout.Text" xml:space="preserve">
+    <value>О программе</value>
+  </data>
   <metadata name="tmrUpd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>278, 17</value>
   </metadata>
@@ -339,30 +345,6 @@
   <metadata name="cmsTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>456, 17</value>
   </metadata>
-  <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="tsmiExpand.Text" xml:space="preserve">
-    <value>Развернуть</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 6</value>
-  </data>
-  <data name="добавитьТемыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="добавитьТемыToolStripMenuItem.Text" xml:space="preserve">
-    <value>Добавить темы</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 6</value>
-  </data>
-  <data name="tsmiExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="tsmiExit.Text" xml:space="preserve">
-    <value>Выход</value>
-  </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 82</value>
   </data>
@@ -2198,21 +2180,33 @@
   <data name="niTray.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="tsmiExpand.Text" xml:space="preserve">
+    <value>Развернуть</value>
+  </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 6</value>
+  </data>
+  <data name="добавитьТемыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="добавитьТемыToolStripMenuItem.Text" xml:space="preserve">
+    <value>Добавить темы</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 6</value>
+  </data>
+  <data name="tsmiExit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="tsmiExit.Text" xml:space="preserve">
+    <value>Выход</value>
+  </data>
   <metadata name="ssStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>553, 17</value>
   </metadata>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>Обновлений: 0</value>
-  </data>
-  <data name="pbCheckUpd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 16</value>
-  </data>
-  <data name="pbCheckUpd.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ssStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 399</value>
   </data>
@@ -2236,6 +2230,18 @@
   </data>
   <data name="&gt;&gt;ssStatus.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 17</value>
+  </data>
+  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
+    <value>Обновлений: 0</value>
+  </data>
+  <data name="pbCheckUpd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 16</value>
+  </data>
+  <data name="pbCheckUpd.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tbKeyword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4320,6 +4326,12 @@
   </data>
   <data name="&gt;&gt;tmrUpdProgress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiRemoveDuplicates.Name" xml:space="preserve">
+    <value>tsmiRemoveDuplicates</value>
+  </data>
+  <data name="&gt;&gt;tsmiRemoveDuplicates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>

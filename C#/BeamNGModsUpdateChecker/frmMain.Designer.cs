@@ -70,6 +70,7 @@
             this.tbKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tmrUpdProgress = new System.Windows.Forms.Timer(this.components);
+            this.tsmiRemoveDuplicates = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
             this.cmsTray.SuspendLayout();
@@ -165,6 +166,7 @@
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAddThreads,
             this.tsmiMarkAllRead,
+            this.tsmiRemoveDuplicates,
             this.toolStripMenuItem6,
             this.tsmiRefresh});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
@@ -335,6 +337,12 @@
             // 
             this.tmrUpdProgress.Tick += new System.EventHandler(this.tmrUpdProgress_Tick);
             // 
+            // tsmiRemoveDuplicates
+            // 
+            this.tsmiRemoveDuplicates.Name = "tsmiRemoveDuplicates";
+            resources.ApplyResources(this.tsmiRemoveDuplicates, "tsmiRemoveDuplicates");
+            this.tsmiRemoveDuplicates.Click += new System.EventHandler(this.tsmiRemoveDuplicates_Click);
+            // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
@@ -403,6 +411,7 @@
         private System.Windows.Forms.TextBox tbKeyword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer tmrUpdProgress;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDuplicates;
     }
 }
 

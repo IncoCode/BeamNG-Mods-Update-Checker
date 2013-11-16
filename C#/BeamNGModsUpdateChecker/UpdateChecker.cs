@@ -293,6 +293,14 @@ namespace BeamNGModsUpdateChecker
         }
 
         /// <summary>
+        /// Removes duplicate of threads
+        /// </summary>
+        public void removeDuplicates()
+        {            
+            this.threads = this.threads.GroupBy( x => x.Link ).Select( y => y.First() ).ToList();
+        }
+
+        /// <summary>
         /// Searching threads
         /// </summary>
         /// <param name="keyword">Search keyword</param>

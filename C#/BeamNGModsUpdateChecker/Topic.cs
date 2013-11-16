@@ -181,7 +181,10 @@ namespace BeamNGModsUpdateChecker
 
         public bool Equals( Topic obj )
         {
-            return this.Link.Equals( obj.Link );
+            Regex regex = new Regex( @"(http://(www\.)?beamng\.com/threads/[0-9]+)" );
+            string link = regex.Match( this.Link ).Groups[ 1 ].ToString();
+            string link2 = regex.Match( obj.Link ).Groups[ 1 ].ToString();
+            return link.Equals( link2 );
         }
     }
 }

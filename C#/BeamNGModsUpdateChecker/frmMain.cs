@@ -465,6 +465,12 @@ namespace BeamNGModsUpdateChecker
             pbCheckUpd.Maximum = this.upd.UpdMaxProgress;
             pbCheckUpd.Value = this.upd.UpdProgress;
         }
+
+        private void tsmiRemoveDuplicates_Click( object sender, EventArgs e )
+        {
+            this.upd.removeDuplicates();
+            this.printAllThreads();
+        }
     }
 
     public static class ExMethods
