@@ -141,6 +141,12 @@ namespace BeamNGModsUpdateChecker
             HtmlNode attachments = null;
             if ( l == null )
             {
+                l =
+                    postbody.SelectNodes(
+                        "//div[@class][1]//div[@class][2]//div[@id][6]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
+            }
+            if ( l == null )
+            {
                 return result;
             }
             for ( int i = 0; i < l.Count; i++ )

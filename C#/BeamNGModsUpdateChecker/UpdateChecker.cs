@@ -224,6 +224,10 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
+            if ( !link.StartsWith( "http://" ) )
+            {
+                link = "http://" + link;
+            }
             if ( !link.StartsWith( "http://www.beamng.com/" ) )
             {
                 return false;
