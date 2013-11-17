@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -6,6 +8,8 @@ using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using Ini;
+
+#endregion
 
 namespace BeamNGModsUpdateChecker
 {
@@ -37,7 +41,8 @@ namespace BeamNGModsUpdateChecker
             this.lang = lang;
             this.saveSettings();
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
-            DialogResult res = MessageBox.Show( strings.restartApp, strings.warning, MessageBoxButtons.YesNo, MessageBoxIcon.Warning );
+            DialogResult res = MessageBox.Show( strings.restartApp, strings.warning, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning );
             if ( res == DialogResult.Yes )
             {
                 Application.Restart();
@@ -105,9 +110,12 @@ namespace BeamNGModsUpdateChecker
                 this.password = ini.Read( "Password", "Auth", "" );
                 this.lang = ini.Read( "Lang", "Options", lang );
                 this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
-                this.minimizeWhenStart = bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
-                int mainFormWidth = int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
-                int mainFormHeight = int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
+                this.minimizeWhenStart =
+                    bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
+                int mainFormWidth =
+                    int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
+                int mainFormHeight =
+                    int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
                 Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
                 this.mainFormSize = mainFormSize;
             }
@@ -150,10 +158,10 @@ namespace BeamNGModsUpdateChecker
             this.isUpdating = true;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
             this.Invoke( new MethodInvoker( delegate()
-                {
-                    pbCheckUpd.Visible = true;
-                    pbCheckUpd.Value = 0;
-                } ) );
+            {
+                pbCheckUpd.Visible = true;
+                pbCheckUpd.Value = 0;
+            } ) );
             lvThreads.Enabled = false;
             tbKeyword.Enabled = false;
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
@@ -177,7 +185,9 @@ namespace BeamNGModsUpdateChecker
                         tmrUpdProgress.Stop();
                     } ) );
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -454,7 +464,8 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiAbout_Click( object sender, EventArgs e )
         {
-            MessageBox.Show( strings.copyright.FixNewLines(), strings.aboutProg, MessageBoxButtons.OK, MessageBoxIcon.Information );
+            MessageBox.Show( strings.copyright.FixNewLines(), strings.aboutProg, MessageBoxButtons.OK,
+                MessageBoxIcon.Information );
         }
 
         private void tmrUpdProgress_Tick( object sender, EventArgs e )

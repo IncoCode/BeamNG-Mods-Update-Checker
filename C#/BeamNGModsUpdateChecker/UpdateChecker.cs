@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -9,6 +11,8 @@ using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using RestSharp;
+
+#endregion
 
 namespace BeamNGModsUpdateChecker
 {
@@ -70,26 +74,17 @@ namespace BeamNGModsUpdateChecker
 
         public List<Topic> Threads
         {
-            get
-            {
-                return this.threads;
-            }
+            get { return this.threads; }
         }
 
         public int UpdProgress
         {
-            get
-            {
-                return this.updProgress;
-            }
+            get { return this.updProgress; }
         }
 
         public int UpdMaxProgress
         {
-            get
-            {
-                return this.updMaxProgress;
-            }
+            get { return this.updMaxProgress; }
         }
 
         #endregion Fields
@@ -104,7 +99,9 @@ namespace BeamNGModsUpdateChecker
             {
                 this.loadThreads();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -204,7 +201,9 @@ namespace BeamNGModsUpdateChecker
                         updEvent( this, args );
                     }
                 }
-                catch { }
+                catch
+                {
+                }
                 this.updProgress++;
                 Thread.Sleep( 50 );
             }
@@ -311,8 +310,10 @@ namespace BeamNGModsUpdateChecker
                 return null;
             }
             CultureInfo culture = CultureInfo.CurrentCulture;
-            return this.threads.FindAll( p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
-                || p.Link.Contains( keyword ) );
+            return
+                this.threads.FindAll(
+                    p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
+                         || p.Link.Contains( keyword ) );
         }
 
         #endregion Working with threads

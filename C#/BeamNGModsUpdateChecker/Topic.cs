@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using RestSharp;
+
+#endregion
 
 namespace BeamNGModsUpdateChecker
 {
@@ -17,7 +21,9 @@ namespace BeamNGModsUpdateChecker
 
         #region Constructors
 
-        public Topic() { }
+        public Topic()
+        {
+        }
 
         public Topic( string link, CookieContainer cookieJar )
         {
@@ -68,12 +74,15 @@ namespace BeamNGModsUpdateChecker
         private string normalPrefix( string str )
         {
             string result = str;
-            string[] prefixs = { @"\[WIP Beta released\]",
-                                   @"\[WIP\]", 
-                                   @"\[On Hold\]", 
-                                   @"\[Released\]", 
-                                   @"\[Cancelled\]", 
-                                   @"\[Old and Unsupported\]" };
+            string[] prefixs =
+            {
+                @"\[WIP Beta released\]",
+                @"\[WIP\]",
+                @"\[On Hold\]",
+                @"\[Released\]",
+                @"\[Cancelled\]",
+                @"\[Old and Unsupported\]"
+            };
             Regex regex = new Regex( "(" + string.Join( "|", prefixs ) + ")" );
             Match match = regex.Match( str );
             if ( !match.Success )
@@ -126,7 +135,9 @@ namespace BeamNGModsUpdateChecker
                     break;
                 }
             }
-            HtmlNodeCollection l = postbody.SelectNodes( "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
+            HtmlNodeCollection l =
+                postbody.SelectNodes(
+                    "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
             HtmlNode attachments = null;
             if ( l == null )
             {
