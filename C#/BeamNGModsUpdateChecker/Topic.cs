@@ -80,8 +80,11 @@ namespace BeamNGModsUpdateChecker
             {
                 regex = new Regex( "(" + string.Join( "|", prefixs ).Replace( "\\[", "" ).Replace( "\\]", "" ) + ")" );
                 match = regex.Match( str );
-                string findTag = match.Groups[ 1 ].ToString();
-                result = str.Replace( findTag, "[" + findTag + "]" );
+                if ( match.Success )
+                {
+                    string findTag = match.Groups[ 1 ].ToString();
+                    result = str.Replace( findTag, "[" + findTag + "]" );
+                }
             }
             return result;
         }

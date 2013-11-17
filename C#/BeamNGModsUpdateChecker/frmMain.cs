@@ -157,6 +157,7 @@ namespace BeamNGModsUpdateChecker
             lvThreads.Enabled = false;
             tbKeyword.Enabled = false;
             ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
+            niTray.Text = strings.checkingForUpdates;
             try
             {
                 int updatesCount = this.upd.checkUpdates();
