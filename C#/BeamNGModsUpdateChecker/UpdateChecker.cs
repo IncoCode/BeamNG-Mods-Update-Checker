@@ -299,7 +299,7 @@ namespace BeamNGModsUpdateChecker
         /// </summary>
         public void removeDuplicates()
         {
-            this.threads = this.threads.GroupBy( x => x.Link ).Select( y => y.First() ).ToList();
+            this.threads = this.threads.Distinct().ToList();
         }
 
         /// <summary>

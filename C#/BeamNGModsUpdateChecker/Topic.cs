@@ -222,12 +222,42 @@ namespace BeamNGModsUpdateChecker
             return result;
         }
 
-        public bool Equals( Topic obj )
+        #region Ovverides
+
+        public bool Equals( Topic t )
         {
-            Regex regex = new Regex( @"(http://(www\.)?beamng\.com/threads/[0-9]+)" );
+            if ( t == null )
+            {
+                return false;
+            }
+            var regex = new Regex( @"(http://(www\.)?beamng\.com/threads/[0-9]+)" );
             string link = regex.Match( this.Link ).Groups[ 1 ].ToString();
-            string link2 = regex.Match( obj.Link ).Groups[ 1 ].ToString();
+            string link2 = regex.Match( t.Link ).Groups[ 1 ].ToString();
             return link.Equals( link2 );
         }
+
+        public override bool Equals( object obj )
+        {
+            if ( obj == null )
+            {
+                return false;
+            }
+            var t = obj as Topic;
+            // если не может быть представлен как Topic
+            if ( (Topic) t == null )
+            {
+                return false;
+            }
+            return this.Equals( t );
+        }
+
+        public override int GetHashCode()
+        {
+            var regex = new Regex( @"(http://(www\.)?beamng\.com/threads/[0-9]+)" );
+            string link = regex.Match( this.Link ).Groups[ 1 ].ToString();
+            return link.GetHashCode();
+        }
+
+        #endregion
     }
 }
