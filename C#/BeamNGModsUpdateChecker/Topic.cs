@@ -112,42 +112,15 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
-
-            HtmlNode post = posts.ChildNodes[ 1 ];
-            HtmlNode postdetails = null;
-            for ( int i = 0; i < post.ChildNodes.Count; i++ )
-            {
-                if ( post.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postdetails" )
-                {
-                    postdetails = post.ChildNodes[ i ];
-                    break;
-                }
-            }
-            HtmlNode postbody = null;
-            if ( postdetails == null )
-            {
-                return false;
-            }
-            for ( int i = 0; i < postdetails.ChildNodes.Count; i++ )
-            {
-                if ( postdetails.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postbody" )
-                {
-                    postbody = postdetails.ChildNodes[ i ];
-                    break;
-                }
-            }
-            if ( postbody == null )
-            {
-                return false;
-            }
+            
             HtmlNodeCollection l =
-                postbody.SelectNodes(
+                posts.SelectNodes(
                     "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
             HtmlNode attachments = null;
             if ( l == null )
             {
                 l =
-                    postbody.SelectNodes(
+                    posts.SelectNodes(
                         "//div[@class][1]//div[@class][2]//div[@id][6]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
             }
             if ( l == null )

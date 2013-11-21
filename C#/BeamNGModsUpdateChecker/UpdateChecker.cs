@@ -197,7 +197,7 @@ namespace BeamNGModsUpdateChecker
                 {
                 }
                 this._updProgress++;
-                Thread.Sleep( 50 );
+                Thread.Sleep( 30 );
             }
             return this.GetUnreadThreads();
         }
