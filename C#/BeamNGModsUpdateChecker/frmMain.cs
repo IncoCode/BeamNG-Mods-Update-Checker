@@ -434,6 +434,7 @@ namespace BeamNGModsUpdateChecker
         private void tsmiRefresh_Click( object sender, EventArgs e )
         {
             tmrUpd.Stop();
+            tmrUpdProgress.Start();
             this._updThread = new Thread( this.CheckUpdates );
             this._updThread.Start();
             tmrUpd.Start();
@@ -476,6 +477,11 @@ namespace BeamNGModsUpdateChecker
         {
             this._upd.RemoveDuplicates();
             this.PrintAllThreads();
+        }
+
+        private void tsmiRefreshT_Click( object sender, EventArgs e )
+        {
+            tsmiRefresh.PerformClick();
         }
     }
 

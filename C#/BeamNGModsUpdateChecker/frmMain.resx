@@ -144,7 +144,7 @@
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="lvThreads.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -170,14 +170,14 @@
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 6</value>
   </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;toolStripMenuItem6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;добавитьТемыToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
@@ -201,7 +201,7 @@
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="&gt;&gt;tsmiOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -233,6 +233,9 @@
   </data>
   <data name="tsmiRepository.Text" xml:space="preserve">
     <value>Репозиторий</value>
+  </data>
+  <data name="&gt;&gt;русскийToolStripMenuItem.Name" xml:space="preserve">
+    <value>русскийToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tsmiMakeUnread.Name" xml:space="preserve">
     <value>tsmiMakeUnread</value>
@@ -3983,7 +3986,7 @@
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>frmMain</value>
+    <value>FrmMain</value>
   </data>
   <data name="&gt;&gt;русскийToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3991,11 +3994,14 @@
   <data name="msMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>732, 24</value>
   </data>
+  <data name="tsmiRefreshT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="добавитьТемыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="&gt;&gt;tsmiLAddThread.Name" xml:space="preserve">
     <value>tsmiLAddThread</value>
@@ -4009,8 +4015,8 @@
   <data name="&gt;&gt;msMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;русскийToolStripMenuItem.Name" xml:space="preserve">
-    <value>русскийToolStripMenuItem</value>
+  <data name="&gt;&gt;добавитьТемыToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -4025,7 +4031,7 @@
     <value>42, 13</value>
   </data>
   <data name="tsmiExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
@@ -4036,8 +4042,8 @@
   <data name="&gt;&gt;msMenu.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;tsmiRefreshT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
     <value>toolStripMenuItem6</value>
@@ -4046,7 +4052,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 82</value>
+    <value>209, 104</value>
   </data>
   <data name="&gt;&gt;tsmiMarkAllRead.Name" xml:space="preserve">
     <value>tsmiMarkAllRead</value>
@@ -4057,8 +4063,8 @@
   <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
     <value>Помощь</value>
   </data>
-  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
+  <data name="&gt;&gt;tsmiRepository.Name" xml:space="preserve">
+    <value>tsmiRepository</value>
   </data>
   <data name="&gt;&gt;tsmiOptions.Name" xml:space="preserve">
     <value>tsmiOptions</value>
@@ -4093,6 +4099,9 @@
   <data name="columnHeader2.Width" type="System.Int32, mscorlib">
     <value>250</value>
   </data>
+  <data name="tsmiRefreshT.Text" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
   <data name="&gt;&gt;cmsTray.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -4101,6 +4110,9 @@
   </data>
   <data name="pbCheckUpd.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="&gt;&gt;tsmiRefreshT.Name" xml:space="preserve">
+    <value>tsmiRefreshT</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4118,7 +4130,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 104</value>
@@ -4167,6 +4179,9 @@
   </data>
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Обновлений: 0</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
   </data>
   <data name="ssStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>732, 22</value>
@@ -4272,9 +4287,6 @@
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;tsmiRepository.Name" xml:space="preserve">
-    <value>tsmiRepository</value>
   </data>
   <data name="lvThreads.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>

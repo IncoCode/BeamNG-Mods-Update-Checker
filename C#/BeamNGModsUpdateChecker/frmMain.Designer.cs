@@ -62,6 +62,7 @@
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiRefreshT = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьТемыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -277,6 +278,7 @@
             this.cmsTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiExpand,
             this.toolStripMenuItem4,
+            this.tsmiRefreshT,
             this.добавитьТемыToolStripMenuItem,
             this.toolStripMenuItem2,
             this.tsmiExit});
@@ -292,6 +294,12 @@
             // 
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            // 
+            // tsmiRefreshT
+            // 
+            resources.ApplyResources(this.tsmiRefreshT, "tsmiRefreshT");
+            this.tsmiRefreshT.Name = "tsmiRefreshT";
+            this.tsmiRefreshT.Click += new System.EventHandler(this.tsmiRefreshT_Click);
             // 
             // добавитьТемыToolStripMenuItem
             // 
@@ -343,7 +351,7 @@
             // 
             this.tmrUpdProgress.Tick += new System.EventHandler(this.tmrUpdProgress_Tick);
             // 
-            // frmMain
+            // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -354,7 +362,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.msMenu);
             this.MainMenuStrip = this.msMenu;
-            this.Name = "frmMain";
+            this.Name = "FrmMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
@@ -412,6 +420,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer tmrUpdProgress;
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDuplicates;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRefreshT;
     }
 }
 
