@@ -1,4 +1,5 @@
 v1.0.1 Stable:
 -Fixed: adding duplicate threads.
--Added: decoding html characters.
+-Added: decoding html characters in thread title.
 -Now prefixes concluded in "[" and "]".
+-Fixed some more bugs.
