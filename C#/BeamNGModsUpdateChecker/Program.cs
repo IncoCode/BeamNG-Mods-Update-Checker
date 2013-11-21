@@ -26,7 +26,7 @@ namespace BeamNGModsUpdateChecker
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault( false );
-                Application.Run( new frmMain() );
+                Application.Run( new FrmMain() );
             }
         }
 

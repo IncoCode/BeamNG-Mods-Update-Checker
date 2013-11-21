@@ -1,51 +1,55 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
+#endregion
+
 namespace BeamNGModsUpdateChecker
 {
-    public partial class frmAddLinks : Form
+    public partial class FrmAddLinks : Form
     {
         private UpdateChecker upd;
-        private bool addingLinks = false;
+        private bool _addingLinks = false;
 
-        public frmAddLinks( UpdateChecker upd, frmMain MainForm )
+        public FrmAddLinks( UpdateChecker upd, FrmMain mainForm )
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( MainForm.lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
             InitializeComponent();
             this.upd = upd;
         }
 
-        private void addLinks()
+        private void AddLinks()
         {
             string[] links = tbLinks.Lines;
             pb1.Maximum = links.Length;
             for ( int i = 0; i < links.Length; i++ )
             {
                 string link = links[ i ];
-                this.upd.addThread( link );
+                this.upd.AddThread( link );
                 Thread.Sleep( 50 );
                 pb1.PerformStep();
             }
-            this.addingLinks = false;
+            this._addingLinks = false;
             this.Close();
         }
 
         private void btnAdd_Click( object sender, EventArgs e )
         {
-            this.addingLinks = true;
+            this._addingLinks = true;
             pb1.Value = 0;
             tbLinks.Enabled = false;
             btnAdd.Enabled = false;
             lblStatus.Show();
-            Thread thr = new Thread( this.addLinks );
+            var thr = new Thread( this.AddLinks );
             thr.Start();
         }
 
         private void frmAddLinks_FormClosing( object sender, FormClosingEventArgs e )
         {
-            if ( this.addingLinks )
+            if ( this._addingLinks )
             {
                 e.Cancel = true;
             }

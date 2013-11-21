@@ -62,29 +62,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attachment.cs" />
-    <Compile Include="frmAddLinks.cs">
+    <Compile Include="FrmAddLinks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddLinks.Designer.cs">
-      <DependentUpon>frmAddLinks.cs</DependentUpon>
+    <Compile Include="FrmAddLinks.Designer.cs">
+      <DependentUpon>FrmAddLinks.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEnterPassword.cs">
+    <Compile Include="FrmEnterPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEnterPassword.Designer.cs">
-      <DependentUpon>frmEnterPassword.cs</DependentUpon>
+    <Compile Include="FrmEnterPassword.Designer.cs">
+      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOptions.cs">
+    <Compile Include="FrmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOptions.Designer.cs">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <Compile Include="FrmOptions.Designer.cs">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="JSONClasses.cs" />
     <Compile Include="PassEncrDecr.cs" />
@@ -97,29 +97,29 @@
     </Compile>
     <Compile Include="Topic.cs" />
     <Compile Include="UpdateChecker.cs" />
-    <EmbeddedResource Include="frmAddLinks.en-GB.resx">
-      <DependentUpon>frmAddLinks.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddLinks.en-GB.resx">
+      <DependentUpon>FrmAddLinks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddLinks.resx">
-      <DependentUpon>frmAddLinks.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddLinks.resx">
+      <DependentUpon>FrmAddLinks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEnterPassword.en-GB.resx">
-      <DependentUpon>frmEnterPassword.cs</DependentUpon>
+    <EmbeddedResource Include="FrmEnterPassword.en-GB.resx">
+      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEnterPassword.resx">
-      <DependentUpon>frmEnterPassword.cs</DependentUpon>
+    <EmbeddedResource Include="FrmEnterPassword.resx">
+      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.en-GB.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.en-GB.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOptions.en-GB.resx">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="FrmOptions.en-GB.resx">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOptions.resx">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="FrmOptions.resx">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -154,6 +154,7 @@
     <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)\..\Install\Release\"
 xcopy /y "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)\..\Install\Release\"
 xcopy /y "$(ProjectDir)$(OutDir)en\*.dll" "$(SolutionDir)\..\Install\Release\en\"
+"$(SolutionDir)\..\ChangeRevisionNumber.exe" "$(ProjectDir)\Properties\AssemblyInfo.cs"
 xcopy /y "$(ProjectDir)$(OutDir)en-GB\*.dll" "$(SolutionDir)\..\Install\Release\en-GB\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

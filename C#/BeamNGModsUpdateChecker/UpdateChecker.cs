@@ -18,20 +18,20 @@ namespace BeamNGModsUpdateChecker
 {
     public class UpdEventArgs : EventArgs
     {
-        public Topic thread { get; set; }
+        public Topic Thread { get; set; }
     }
 
     public class UpdateChecker
     {
-        public event EventHandler<UpdEventArgs> updEvent = delegate { };
+        public event EventHandler<UpdEventArgs> UpdEvent = delegate { };
 
-        private List<Topic> threads;
-        private string login;
-        private string password;
-        private string progPath;
-        private CookieContainer cookieJar = new CookieContainer();
-        private volatile int updProgress;
-        private volatile int updMaxProgress;
+        private List<Topic> _threads;
+        private string _login;
+        private string _password;
+        private readonly string _progPath;
+        private CookieContainer _cookieJar = new CookieContainer();
+        private volatile int _updProgress;
+        private volatile int _updMaxProgress;
 
         #region Additional methods
 
@@ -42,9 +42,9 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns MD5 hash</returns>
         public static string GetMd5Hash( string input )
         {
-            MD5 md5Hash = MD5.Create();
+            var md5Hash = MD5.Create();
             byte[] data = md5Hash.ComputeHash( Encoding.UTF8.GetBytes( input ) );
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             for ( int i = 0; i < data.Length; i++ )
             {
                 sb.Append( data[ i ].ToString( "x2" ) );
@@ -52,7 +52,7 @@ namespace BeamNGModsUpdateChecker
             return sb.ToString();
         }
 
-        public static string sendGet( string url, CookieContainer cookieJar )
+        public static string SendGet( string url, CookieContainer cookieJar )
         {
             try
             {
@@ -74,30 +74,30 @@ namespace BeamNGModsUpdateChecker
 
         public List<Topic> Threads
         {
-            get { return this.threads; }
+            get { return this._threads; }
         }
 
         public int UpdProgress
         {
-            get { return this.updProgress; }
+            get { return this._updProgress; }
         }
 
         public int UpdMaxProgress
         {
-            get { return this.updMaxProgress; }
+            get { return this._updMaxProgress; }
         }
 
         #endregion Fields
 
         public UpdateChecker( string login, string password, string progPath )
         {
-            this.login = login;
-            this.password = password;
-            this.progPath = progPath;
-            this.threads = new List<Topic>();
+            this._login = login;
+            this._password = password;
+            this._progPath = progPath;
+            this._threads = new List<Topic>();
             try
             {
-                this.loadThreads();
+                this.LoadThreads();
             }
             catch
             {
@@ -108,33 +108,28 @@ namespace BeamNGModsUpdateChecker
         /// Authorization
         /// </summary>
         /// <returns>Returns the value indicating success of authorization</returns>
-        public bool auth()
+        public bool Auth()
         {
             try
             {
-                RestClient client = new RestClient( "http://www.beamng.com/login.php?do=login" );
-                client.CookieContainer = this.cookieJar;
+                var client = new RestClient( "http://www.beamng.com/login.php?do=login" );
+                client.CookieContainer = this._cookieJar;
                 RestRequest request = new RestRequest( Method.POST );
                 request.AddParameter( "do", "login" );
                 request.AddParameter( "url", "login.php?do=logout" );
-                request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
-                request.AddParameter( "vb_login_md5password_utf", GetMd5Hash( Crypto.DecryptPassword( this.password ) ) );
+                request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this._password ) ) );
+                request.AddParameter( "vb_login_md5password_utf", GetMd5Hash( Crypto.DecryptPassword( this._password ) ) );
                 request.AddParameter( "s", "" );
                 request.AddParameter( "securitytoken", "guest" );
-                request.AddParameter( "vb_login_username", Crypto.DecryptPassword( this.login ) );
+                request.AddParameter( "vb_login_username", Crypto.DecryptPassword( this._login ) );
                 request.AddParameter( "cookieuser", "1" );
                 IRestResponse response = client.Execute( request );
                 string content = response.Content;
-                client = null;
-                request = null;
                 if ( content.IndexOf( "Thank you for logging in" ) >= 0 )
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
             catch
             {
@@ -142,30 +137,27 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        public bool auth( string login, string password )
+        public bool Auth( string login, string password )
         {
-            this.login = login;
-            this.password = password;
-            return this.auth();
+            this._login = login;
+            this._password = password;
+            return this.Auth();
         }
 
         /// <summary>
         /// Do we need authorization
         /// </summary>
         /// <returns></returns>
-        private bool isNeedAuth()
+        private bool IsNeedAuth()
         {
             try
             {
-                string content = UpdateChecker.sendGet( "http://www.beamng.com/forum/", this.cookieJar );
+                string content = UpdateChecker.SendGet( "http://www.beamng.com/forum/", this._cookieJar );
                 if ( content.IndexOf( "Welcome," ) >= 0 )
                 {
                     return false;
                 }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
             catch
             {
@@ -177,38 +169,37 @@ namespace BeamNGModsUpdateChecker
         /// Check for updates
         /// </summary>
         /// <returns>Returns the number of updates</returns>
-        public int checkUpdates()
+        public int CheckUpdates()
         {
-            UpdEventArgs args = new UpdEventArgs();
-            this.updMaxProgress = this.threads.Count;
-            this.updProgress = 0;
-            if ( this.isNeedAuth() )
+            var args = new UpdEventArgs();
+            this._updMaxProgress = this._threads.Count;
+            this._updProgress = 0;
+            if ( this.IsNeedAuth() )
             {
-                this.auth();
+                this.Auth();
             }
-            for ( int i = 0; i < this.threads.Count; i++ )
+            for ( int i = 0; i < this._threads.Count; i++ )
             {
-                Topic thread = this.threads[ i ];
+                Topic thread = this._threads[ i ];
                 try
                 {
-                    string content = UpdateChecker.sendGet( thread.Link, this.cookieJar );
-                    bool titleChanged = thread.updTitle( this.cookieJar, content );
-                    bool attachmentsChanged = thread.updAttachments( this.cookieJar, content );
-                    args.thread = thread;
+                    string content = UpdateChecker.SendGet( thread.Link, this._cookieJar );
+                    bool titleChanged = thread.UpdTitle( content );
+                    bool attachmentsChanged = thread.UpdAttachments( content );
+                    args.Thread = thread;
                     if ( titleChanged || attachmentsChanged )
                     {
                         thread.Read = false;
-                        updEvent( this, args );
+                        this.UpdEvent( this, args );
                     }
                 }
                 catch
                 {
                 }
-                this.updProgress++;
+                this._updProgress++;
                 Thread.Sleep( 50 );
             }
-            args = null;
-            return this.getUnreadThreads();
+            return this.GetUnreadThreads();
         }
 
         #region Working with threads
@@ -218,7 +209,7 @@ namespace BeamNGModsUpdateChecker
         /// </summary>
         /// <param name="link">Link to the thread</param>
         /// <returns>Returns the value indicating on success of addition</returns>
-        public bool addThread( string link )
+        public bool AddThread( string link )
         {
             if ( string.IsNullOrEmpty( link ) )
             {
@@ -240,33 +231,30 @@ namespace BeamNGModsUpdateChecker
             {
                 link = link.Substring( 0, link.IndexOf( "/page" ) );
             }
-            if ( !this.threads.Contains( new Topic { Link = link } ) )
+            if ( !this._threads.Contains( new Topic { Link = link } ) )
             {
-                Topic topic = new Topic( link, this.cookieJar );
+                var topic = new Topic( link, this._cookieJar );
                 if ( string.IsNullOrEmpty( topic.Title ) )
                 {
                     return false;
                 }
 
-                this.threads.Add( topic );
+                this._threads.Add( topic );
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
         /// Removes thread
         /// </summary>
         /// <param name="link">Link to the thread</param>
-        public void removeThread( string link )
+        public void RemoveThread( string link )
         {
-            int index = this.threads.FindIndex( p => p.Link == link );
+            int index = this._threads.FindIndex( p => p.Link == link );
             if ( index >= 0 )
             {
-                this.threads.RemoveAt( index );
+                this._threads.RemoveAt( index );
             }
         }
 
@@ -275,12 +263,12 @@ namespace BeamNGModsUpdateChecker
         /// </summary>
         /// <param name="link"></param>
         /// <param name="read"></param>
-        public void changeReadStatus( string link, bool read )
+        public void ChangeReadStatus( string link, bool read )
         {
-            int index = this.threads.FindIndex( p => p.Link == link );
+            int index = this._threads.FindIndex( p => p.Link == link );
             if ( index >= 0 )
             {
-                this.threads[ index ].Read = read;
+                this._threads[ index ].Read = read;
             }
         }
 
@@ -288,18 +276,18 @@ namespace BeamNGModsUpdateChecker
         /// Unread threads
         /// </summary>
         /// <returns>Returns the value of unread threads</returns>
-        public int getUnreadThreads()
+        public int GetUnreadThreads()
         {
-            List<Topic> unread = this.threads.FindAll( p => p.Read == false );
+            List<Topic> unread = this._threads.FindAll( p => p.Read == false );
             return unread.Count;
         }
 
         /// <summary>
         /// Removes duplicate of threads
         /// </summary>
-        public void removeDuplicates()
+        public void RemoveDuplicates()
         {
-            this.threads = this.threads.Distinct().ToList();
+            this._threads = this._threads.Distinct().ToList();
         }
 
         /// <summary>
@@ -307,7 +295,7 @@ namespace BeamNGModsUpdateChecker
         /// </summary>
         /// <param name="keyword">Search keyword</param>
         /// <returns>Found threads</returns>
-        public List<Topic> searchThreads( string keyword )
+        public List<Topic> SearchThreads( string keyword )
         {
             if ( string.IsNullOrEmpty( keyword ) )
             {
@@ -315,7 +303,7 @@ namespace BeamNGModsUpdateChecker
             }
             CultureInfo culture = CultureInfo.CurrentCulture;
             return
-                this.threads.FindAll(
+                this._threads.FindAll(
                     p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
                          || p.Link.Contains( keyword ) );
         }
@@ -324,12 +312,12 @@ namespace BeamNGModsUpdateChecker
 
         #region Save/Load
 
-        public void saveThreads()
+        public void SaveThreads()
         {
             var threads = new JSONClasses.ThreadsRoot();
-            threads.Threads = this.threads;
+            threads.Threads = this._threads;
             string s = JsonConvert.SerializeObject( threads );
-            string fileName = this.progPath + @"\Threads.json";
+            string fileName = this._progPath + @"\Threads.json";
             string fileNameBak = fileName + ".bak";
             try
             {
@@ -347,12 +335,11 @@ namespace BeamNGModsUpdateChecker
             {
                 throw new Exception( "Save error!" );
             }
-            threads = null;
         }
 
-        public void loadThreads()
+        public void LoadThreads()
         {
-            string fileName = this.progPath + @"\Threads.json";
+            string fileName = this._progPath + @"\Threads.json";
             if ( File.Exists( fileName ) )
             {
                 try
@@ -361,12 +348,12 @@ namespace BeamNGModsUpdateChecker
                     var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
                     if ( threads.Threads != null )
                     {
-                        this.threads = threads.Threads;
+                        this._threads = threads.Threads;
                     }
                 }
                 catch
                 {
-                    this.threads = new List<Topic>();
+                    this._threads = new List<Topic>();
                     throw new Exception( "Load error!" );
                 }
             }

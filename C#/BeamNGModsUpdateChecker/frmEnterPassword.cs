@@ -1,25 +1,29 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
+#endregion
+
 namespace BeamNGModsUpdateChecker
 {
-    public partial class frmEnterPassword : Form
+    public partial class FrmEnterPassword : Form
     {
-        private frmMain MainForm;
+        private FrmMain _mainForm;
 
-        public frmEnterPassword( frmMain MainForm )
+        public FrmEnterPassword( FrmMain mainForm )
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( MainForm.lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
             InitializeComponent();
-            this.MainForm = MainForm;
+            this._mainForm = mainForm;
             this.DialogResult = DialogResult.Cancel;
         }
 
         private void btnOk_Click( object sender, EventArgs e )
         {
-            this.MainForm.setLoginPassword( tbLogin.Text, tbPassword.Text );
+            this._mainForm.SetLoginPassword( tbLogin.Text, tbPassword.Text );
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

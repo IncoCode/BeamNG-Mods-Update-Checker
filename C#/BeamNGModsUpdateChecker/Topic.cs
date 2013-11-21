@@ -35,8 +35,8 @@ namespace BeamNGModsUpdateChecker
             client.CookieContainer = cookieJar;
             var request = new RestRequest( Method.GET );
             IRestResponse response = client.Execute( request );
-            this.updTitle( cookieJar, response.Content );
-            this.updAttachments( cookieJar, response.Content );
+            this.UpdTitle( response.Content );
+            this.UpdAttachments( response.Content );
         }
 
         #endregion
@@ -44,14 +44,13 @@ namespace BeamNGModsUpdateChecker
         /// <summary>
         /// Updates thread title
         /// </summary>
-        /// <param name="cookieJar">Cookies</param>
         /// <param name="content">HTML</param>
         /// <returns></returns>
-        public bool updTitle( CookieContainer cookieJar, string content )
+        public bool UpdTitle( string content )
         {
             if ( this.Title != null )
             {
-                this.Title = this.normalPrefix( this.Title );
+                this.Title = this.NormalTitle( this.Title );
             }
             bool result = false;
             var h = new HtmlAgilityPack.HtmlDocument();
@@ -59,10 +58,10 @@ namespace BeamNGModsUpdateChecker
             HtmlNodeCollection nodes = h.DocumentNode.SelectNodes( "//title" );
             if ( nodes == null )
             {
-                return result;
+                return false;
             }
 
-            string title = this.normalPrefix( WebUtility.HtmlDecode( nodes[ 0 ].InnerText ) );
+            string title = this.NormalTitle( nodes[ 0 ].InnerText );
             if ( title != this.Title )
             {
                 result = true;
@@ -71,7 +70,7 @@ namespace BeamNGModsUpdateChecker
             return result;
         }
 
-        private string normalPrefix( string str )
+        private string NormalTitle( string str )
         {
             string result = str;
             string[] prefixs =
@@ -83,7 +82,7 @@ namespace BeamNGModsUpdateChecker
                 @"\[Cancelled\]",
                 @"\[Old and Unsupported\]"
             };
-            Regex regex = new Regex( "(" + string.Join( "|", prefixs ) + ")" );
+            var regex = new Regex( "(" + string.Join( "|", prefixs ) + ")" );
             Match match = regex.Match( str );
             if ( !match.Success )
             {
@@ -95,19 +94,18 @@ namespace BeamNGModsUpdateChecker
                     result = str.Replace( findTag, "[" + findTag + "]" );
                 }
             }
-            return result;
+            return WebUtility.HtmlDecode( result );
         }
 
         /// <summary>
         /// Updates first post attachments
         /// </summary>
-        /// <param name="cookieJar">Cookies</param>
         /// <param name="content">HTML</param>
         /// <returns></returns>
-        public bool updAttachments( CookieContainer cookieJar, string content )
+        public bool UpdAttachments( string content )
         {
             bool result = false;
-            HtmlDocument h = new HtmlAgilityPack.HtmlDocument();
+            var h = new HtmlAgilityPack.HtmlDocument();
             h.LoadHtml( content );
             HtmlNode posts = h.GetElementbyId( "posts" );
             if ( posts == null )
@@ -126,14 +124,21 @@ namespace BeamNGModsUpdateChecker
                 }
             }
             HtmlNode postbody = null;
+            if ( postdetails == null )
+            {
+                return false;
+            }
             for ( int i = 0; i < postdetails.ChildNodes.Count; i++ )
             {
-                string lol = post.ChildNodes[ i ].GetAttributeValue( "class", "" );
                 if ( postdetails.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postbody" )
                 {
                     postbody = postdetails.ChildNodes[ i ];
                     break;
                 }
+            }
+            if ( postbody == null )
+            {
+                return false;
             }
             HtmlNodeCollection l =
                 postbody.SelectNodes(
@@ -147,7 +152,7 @@ namespace BeamNGModsUpdateChecker
             }
             if ( l == null )
             {
-                return result;
+                return false;
             }
             for ( int i = 0; i < l.Count; i++ )
             {
@@ -160,7 +165,7 @@ namespace BeamNGModsUpdateChecker
             HtmlNode attachment = null;
             if ( attachments != null )
             {
-                Regex regex = new Regex( "\"postcontent\"" );
+                var regex = new Regex( "\"postcontent\"" );
                 MatchCollection match = regex.Matches( attachments.InnerHtml );
                 if ( match.Count > 1 )
                 {
@@ -193,7 +198,11 @@ namespace BeamNGModsUpdateChecker
                             break;
                         }
                     }
-                    List<Attachment> attachmentsList = new List<Attachment>();
+                    if ( files == null )
+                    {
+                        return false;
+                    }
+                    var attachmentsList = new List<Attachment>();
                     for ( int i = 0; i < files.ChildNodes.Count; i++ )
                     {
                         HtmlNode file = files.ChildNodes[ i ];
@@ -243,8 +252,8 @@ namespace BeamNGModsUpdateChecker
                 return false;
             }
             var t = obj as Topic;
-            // если не может быть представлен как Topic
-            if ( (Topic) t == null )
+            // if not a Topic
+            if ( t == null )
             {
                 return false;
             }

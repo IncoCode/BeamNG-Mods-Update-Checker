@@ -138,6 +138,9 @@
   <data name="saveThreadsError" xml:space="preserve">
     <value>Невозможно сохранить список тем!</value>
   </data>
+  <data name="unableSendRequest" xml:space="preserve">
+    <value>Невозможно отправить запрос!</value>
+  </data>
   <data name="updatesCount" xml:space="preserve">
     <value>Обновлений: {0}</value>
   </data>

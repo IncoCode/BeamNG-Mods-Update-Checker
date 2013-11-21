@@ -13,34 +13,34 @@ using Ini;
 
 namespace BeamNGModsUpdateChecker
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
-        public string lang = "en-GB";
-        public int updInterval = 30;
-        public bool minimizeWhenStart = false;
+        public string Lang = "en-GB";
+        public int UpdInterval = 30;
+        public bool MinimizeWhenStart = false;
 
-        private UpdateChecker upd;
-        private string login = "";
-        private string password = "";
-        private double[] lvColProp = { 0.6, 0.4 };
-        private bool isUpdating = false;
-        private Size mainFormSize = new Size( 748, 456 );
-        private Thread updThread = null;
+        private UpdateChecker _upd;
+        private string _login = "";
+        private string _password = "";
+        private readonly double[] _lvColProp = { 0.6, 0.4 };
+        private bool _isUpdating = false;
+        private Size _mainFormSize = new Size( 748, 456 );
+        private Thread _updThread = null;
 
-        public frmMain()
+        public FrmMain()
         {
-            this.loadSettings();
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
+            this.LoadSettings();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
-            this.Size = this.mainFormSize;
+            this.Size = this._mainFormSize;
         }
 
-        public void changeLanguage( string lang )
+        public void ChangeLanguage( string lang )
         {
-            this.lang = lang;
-            this.saveSettings();
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
+            this.Lang = lang;
+            this.SaveSettings();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             DialogResult res = MessageBox.Show( strings.restartApp, strings.warning, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning );
             if ( res == DialogResult.Yes )
@@ -49,24 +49,24 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        public void setLoginPassword( string login, string password )
+        public void SetLoginPassword( string login, string password )
         {
-            this.login = Crypto.EncryptPassword( login );
-            this.password = Crypto.EncryptPassword( password );
+            this._login = Crypto.EncryptPassword( login );
+            this._password = Crypto.EncryptPassword( password );
         }
 
-        private void printAllThreads( List<Topic> threads = null )
+        private void PrintAllThreads( List<Topic> threads = null )
         {
             lvThreads.Items.Clear();
             if ( threads == null )
             {
-                threads = this.upd.Threads;
+                threads = this._upd.Threads;
             }
             for ( int i = 0; i < threads.Count; i++ )
             {
-                ListViewItem lvi = new ListViewItem( threads[ i ].Title );
+                var lvi = new ListViewItem( threads[ i ].Title );
                 lvi.UseItemStyleForSubItems = false;
-                ListViewItem.ListViewSubItem lvisi = new ListViewItem.ListViewSubItem();
+                var lvisi = new ListViewItem.ListViewSubItem();
                 lvisi.Text = threads[ i ].Link;
                 lvisi.ForeColor = Color.Blue;
                 if ( !threads[ i ].Read )
@@ -79,16 +79,16 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void saveSettings()
+        private void SaveSettings()
         {
             try
             {
-                IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                ini.Write( "Login", this.login, "Auth" );
-                ini.Write( "Password", this.password, "Auth" );
-                ini.Write( "Lang", lang, "Options" );
-                ini.Write( "UpdInterval", this.updInterval.ToString(), "Options" );
-                ini.Write( "MinimizeWhenStart", this.minimizeWhenStart.ToString(), "Options" );
+                var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
+                ini.Write( "Login", this._login, "Auth" );
+                ini.Write( "Password", this._password, "Auth" );
+                ini.Write( "Lang", this.Lang, "Options" );
+                ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
+                ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
                 if ( WindowState != FormWindowState.Minimized )
                 {
                     ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
@@ -97,27 +97,26 @@ namespace BeamNGModsUpdateChecker
             }
             catch
             {
-                return;
             }
         }
 
-        private void loadSettings()
+        private void LoadSettings()
         {
             try
             {
-                IniFile ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                this.login = ini.Read( "Login", "Auth", "" );
-                this.password = ini.Read( "Password", "Auth", "" );
-                this.lang = ini.Read( "Lang", "Options", lang );
-                this.updInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.updInterval.ToString() ) );
-                this.minimizeWhenStart =
-                    bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.minimizeWhenStart.ToString() ) );
+                var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
+                this._login = ini.Read( "Login", "Auth", "" );
+                this._password = ini.Read( "Password", "Auth", "" );
+                this.Lang = ini.Read( "Lang", "Options", this.Lang );
+                this.UpdInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.UpdInterval.ToString() ) );
+                this.MinimizeWhenStart =
+                    bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.MinimizeWhenStart.ToString() ) );
                 int mainFormWidth =
-                    int.Parse( ini.Read( "MainFormWidth", "Options", this.mainFormSize.Width.ToString() ) );
+                    int.Parse( ini.Read( "MainFormWidth", "Options", this._mainFormSize.Width.ToString() ) );
                 int mainFormHeight =
-                    int.Parse( ini.Read( "MainFormHeight", "Options", this.mainFormSize.Height.ToString() ) );
-                Size mainFormSize = new Size( mainFormWidth, mainFormHeight );
-                this.mainFormSize = mainFormSize;
+                    int.Parse( ini.Read( "MainFormHeight", "Options", this._mainFormSize.Height.ToString() ) );
+                var mainFormSize = new Size( mainFormWidth, mainFormHeight );
+                this._mainFormSize = mainFormSize;
             }
             catch
             {
@@ -125,38 +124,37 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void saveThreads()
+        private void SaveThreads()
         {
             try
             {
-                this.upd.saveThreads();
+                this._upd.SaveThreads();
             }
             catch
             {
                 MessageBox.Show( strings.saveThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
-                return;
             }
         }
 
-        private void updProgress( object sender, UpdEventArgs e )
+        private void UpdProgress( object sender, UpdEventArgs e )
         {
-            ListViewItem lvi = lvThreads.FindItemWithText( e.thread.Link );
+            ListViewItem lvi = lvThreads.FindItemWithText( e.Thread.Link );
             if ( lvi != null )
             {
-                lvi.Text = e.thread.Title;
+                lvi.Text = e.Thread.Title;
                 lvi.BackColor = Color.GreenYellow;
                 lvi.SubItems[ 1 ].BackColor = Color.GreenYellow;
             }
         }
 
-        private void checkUpdates()
+        private void CheckUpdates()
         {
-            if ( this.isUpdating )
+            if ( this._isUpdating )
             {
                 return;
             }
-            this.isUpdating = true;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( lang );
+            this._isUpdating = true;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             this.Invoke( new MethodInvoker( delegate()
             {
                 pbCheckUpd.Visible = true;
@@ -168,15 +166,15 @@ namespace BeamNGModsUpdateChecker
             niTray.Text = strings.checkingForUpdates;
             try
             {
-                int updatesCount = this.upd.checkUpdates();
-                this.showUpdNot( updatesCount );
-                this.saveThreads();
+                int updatesCount = this._upd.CheckUpdates();
+                this.ShowUpdNot( updatesCount );
+                this.SaveThreads();
             }
             finally
             {
                 lvThreads.Enabled = true;
                 tbKeyword.Enabled = true;
-                this.isUpdating = false;
+                this._isUpdating = false;
                 try
                 {
                     this.Invoke( new MethodInvoker( delegate()
@@ -191,9 +189,9 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void showUpdNot( int updatesCount, bool showBalloon = true )
+        private void ShowUpdNot( int updatesCount, bool showBalloon = true )
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             niTray.Text = string.Format( strings.updatesCount, updatesCount );
             ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
             if ( updatesCount > 0 && showBalloon )
@@ -205,22 +203,22 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void lvColAutosize()
+        private void LvColAutosize()
         {
             int allWidth = lvThreads.Width - 37;
-            for ( int i = 0; i < this.lvColProp.Length; i++ )
+            for ( int i = 0; i < this._lvColProp.Length; i++ )
             {
-                int width = (int)( allWidth * this.lvColProp[ i ] );
+                int width = (int)( allWidth * this._lvColProp[ i ] );
                 lvThreads.Columns[ i ].Width = width;
             }
         }
 
         private void frmMain_Load( object sender, EventArgs e )
         {
-            frmEnterPassword frm = null;
-            if ( string.IsNullOrEmpty( this.login ) || string.IsNullOrEmpty( this.password ) )
+            FrmEnterPassword frm = null;
+            if ( string.IsNullOrEmpty( this._login ) || string.IsNullOrEmpty( this._password ) )
             {
-                frm = new frmEnterPassword( this );
+                frm = new FrmEnterPassword( this );
                 DialogResult dr = frm.ShowDialog();
                 if ( dr == DialogResult.Cancel )
                 {
@@ -229,13 +227,13 @@ namespace BeamNGModsUpdateChecker
                     return;
                 }
             }
-            this.upd = new UpdateChecker( this.login, this.password, Application.StartupPath );
+            this._upd = new UpdateChecker( this._login, this._password, Application.StartupPath );
             try
             {
-                bool isAuth = this.upd.auth();
+                bool isAuth = this._upd.Auth();
                 while ( !isAuth )
                 {
-                    frm = new frmEnterPassword( this );
+                    frm = new FrmEnterPassword( this );
                     DialogResult dr = frm.ShowDialog();
                     if ( dr == DialogResult.Cancel )
                     {
@@ -243,26 +241,26 @@ namespace BeamNGModsUpdateChecker
                         Environment.Exit( 0 );
                         return;
                     }
-                    isAuth = this.upd.auth( this.login, this.password );
+                    isAuth = this._upd.Auth( this._login, this._password );
                 }
             }
             catch
             {
-                MessageBox.Show( "Unable to send a request!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show( strings.unableSendRequest, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
                 Environment.Exit( 0 );
             }
-            upd.updEvent += new EventHandler<UpdEventArgs>( updProgress );
+            this._upd.UpdEvent += new EventHandler<UpdEventArgs>( this.UpdProgress );
             try
             {
-                this.upd.loadThreads();
+                this._upd.LoadThreads();
             }
             catch
             {
                 MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
-            this.printAllThreads();
+            this.PrintAllThreads();
             tmrUpd.Start();
-            if ( this.minimizeWhenStart )
+            if ( this.MinimizeWhenStart )
             {
                 this.WindowState = FormWindowState.Minimized;
             }
@@ -270,14 +268,14 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_FormClosing( object sender, FormClosingEventArgs e )
         {
-            this.saveThreads();
-            this.saveSettings();
+            this.SaveThreads();
+            this.SaveSettings();
             niTray.Dispose();
-            if ( this.updThread != null )
+            if ( this._updThread != null )
             {
                 try
                 {
-                    this.updThread.Abort();
+                    this._updThread.Abort();
                 }
                 catch
                 {
@@ -288,14 +286,14 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiAddThreads_Click( object sender, EventArgs e )
         {
-            if ( this.isUpdating )
+            if ( this._isUpdating )
             {
                 return;
             }
-            frmAddLinks frm = new frmAddLinks( this.upd, this );
+            var frm = new FrmAddLinks( this._upd, this );
             frm.ShowDialog();
-            this.printAllThreads();
-            this.saveThreads();
+            this.PrintAllThreads();
+            this.SaveThreads();
         }
 
         private void tsmiLAddThread_Click( object sender, EventArgs e )
@@ -310,10 +308,10 @@ namespace BeamNGModsUpdateChecker
                 for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
                 {
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    this.upd.removeThread( link );
+                    this._upd.RemoveThread( link );
                 }
-                this.printAllThreads();
-                this.showUpdNot( this.upd.getUnreadThreads(), false );
+                this.PrintAllThreads();
+                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
             }
         }
 
@@ -325,17 +323,17 @@ namespace BeamNGModsUpdateChecker
                 Process.Start( link );
                 lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
                 lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
-                this.upd.changeReadStatus( link, true );
-                this.showUpdNot( this.upd.getUnreadThreads(), false );
+                this._upd.ChangeReadStatus( link, true );
+                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
             }
         }
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
             tmrUpdProgress.Start();
-            tmrUpd.Interval = this.updInterval * 60 * 1000;
-            this.updThread = new Thread( this.checkUpdates );
-            this.updThread.Start();
+            tmrUpd.Interval = this.UpdInterval * 60 * 1000;
+            this._updThread = new Thread( this.CheckUpdates );
+            this._updThread.Start();
         }
 
         private void tsmiExit_Click( object sender, EventArgs e )
@@ -348,14 +346,14 @@ namespace BeamNGModsUpdateChecker
             this.Visible = true;
             this.ShowInTaskbar = true;
             this.WindowState = FormWindowState.Normal;
-            this.Size = this.mainFormSize;
+            this.Size = this._mainFormSize;
         }
 
         private void frmMain_Resize( object sender, EventArgs e )
         {
-            this.lvColAutosize();
-            this.mainFormSize = this.Size;
-            this.saveSettings();
+            this.LvColAutosize();
+            this._mainFormSize = this.Size;
+            this.SaveSettings();
             if ( WindowState == FormWindowState.Minimized )
             {
                 this.Visible = false;
@@ -372,10 +370,10 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.White;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
-                    this.upd.changeReadStatus( link, true );
+                    this._upd.ChangeReadStatus( link, true );
                 }
-                this.showUpdNot( this.upd.getUnreadThreads(), false );
-                this.saveThreads();
+                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.SaveThreads();
             }
         }
 
@@ -386,35 +384,35 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiEnglish_Click( object sender, EventArgs e )
         {
-            this.changeLanguage( "en-GB" );
+            this.ChangeLanguage( "en-GB" );
         }
 
         private void tsmiRussian_Click( object sender, EventArgs e )
         {
-            this.changeLanguage( "ru-RU" );
+            this.ChangeLanguage( "ru-RU" );
         }
 
         private void tsmiOptions_Click( object sender, EventArgs e )
         {
-            frmOptions frm = new frmOptions( this );
+            var frm = new FrmOptions( this );
             frm.ShowDialog();
         }
 
         private void tsmiMarkAllRead_Click( object sender, EventArgs e )
         {
-            if ( this.isUpdating )
+            if ( this._isUpdating )
             {
                 return;
             }
-            for ( int i = 0; i < this.upd.Threads.Count; i++ )
+            for ( int i = 0; i < this._upd.Threads.Count; i++ )
             {
-                string link = this.upd.Threads[ i ].Link;
+                string link = this._upd.Threads[ i ].Link;
                 lvThreads.Items[ i ].BackColor = Color.White;
                 lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
-                this.upd.changeReadStatus( link, true );
+                this._upd.ChangeReadStatus( link, true );
             }
-            this.saveThreads();
-            this.showUpdNot( this.upd.getUnreadThreads(), false );
+            this.SaveThreads();
+            this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
         }
 
         private void tsmiMakeUnread_Click( object sender, EventArgs e )
@@ -426,18 +424,18 @@ namespace BeamNGModsUpdateChecker
                     string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
                     lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
-                    this.upd.changeReadStatus( link, false );
+                    this._upd.ChangeReadStatus( link, false );
                 }
-                this.showUpdNot( this.upd.getUnreadThreads(), false );
-                this.saveThreads();
+                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.SaveThreads();
             }
         }
 
         private void tsmiRefresh_Click( object sender, EventArgs e )
         {
             tmrUpd.Stop();
-            this.updThread = new Thread( this.checkUpdates );
-            this.updThread.Start();
+            this._updThread = new Thread( this.CheckUpdates );
+            this._updThread.Start();
             tmrUpd.Start();
         }
 
@@ -454,7 +452,7 @@ namespace BeamNGModsUpdateChecker
         private void tbKeyword_TextChanged( object sender, EventArgs e )
         {
             string keyword = tbKeyword.Text;
-            this.printAllThreads( this.upd.searchThreads( keyword ) );
+            this.PrintAllThreads( this._upd.SearchThreads( keyword ) );
         }
 
         private void tsmiOfficialThread_Click( object sender, EventArgs e )
@@ -470,14 +468,14 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpdProgress_Tick( object sender, EventArgs e )
         {
-            pbCheckUpd.Maximum = this.upd.UpdMaxProgress;
-            pbCheckUpd.Value = this.upd.UpdProgress;
+            pbCheckUpd.Maximum = this._upd.UpdMaxProgress;
+            pbCheckUpd.Value = this._upd.UpdProgress;
         }
 
         private void tsmiRemoveDuplicates_Click( object sender, EventArgs e )
         {
-            this.upd.removeDuplicates();
-            this.printAllThreads();
+            this._upd.RemoveDuplicates();
+            this.PrintAllThreads();
         }
     }
 

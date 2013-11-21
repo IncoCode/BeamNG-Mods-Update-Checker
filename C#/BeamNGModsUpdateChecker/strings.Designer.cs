@@ -124,6 +124,15 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Невозможно отправить запрос!.
+        /// </summary>
+        internal static string unableSendRequest {
+            get {
+                return ResourceManager.GetString("unableSendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Обновлений: {0}.
         /// </summary>
         internal static string updatesCount {

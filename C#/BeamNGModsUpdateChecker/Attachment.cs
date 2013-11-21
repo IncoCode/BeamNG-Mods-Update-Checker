@@ -1,7 +1,9 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+#endregion
 
 namespace BeamNGModsUpdateChecker
 {
@@ -12,7 +14,9 @@ namespace BeamNGModsUpdateChecker
 
         #region Constructors
 
-        public Attachment() { }
+        public Attachment()
+        {
+        }
 
         public Attachment( string Name, string Size )
         {
@@ -29,17 +33,25 @@ namespace BeamNGModsUpdateChecker
 
         public bool Equals( Attachment x, Attachment y )
         {
-            if ( Object.ReferenceEquals( x, y ) ) return true;
+            if ( Object.ReferenceEquals( x, y ) )
+            {
+                return true;
+            }
 
             if ( Object.ReferenceEquals( x, null ) || Object.ReferenceEquals( y, null ) )
+            {
                 return false;
+            }
 
             return x.Name == y.Name && x.Size == y.Size;
         }
 
         public int GetHashCode( Attachment product )
         {
-            if ( Object.ReferenceEquals( product, null ) ) return 0;
+            if ( Object.ReferenceEquals( product, null ) )
+            {
+                return 0;
+            }
 
             int hashName = product.Name == null ? 0 : product.Name.GetHashCode();
 

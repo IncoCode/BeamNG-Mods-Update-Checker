@@ -1,36 +1,46 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
+#endregion
+
 namespace BeamNGModsUpdateChecker
 {
-    public partial class frmOptions : Form
+    public partial class FrmOptions : Form
     {
-        private frmMain MainForm;
+        private FrmMain _mainForm;
 
-        public frmOptions( frmMain MainForm )
+        public FrmOptions( FrmMain mainForm )
         {
-            this.MainForm = MainForm;
+            this._mainForm = mainForm;
             InitializeComponent();
         }
 
-        private void addRemoveStartup( bool add )
+        private void AddRemoveStartup( bool add )
         {
             try
             {
-                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey(
+                    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
                 if ( add && !this.IsStartupItem() )
                 {
-                    rkApp.SetValue( "BeamNGModsUpdateChecker", Application.ExecutablePath.ToString() );
+                    if ( rkApp != null )
+                    {
+                        rkApp.SetValue( "BeamNGModsUpdateChecker", Application.ExecutablePath );
+                    }
                 }
                 else if ( !add )
                 {
-                    rkApp.DeleteValue( "BeamNGModsUpdateChecker", false );
+                    if ( rkApp != null )
+                    {
+                        rkApp.DeleteValue( "BeamNGModsUpdateChecker", false );
+                    }
                 }
             }
             catch
             {
-                return;
             }
         }
 
@@ -38,7 +48,8 @@ namespace BeamNGModsUpdateChecker
         {
             try
             {
-                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey(
+                    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
                 if ( rkApp.GetValue( "BeamNGModsUpdateChecker" ) == null )
                 {
                     return false;
@@ -56,17 +67,17 @@ namespace BeamNGModsUpdateChecker
 
         private void btnOk_Click( object sender, EventArgs e )
         {
-            this.MainForm.minimizeWhenStart = cbMinimizeToTray.Checked;
-            this.MainForm.updInterval = (int)nudUpdInterval.Value;
-            this.addRemoveStartup( cbAutorun.Checked );
+            this._mainForm.MinimizeWhenStart = cbMinimizeToTray.Checked;
+            this._mainForm.UpdInterval = (int)nudUpdInterval.Value;
+            this.AddRemoveStartup( cbAutorun.Checked );
             this.Close();
         }
 
         private void frmOptions_Load( object sender, EventArgs e )
         {
             cbAutorun.Checked = this.IsStartupItem();
-            cbMinimizeToTray.Checked = this.MainForm.minimizeWhenStart;
-            nudUpdInterval.Value = this.MainForm.updInterval;
+            cbMinimizeToTray.Checked = this._mainForm.MinimizeWhenStart;
+            nudUpdInterval.Value = this._mainForm.UpdInterval;
         }
     }
 }
