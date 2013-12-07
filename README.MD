@@ -2,4 +2,4 @@ The program checks changes of title of a thread and changes in attachments in th
 
 You need to specify links to threads, whose updates you want to track (Threads => Add threads). Updates are checked every 120 minutes (interval can be changed in the options).
 
-Link: http://www.beamng.com/threads/4920-Mods-Update-Checker
+Link: [http://www.beamng.com/threads/4920-Mods-Update-Checker](http://www.beamng.com/threads/4920-Mods-Update-Checker)
