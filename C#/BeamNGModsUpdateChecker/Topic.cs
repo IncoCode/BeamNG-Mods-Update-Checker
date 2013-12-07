@@ -112,7 +112,7 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
-            
+
             HtmlNodeCollection l =
                 posts.SelectNodes(
                     "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
@@ -204,7 +204,7 @@ namespace BeamNGModsUpdateChecker
             return result;
         }
 
-        #region Ovverides
+        #region Members
 
         public bool Equals( Topic t )
         {

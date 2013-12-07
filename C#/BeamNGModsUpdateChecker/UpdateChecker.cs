@@ -29,7 +29,7 @@ namespace BeamNGModsUpdateChecker
         private string _login;
         private string _password;
         private readonly string _progPath;
-        private CookieContainer _cookieJar = new CookieContainer();
+        private readonly CookieContainer _cookieJar = new CookieContainer();
         private volatile int _updProgress;
         private volatile int _updMaxProgress;
 

@@ -32,7 +32,7 @@ namespace BeamNGModsUpdateChecker
         {
             this.LoadSettings();
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
-            InitializeComponent();
+            this.InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             this.Size = this._mainFormSize;
         }
@@ -58,7 +58,7 @@ namespace BeamNGModsUpdateChecker
 
         private void PrintAllThreads( List<Topic> threads = null )
         {
-            lvThreads.Items.Clear();
+            this.lvThreads.Items.Clear();
             if ( threads == null )
             {
                 threads = this._upd.Threads;
@@ -77,7 +77,7 @@ namespace BeamNGModsUpdateChecker
                     lvisi.BackColor = Color.GreenYellow;
                 }
                 lvi.SubItems.Add( lvisi );
-                lvThreads.Items.Add( lvi );
+                this.lvThreads.Items.Add( lvi );
             }
         }
 
@@ -91,7 +91,7 @@ namespace BeamNGModsUpdateChecker
                 ini.Write( "Lang", this.Lang, "Options" );
                 ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
                 ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
-                if ( WindowState != FormWindowState.Minimized )
+                if ( this.WindowState != FormWindowState.Minimized )
                 {
                     ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
                     ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
@@ -140,7 +140,7 @@ namespace BeamNGModsUpdateChecker
 
         private void UpdProgress( object sender, UpdEventArgs e )
         {
-            ListViewItem lvi = lvThreads.FindItemWithText( e.Thread.Link );
+            ListViewItem lvi = this.lvThreads.FindItemWithText( e.Thread.Link );
             if ( lvi != null )
             {
                 lvi.Text = e.Thread.Title;
@@ -159,13 +159,13 @@ namespace BeamNGModsUpdateChecker
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             this.Invoke( new MethodInvoker( delegate()
             {
-                pbCheckUpd.Visible = true;
-                pbCheckUpd.Value = 0;
+                this.pbCheckUpd.Visible = true;
+                this.pbCheckUpd.Value = 0;
             } ) );
-            lvThreads.Enabled = false;
-            tbKeyword.Enabled = false;
-            ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
-            niTray.Text = strings.checkingForUpdates;
+            this.lvThreads.Enabled = false;
+            this.tbKeyword.Enabled = false;
+            this.ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
+            this.niTray.Text = strings.checkingForUpdates;
             try
             {
                 int updatesCount = this._upd.CheckUpdates();
@@ -174,15 +174,15 @@ namespace BeamNGModsUpdateChecker
             }
             finally
             {
-                lvThreads.Enabled = true;
-                tbKeyword.Enabled = true;
+                this.lvThreads.Enabled = true;
+                this.tbKeyword.Enabled = true;
                 this._isUpdating = false;
                 try
                 {
                     this.Invoke( new MethodInvoker( delegate()
                     {
-                        pbCheckUpd.Visible = false;
-                        tmrUpdProgress.Stop();
+                        this.pbCheckUpd.Visible = false;
+                        this.tmrUpdProgress.Stop();
                     } ) );
                 }
                 catch
@@ -194,24 +194,24 @@ namespace BeamNGModsUpdateChecker
         private void ShowUpdNot( int updatesCount, bool showBalloon = true )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
-            niTray.Text = string.Format( strings.updatesCount, updatesCount );
-            ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
+            this.niTray.Text = string.Format( strings.updatesCount, updatesCount );
+            this.ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
             if ( updatesCount > 0 && showBalloon )
             {
-                niTray.BalloonTipIcon = ToolTipIcon.Info;
-                niTray.BalloonTipTitle = strings.updatesFound;
-                niTray.BalloonTipText = string.Format( strings.updatesCount, updatesCount );
-                niTray.ShowBalloonTip( 2500 );
+                this.niTray.BalloonTipIcon = ToolTipIcon.Info;
+                this.niTray.BalloonTipTitle = strings.updatesFound;
+                this.niTray.BalloonTipText = string.Format( strings.updatesCount, updatesCount );
+                this.niTray.ShowBalloonTip( 2500 );
             }
         }
 
         private void LvColAutosize()
         {
-            int allWidth = lvThreads.Width - 37;
+            int allWidth = this.lvThreads.Width - 37;
             for ( int i = 0; i < this._lvColProp.Length; i++ )
             {
                 int width = (int)( allWidth * this._lvColProp[ i ] );
-                lvThreads.Columns[ i ].Width = width;
+                this.lvThreads.Columns[ i ].Width = width;
             }
         }
 
@@ -224,7 +224,7 @@ namespace BeamNGModsUpdateChecker
                 DialogResult dr = frm.ShowDialog();
                 if ( dr == DialogResult.Cancel )
                 {
-                    niTray.Dispose();
+                    this.niTray.Dispose();
                     Environment.Exit( 0 );
                     return;
                 }
@@ -239,7 +239,7 @@ namespace BeamNGModsUpdateChecker
                     DialogResult dr = frm.ShowDialog();
                     if ( dr == DialogResult.Cancel )
                     {
-                        niTray.Dispose();
+                        this.niTray.Dispose();
                         Environment.Exit( 0 );
                         return;
                     }
@@ -261,7 +261,7 @@ namespace BeamNGModsUpdateChecker
                 MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
             this.PrintAllThreads();
-            tmrUpd.Start();
+            this.tmrUpd.Start();
             if ( this.MinimizeWhenStart )
             {
                 this.WindowState = FormWindowState.Minimized;
@@ -272,7 +272,7 @@ namespace BeamNGModsUpdateChecker
         {
             this.SaveThreads();
             this.SaveSettings();
-            niTray.Dispose();
+            this.niTray.Dispose();
             if ( this._updThread != null )
             {
                 try
@@ -300,16 +300,16 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiLAddThread_Click( object sender, EventArgs e )
         {
-            tsmiAddThreads.PerformClick();
+            this.tsmiAddThreads.PerformClick();
         }
 
         private void tsmiRemove_Click( object sender, EventArgs e )
         {
-            if ( lvThreads.SelectedItems.Count > 0 )
+            if ( this.lvThreads.SelectedItems.Count > 0 )
             {
-                for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
+                for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
-                    string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
+                    string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     this._upd.RemoveThread( link );
                 }
                 this.PrintAllThreads();
@@ -319,12 +319,12 @@ namespace BeamNGModsUpdateChecker
 
         private void lvThreads_DoubleClick( object sender, EventArgs e )
         {
-            if ( lvThreads.SelectedItems.Count == 1 )
+            if ( this.lvThreads.SelectedItems.Count == 1 )
             {
-                string link = lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].Text;
+                string link = this.lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].Text;
                 Process.Start( link );
-                lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
-                lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
+                this.lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
+                this.lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
                 this._upd.ChangeReadStatus( link, true );
                 this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
             }
@@ -332,8 +332,8 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
-            tmrUpdProgress.Start();
-            tmrUpd.Interval = this.UpdInterval * 60 * 1000;
+            this.tmrUpdProgress.Start();
+            this.tmrUpd.Interval = this.UpdInterval * 60 * 1000;
             this._updThread = new Thread( this.CheckUpdates );
             this._updThread.Start();
         }
@@ -356,7 +356,7 @@ namespace BeamNGModsUpdateChecker
             this.LvColAutosize();
             this._mainFormSize = this.Size;
             this.SaveSettings();
-            if ( WindowState == FormWindowState.Minimized )
+            if ( this.WindowState == FormWindowState.Minimized )
             {
                 this.Visible = false;
                 this.ShowInTaskbar = false;
@@ -365,13 +365,13 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiMakeRead_Click( object sender, EventArgs e )
         {
-            if ( lvThreads.SelectedItems.Count > 0 )
+            if ( this.lvThreads.SelectedItems.Count > 0 )
             {
-                for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
+                for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
-                    string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    lvThreads.SelectedItems[ i ].BackColor = Color.White;
-                    lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
+                    string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
+                    this.lvThreads.SelectedItems[ i ].BackColor = Color.White;
+                    this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
                     this._upd.ChangeReadStatus( link, true );
                 }
                 this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
@@ -381,7 +381,7 @@ namespace BeamNGModsUpdateChecker
 
         private void niTray_DoubleClick( object sender, EventArgs e )
         {
-            tsmiExpand.PerformClick();
+            this.tsmiExpand.PerformClick();
         }
 
         private void tsmiEnglish_Click( object sender, EventArgs e )
@@ -409,8 +409,8 @@ namespace BeamNGModsUpdateChecker
             for ( int i = 0; i < this._upd.Threads.Count; i++ )
             {
                 string link = this._upd.Threads[ i ].Link;
-                lvThreads.Items[ i ].BackColor = Color.White;
-                lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
+                this.lvThreads.Items[ i ].BackColor = Color.White;
+                this.lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
                 this._upd.ChangeReadStatus( link, true );
             }
             this.SaveThreads();
@@ -419,13 +419,13 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiMakeUnread_Click( object sender, EventArgs e )
         {
-            if ( lvThreads.SelectedItems.Count > 0 )
+            if ( this.lvThreads.SelectedItems.Count > 0 )
             {
-                for ( int i = 0; i < lvThreads.SelectedItems.Count; i++ )
+                for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
-                    string link = lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
-                    lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
+                    string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
+                    this.lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
+                    this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
                     this._upd.ChangeReadStatus( link, false );
                 }
                 this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
@@ -435,16 +435,16 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiRefresh_Click( object sender, EventArgs e )
         {
-            tmrUpd.Stop();
-            tmrUpdProgress.Start();
+            this.tmrUpd.Stop();
+            this.tmrUpdProgress.Start();
             this._updThread = new Thread( this.CheckUpdates );
             this._updThread.Start();
-            tmrUpd.Start();
+            this.tmrUpd.Start();
         }
 
         private void tsmiAddT_Click( object sender, EventArgs e )
         {
-            tsmiAddThreads.PerformClick();
+            this.tsmiAddThreads.PerformClick();
         }
 
         private void tsmiRepository_Click( object sender, EventArgs e )
@@ -454,7 +454,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tbKeyword_TextChanged( object sender, EventArgs e )
         {
-            string keyword = tbKeyword.Text;
+            string keyword = this.tbKeyword.Text;
             this.PrintAllThreads( this._upd.SearchThreads( keyword ) );
         }
 
@@ -471,8 +471,8 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpdProgress_Tick( object sender, EventArgs e )
         {
-            pbCheckUpd.Maximum = this._upd.UpdMaxProgress;
-            pbCheckUpd.Value = this._upd.UpdProgress;
+            this.pbCheckUpd.Maximum = this._upd.UpdMaxProgress;
+            this.pbCheckUpd.Value = this._upd.UpdProgress;
         }
 
         private void tsmiRemoveDuplicates_Click( object sender, EventArgs e )
@@ -483,7 +483,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiRefreshT_Click( object sender, EventArgs e )
         {
-            tsmiRefresh.PerformClick();
+            this.tsmiRefresh.PerformClick();
         }
 
         private void lblOnlyUnread_Click( object sender, EventArgs e )
