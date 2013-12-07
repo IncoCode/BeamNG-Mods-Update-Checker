@@ -72,6 +72,7 @@
             this.tbKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tmrUpdProgress = new System.Windows.Forms.Timer(this.components);
+            this.lblOnlyUnread = new System.Windows.Forms.Label();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
             this.cmsTray.SuspendLayout();
@@ -351,10 +352,19 @@
             // 
             this.tmrUpdProgress.Tick += new System.EventHandler(this.tmrUpdProgress_Tick);
             // 
+            // lblOnlyUnread
+            // 
+            resources.ApplyResources(this.lblOnlyUnread, "lblOnlyUnread");
+            this.lblOnlyUnread.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblOnlyUnread.ForeColor = System.Drawing.Color.Blue;
+            this.lblOnlyUnread.Name = "lblOnlyUnread";
+            this.lblOnlyUnread.Click += new System.EventHandler(this.lblOnlyUnread_Click);
+            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblOnlyUnread);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbKeyword);
             this.Controls.Add(this.ssStatus);
@@ -421,6 +431,7 @@
         private System.Windows.Forms.Timer tmrUpdProgress;
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDuplicates;
         private System.Windows.Forms.ToolStripMenuItem tsmiRefreshT;
+        private System.Windows.Forms.Label lblOnlyUnread;
     }
 }
 

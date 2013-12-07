@@ -278,8 +278,17 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns the value of unread threads</returns>
         public int GetUnreadThreads()
         {
-            List<Topic> unread = this._threads.FindAll( p => p.Read == false );
+            List<Topic> unread = this._threads.FindAll( p => !p.Read );
             return unread.Count;
+        }
+
+        /// <summary>
+        /// Only unread (updated) threads
+        /// </summary>
+        /// <returns></returns>
+        public List<Topic> GetOnlyUpdatedThreads()
+        {
+            return this._threads.FindAll( p => !p.Read );
         }
 
         /// <summary>

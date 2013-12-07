@@ -26,6 +26,7 @@ namespace BeamNGModsUpdateChecker
         private bool _isUpdating = false;
         private Size _mainFormSize = new Size( 748, 456 );
         private Thread _updThread = null;
+        private bool _showOnlyUpdated = false;
 
         public FrmMain()
         {
@@ -61,6 +62,7 @@ namespace BeamNGModsUpdateChecker
             if ( threads == null )
             {
                 threads = this._upd.Threads;
+                this._showOnlyUpdated = false;
             }
             for ( int i = 0; i < threads.Count; i++ )
             {
@@ -482,6 +484,23 @@ namespace BeamNGModsUpdateChecker
         private void tsmiRefreshT_Click( object sender, EventArgs e )
         {
             tsmiRefresh.PerformClick();
+        }
+
+        private void lblOnlyUnread_Click( object sender, EventArgs e )
+        {
+            if ( this._isUpdating )
+            {
+                return;
+            }
+            this._showOnlyUpdated = !this._showOnlyUpdated;
+            if ( this._showOnlyUpdated )
+            {
+                this.PrintAllThreads( this._upd.GetOnlyUpdatedThreads() );
+            }
+            else
+            {
+                this.PrintAllThreads();
+            }
         }
     }
 

@@ -130,9 +130,6 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Link</value>
   </data>
-  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 104</value>
-  </data>
   <data name="tsmiLAddThread.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 22</value>
   </data>
@@ -163,11 +160,8 @@
   <data name="tsmiRemove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 20</value>
-  </data>
-  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
-    <value>Threads</value>
+  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 104</value>
   </data>
   <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 22</value>
@@ -196,6 +190,12 @@
   <data name="tsmiRefresh.Text" xml:space="preserve">
     <value>Check for updates</value>
   </data>
+  <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 20</value>
+  </data>
+  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
+    <value>Threads</value>
+  </data>
   <data name="tsmiOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
   </data>
@@ -207,12 +207,6 @@
   </data>
   <data name="языкLanguageToolStripMenuItem.Text" xml:space="preserve">
     <value>Language</value>
-  </data>
-  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
-  </data>
-  <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
   </data>
   <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -234,6 +228,12 @@
   </data>
   <data name="tsmiAbout.Text" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
@@ -2105,6 +2105,15 @@
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Search:</value>
+  </data>
+  <data name="lblOnlyUnread.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Underline</value>
+  </data>
+  <data name="lblOnlyUnread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="lblOnlyUnread.Text" xml:space="preserve">
+    <value>Show only unread</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
