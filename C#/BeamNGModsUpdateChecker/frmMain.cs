@@ -62,14 +62,14 @@ namespace BeamNGModsUpdateChecker
             {
                 threads = this._upd.Threads;
             }
-            for ( int i = 0; i < threads.Count; i++ )
+            foreach ( Topic thread in threads )
             {
-                var lvi = new ListViewItem( threads[ i ].Title );
+                var lvi = new ListViewItem( thread.Title );
                 lvi.UseItemStyleForSubItems = false;
                 var lvisi = new ListViewItem.ListViewSubItem();
-                lvisi.Text = threads[ i ].Link;
+                lvisi.Text = thread.Link;
                 lvisi.ForeColor = Color.Blue;
-                if ( !threads[ i ].Read )
+                if ( !thread.Read )
                 {
                     lvi.BackColor = Color.GreenYellow;
                     lvisi.BackColor = Color.GreenYellow;
