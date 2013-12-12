@@ -16,14 +16,26 @@ using RestSharp;
 
 namespace BeamNGModsUpdateChecker
 {
+
+    #region Add. class
+
     public class UpdEventArgs : EventArgs
     {
         public Topic Thread { get; set; }
     }
 
+    public class ThreadFilter
+    {
+        public bool ShowOnlyUnread = false;
+        public string SearchKeyword = "";
+    }
+
+    #endregion
+
     public class UpdateChecker
     {
         public event EventHandler<UpdEventArgs> UpdEvent = delegate { };
+        public readonly ThreadFilter ThreadFilter;
 
         private List<Topic> _threads;
         private string _login;
@@ -74,7 +86,23 @@ namespace BeamNGModsUpdateChecker
 
         public List<Topic> Threads
         {
-            get { return this._threads; }
+            get
+            {
+                List<Topic> threads = this._threads;
+                if ( this.ThreadFilter.ShowOnlyUnread )
+                {
+                    threads = this._threads.FindAll( p => !p.Read );
+                }
+                string keyword = this.ThreadFilter.SearchKeyword;
+                if ( !string.IsNullOrEmpty( keyword ) )
+                {
+                    CultureInfo culture = CultureInfo.CurrentCulture;
+                    threads = threads.FindAll(
+                         p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
+                              || p.Link.Contains( keyword ) );
+                }
+                return threads;
+            }
         }
 
         public int UpdProgress
@@ -95,6 +123,7 @@ namespace BeamNGModsUpdateChecker
             this._password = password;
             this._progPath = progPath;
             this._threads = new List<Topic>();
+            this.ThreadFilter = new ThreadFilter();
             try
             {
                 this.LoadThreads();
@@ -283,38 +312,11 @@ namespace BeamNGModsUpdateChecker
         }
 
         /// <summary>
-        /// Only unread (updated) threads
-        /// </summary>
-        /// <returns></returns>
-        public List<Topic> GetOnlyUpdatedThreads()
-        {
-            return this._threads.FindAll( p => !p.Read );
-        }
-
-        /// <summary>
         /// Removes duplicate of threads
         /// </summary>
         public void RemoveDuplicates()
         {
             this._threads = this._threads.Distinct().ToList();
-        }
-
-        /// <summary>
-        /// Searching threads
-        /// </summary>
-        /// <param name="keyword">Search keyword</param>
-        /// <returns>Found threads</returns>
-        public List<Topic> SearchThreads( string keyword )
-        {
-            if ( string.IsNullOrEmpty( keyword ) )
-            {
-                return null;
-            }
-            CultureInfo culture = CultureInfo.CurrentCulture;
-            return
-                this._threads.FindAll(
-                    p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
-                         || p.Link.Contains( keyword ) );
         }
 
         #endregion Working with threads

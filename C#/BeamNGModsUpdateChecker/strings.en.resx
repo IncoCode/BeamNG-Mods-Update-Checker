@@ -138,6 +138,12 @@
   <data name="saveThreadsError" xml:space="preserve">
     <value>Unable to save the threads list!</value>
   </data>
+  <data name="showAll" xml:space="preserve">
+    <value>Show all</value>
+  </data>
+  <data name="showOnlyUnread" xml:space="preserve">
+    <value>Show only unread</value>
+  </data>
   <data name="unableSendRequest" xml:space="preserve">
     <value>Unable to send a request!</value>
   </data>

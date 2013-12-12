@@ -138,6 +138,12 @@
   <data name="saveThreadsError" xml:space="preserve">
     <value>Невозможно сохранить список тем!</value>
   </data>
+  <data name="showAll" xml:space="preserve">
+    <value>Показать всё</value>
+  </data>
+  <data name="showOnlyUnread" xml:space="preserve">
+    <value>Показать только непрочитанные</value>
+  </data>
   <data name="unableSendRequest" xml:space="preserve">
     <value>Невозможно отправить запрос!</value>
   </data>

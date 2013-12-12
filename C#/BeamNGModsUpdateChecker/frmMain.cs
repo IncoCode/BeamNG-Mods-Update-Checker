@@ -26,7 +26,6 @@ namespace BeamNGModsUpdateChecker
         private bool _isUpdating = false;
         private Size _mainFormSize = new Size( 748, 456 );
         private Thread _updThread = null;
-        private bool _showOnlyUpdated = false;
 
         public FrmMain()
         {
@@ -62,7 +61,6 @@ namespace BeamNGModsUpdateChecker
             if ( threads == null )
             {
                 threads = this._upd.Threads;
-                this._showOnlyUpdated = false;
             }
             for ( int i = 0; i < threads.Count; i++ )
             {
@@ -327,10 +325,6 @@ namespace BeamNGModsUpdateChecker
                 this.lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
                 this._upd.ChangeReadStatus( link, true );
                 this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
-                if ( this._showOnlyUpdated )
-                {
-                    this.PrintAllThreads( this._upd.GetOnlyUpdatedThreads() );
-                }
             }
         }
 
@@ -459,7 +453,8 @@ namespace BeamNGModsUpdateChecker
         private void tbKeyword_TextChanged( object sender, EventArgs e )
         {
             string keyword = this.tbKeyword.Text;
-            this.PrintAllThreads( this._upd.SearchThreads( keyword ) );
+            this._upd.ThreadFilter.SearchKeyword = keyword;
+            this.PrintAllThreads();
         }
 
         private void tsmiOfficialThread_Click( object sender, EventArgs e )
@@ -496,15 +491,9 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            this._showOnlyUpdated = !this._showOnlyUpdated;
-            if ( this._showOnlyUpdated )
-            {
-                this.PrintAllThreads( this._upd.GetOnlyUpdatedThreads() );
-            }
-            else
-            {
-                this.PrintAllThreads();
-            }
+            this._upd.ThreadFilter.ShowOnlyUnread = !this._upd.ThreadFilter.ShowOnlyUnread;
+            this.PrintAllThreads();
+            this.lblOnlyUnread.Text = this._upd.ThreadFilter.ShowOnlyUnread ? strings.showAll : strings.showOnlyUnread;
         }
     }
 

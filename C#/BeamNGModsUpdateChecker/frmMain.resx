@@ -2309,6 +2309,9 @@
   <data name="lblOnlyUnread.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblOnlyUnread.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Underline</value>
+  </data>
   <data name="lblOnlyUnread.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 34</value>
   </data>
