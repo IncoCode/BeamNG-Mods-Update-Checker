@@ -112,7 +112,7 @@ namespace BeamNGModsUpdateChecker
 
         public int UnreadThreadsCount
         {
-            get { return this._threads.FindAll( p => !p.Read ).Count; }
+            get { return this.UnreadThreads.Count; }
         }
 
         public int UpdProgress
@@ -191,7 +191,7 @@ namespace BeamNGModsUpdateChecker
         {
             try
             {
-                string content = UpdateChecker.SendGet( "http://www.beamng.com/forum/", this._cookieJar );
+                string content = SendGet( "http://www.beamng.com/forum/", this._cookieJar );
                 if ( content.IndexOf( "Welcome," ) >= 0 )
                 {
                     return false;
