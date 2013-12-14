@@ -324,6 +324,11 @@ namespace BeamNGModsUpdateChecker
                 this.lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
                 this.lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
                 this._upd.ChangeReadStatus( link, true );
+                if ( this._upd.ThreadFilter.ShowOnlyUnread )
+                {
+                    this.lvThreads.Items.Remove( this.lvThreads.SelectedItems[ 0 ] );
+                }
+                this.lvThreads.Refresh();
                 this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
             }
         }
