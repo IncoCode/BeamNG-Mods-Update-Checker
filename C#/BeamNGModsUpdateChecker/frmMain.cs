@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Ini;
@@ -499,6 +500,22 @@ namespace BeamNGModsUpdateChecker
             this._upd.ThreadFilter.ShowOnlyUnread = !this._upd.ThreadFilter.ShowOnlyUnread;
             this.PrintAllThreads();
             this.lblOnlyUnread.Text = this._upd.ThreadFilter.ShowOnlyUnread ? strings.showAll : strings.showOnlyUnread;
+        }
+
+        private void tsmiOpenAllUnread_Click( object sender, EventArgs e )
+        {
+            if ( this._isUpdating )
+            {
+                return;
+            }
+            List<Topic> threads = this._upd.Threads.FindAll( p => !p.Read );
+            foreach ( var thread in threads )
+            {
+                Process.Start( thread.Link );
+                thread.Read = true;
+                Thread.Sleep( 150 );
+            }
+            this.PrintAllThreads();
         }
     }
 

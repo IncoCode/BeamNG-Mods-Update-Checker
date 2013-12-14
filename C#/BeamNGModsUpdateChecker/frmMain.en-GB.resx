@@ -130,6 +130,9 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 104</value>
+  </data>
   <data name="tsmiLAddThread.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 22</value>
   </data>
@@ -160,41 +163,47 @@
   <data name="tsmiRemove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="cmsThreadsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 104</value>
-  </data>
-  <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 22</value>
-  </data>
-  <data name="tsmiAddThreads.Text" xml:space="preserve">
-    <value>Add threads</value>
-  </data>
-  <data name="tsmiMarkAllRead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 22</value>
-  </data>
-  <data name="tsmiMarkAllRead.Text" xml:space="preserve">
-    <value>Mark all threads as read</value>
-  </data>
-  <data name="tsmiRemoveDuplicates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 22</value>
-  </data>
-  <data name="tsmiRemoveDuplicates.Text" xml:space="preserve">
-    <value>Removes duplicate of threads</value>
-  </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 6</value>
-  </data>
-  <data name="tsmiRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 22</value>
-  </data>
-  <data name="tsmiRefresh.Text" xml:space="preserve">
-    <value>Check for updates</value>
-  </data>
   <data name="файлToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
   </data>
   <data name="файлToolStripMenuItem.Text" xml:space="preserve">
     <value>Threads</value>
+  </data>
+  <data name="tsmiAddThreads.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 22</value>
+  </data>
+  <data name="tsmiAddThreads.Text" xml:space="preserve">
+    <value>Add threads</value>
+  </data>
+  <data name="tsmiMarkAllRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 22</value>
+  </data>
+  <data name="tsmiMarkAllRead.Text" xml:space="preserve">
+    <value>Mark all threads as read</value>
+  </data>
+  <data name="tsmiRemoveDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 22</value>
+  </data>
+  <data name="tsmiRemoveDuplicates.Text" xml:space="preserve">
+    <value>Removes duplicate of threads</value>
+  </data>
+  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 6</value>
+  </data>
+  <data name="tsmiOpenAllUnread.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 22</value>
+  </data>
+  <data name="tsmiOpenAllUnread.Text" xml:space="preserve">
+    <value>Open all unread threads in browser</value>
+  </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 6</value>
+  </data>
+  <data name="tsmiRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 22</value>
+  </data>
+  <data name="tsmiRefresh.Text" xml:space="preserve">
+    <value>Check for updates</value>
   </data>
   <data name="tsmiOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
@@ -207,6 +216,12 @@
   </data>
   <data name="языкLanguageToolStripMenuItem.Text" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -228,42 +243,6 @@
   </data>
   <data name="tsmiAbout.Text" xml:space="preserve">
     <value>About</value>
-  </data>
-  <data name="помощьToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
-  </data>
-  <data name="помощьToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="tsmiExpand.Text" xml:space="preserve">
-    <value>Expand</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 6</value>
-  </data>
-  <data name="tsmiRefreshT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="tsmiRefreshT.Text" xml:space="preserve">
-    <value>Check for updates</value>
-  </data>
-  <data name="добавитьТемыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="добавитьТемыToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add threads</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 6</value>
-  </data>
-  <data name="tsmiExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="tsmiExit.Text" xml:space="preserve">
-    <value>Exit</value>
   </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 104</value>
@@ -2091,6 +2070,36 @@
   <data name="niTray.Text" xml:space="preserve">
     <value>Updates: 0</value>
   </data>
+  <data name="tsmiExpand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="tsmiExpand.Text" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 6</value>
+  </data>
+  <data name="tsmiRefreshT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="tsmiRefreshT.Text" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="добавитьТемыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="добавитьТемыToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add threads</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 6</value>
+  </data>
+  <data name="tsmiExit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="tsmiExit.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 17</value>
   </data>
@@ -2105,9 +2114,6 @@
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Search:</value>
-  </data>
-  <data name="lblOnlyUnread.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Underline</value>
   </data>
   <data name="lblOnlyUnread.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
