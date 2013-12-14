@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Ini;
@@ -312,7 +311,7 @@ namespace BeamNGModsUpdateChecker
                     this._upd.RemoveThread( link );
                 }
                 this.PrintAllThreads();
-                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
             }
         }
 
@@ -330,7 +329,7 @@ namespace BeamNGModsUpdateChecker
                     this.lvThreads.Items.Remove( this.lvThreads.SelectedItems[ 0 ] );
                 }
                 this.lvThreads.Refresh();
-                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
             }
         }
 
@@ -378,7 +377,7 @@ namespace BeamNGModsUpdateChecker
                     this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
                     this._upd.ChangeReadStatus( link, true );
                 }
-                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
                 this.SaveThreads();
             }
         }
@@ -418,7 +417,7 @@ namespace BeamNGModsUpdateChecker
                 this._upd.ChangeReadStatus( link, true );
             }
             this.SaveThreads();
-            this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+            this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
         }
 
         private void tsmiMakeUnread_Click( object sender, EventArgs e )
@@ -432,7 +431,7 @@ namespace BeamNGModsUpdateChecker
                     this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
                     this._upd.ChangeReadStatus( link, false );
                 }
-                this.ShowUpdNot( this._upd.GetUnreadThreads(), false );
+                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
                 this.SaveThreads();
             }
         }
@@ -508,7 +507,7 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            List<Topic> threads = this._upd.Threads.FindAll( p => !p.Read );
+            List<Topic> threads = this._upd.UnreadThreads;
             foreach ( var thread in threads )
             {
                 Process.Start( thread.Link );

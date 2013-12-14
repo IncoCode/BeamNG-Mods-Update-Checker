@@ -98,11 +98,21 @@ namespace BeamNGModsUpdateChecker
                 {
                     CultureInfo culture = CultureInfo.CurrentCulture;
                     threads = threads.FindAll(
-                         p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
-                              || p.Link.Contains( keyword ) );
+                        p => culture.CompareInfo.IndexOf( p.Title, keyword, CompareOptions.IgnoreCase ) >= 0
+                             || p.Link.Contains( keyword ) );
                 }
                 return threads;
             }
+        }
+
+        public List<Topic> UnreadThreads
+        {
+            get { return this._threads.FindAll( p => !p.Read ); }
+        }
+
+        public int UnreadThreadsCount
+        {
+            get { return this._threads.FindAll( p => !p.Read ).Count; }
         }
 
         public int UpdProgress
@@ -207,12 +217,11 @@ namespace BeamNGModsUpdateChecker
             {
                 this.Auth();
             }
-            for ( int i = 0; i < this._threads.Count; i++ )
+            foreach ( Topic thread in this._threads )
             {
-                Topic thread = this._threads[ i ];
                 try
                 {
-                    string content = UpdateChecker.SendGet( thread.Link, this._cookieJar );
+                    string content = SendGet( thread.Link, this._cookieJar );
                     bool titleChanged = thread.UpdTitle( content );
                     bool attachmentsChanged = thread.UpdAttachments( content );
                     args.Thread = thread;
@@ -228,7 +237,7 @@ namespace BeamNGModsUpdateChecker
                 this._updProgress++;
                 Thread.Sleep( 30 );
             }
-            return this.GetUnreadThreads();
+            return this.UnreadThreadsCount;
         }
 
         #region Working with threads
@@ -299,16 +308,6 @@ namespace BeamNGModsUpdateChecker
             {
                 this._threads[ index ].Read = read;
             }
-        }
-
-        /// <summary>
-        /// Unread threads
-        /// </summary>
-        /// <returns>Returns the value of unread threads</returns>
-        public int GetUnreadThreads()
-        {
-            List<Topic> unread = this._threads.FindAll( p => !p.Read );
-            return unread.Count;
         }
 
         /// <summary>
