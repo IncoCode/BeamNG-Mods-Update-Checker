@@ -1,3 +1,4 @@
 v1.0.2 Stable:
 -Check for updates optimization;
--Added: the ability to display only unread topics.
+-Added feature to display only unread topics;
+-Added feature to open all unread threads in browser.
