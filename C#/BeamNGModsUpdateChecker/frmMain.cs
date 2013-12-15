@@ -186,6 +186,7 @@ namespace BeamNGModsUpdateChecker
                 catch
                 {
                 }
+                GC.Collect();
             }
         }
 
@@ -515,6 +516,7 @@ namespace BeamNGModsUpdateChecker
                 Thread.Sleep( 150 );
             }
             this.PrintAllThreads();
+            this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
         }
     }
 
