@@ -518,6 +518,11 @@ namespace BeamNGModsUpdateChecker
             this.PrintAllThreads();
             this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
         }
+
+        private void tsmiOpenAllUnreadTray_Click( object sender, EventArgs e )
+        {
+            tsmiOpenAllUnread.PerformClick();
+        }
     }
 
     public static class ExMethods
