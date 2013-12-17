@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( FrmMain ) );
             this.label1 = new System.Windows.Forms.Label();
             this.lvThreads = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cmsThreadsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.columnHeader1 = ( (System.Windows.Forms.ColumnHeader)( new System.Windows.Forms.ColumnHeader() ) );
+            this.columnHeader2 = ( (System.Windows.Forms.ColumnHeader)( new System.Windows.Forms.ColumnHeader() ) );
+            this.cmsThreadsMenu = new System.Windows.Forms.ContextMenuStrip( this.components );
             this.tsmiLAddThread = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiMakeRead = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,12 +59,15 @@
             this.tsmiRepository = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmrUpd = new System.Windows.Forms.Timer(this.components);
-            this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tmrUpd = new System.Windows.Forms.Timer( this.components );
+            this.niTray = new System.Windows.Forms.NotifyIcon( this.components );
+            this.cmsTray = new System.Windows.Forms.ContextMenuStrip( this.components );
             this.tsmiExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshT = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpenAllUnreadTray = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
             this.добавитьТемыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +76,7 @@
             this.pbCheckUpd = new System.Windows.Forms.ToolStripProgressBar();
             this.tbKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tmrUpdProgress = new System.Windows.Forms.Timer(this.components);
+            this.tmrUpdProgress = new System.Windows.Forms.Timer( this.components );
             this.lblOnlyUnread = new System.Windows.Forms.Label();
             this.cmsThreadsMenu.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -83,15 +86,15 @@
             // 
             // label1
             // 
-            resources.ApplyResources(this.label1, "label1");
+            resources.ApplyResources( this.label1, "label1" );
             this.label1.Name = "label1";
             // 
             // lvThreads
             // 
-            resources.ApplyResources(this.lvThreads, "lvThreads");
-            this.lvThreads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            resources.ApplyResources( this.lvThreads, "lvThreads" );
+            this.lvThreads.Columns.AddRange( new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2} );
             this.lvThreads.ContextMenuStrip = this.cmsThreadsMenu;
             this.lvThreads.FullRowSelect = true;
             this.lvThreads.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -99,305 +102,323 @@
             this.lvThreads.ShowItemToolTips = true;
             this.lvThreads.UseCompatibleStateImageBehavior = false;
             this.lvThreads.View = System.Windows.Forms.View.Details;
-            this.lvThreads.DoubleClick += new System.EventHandler(this.lvThreads_DoubleClick);
+            this.lvThreads.DoubleClick += new System.EventHandler( this.lvThreads_DoubleClick );
             // 
             // columnHeader1
             // 
-            resources.ApplyResources(this.columnHeader1, "columnHeader1");
+            resources.ApplyResources( this.columnHeader1, "columnHeader1" );
             // 
             // columnHeader2
             // 
-            resources.ApplyResources(this.columnHeader2, "columnHeader2");
+            resources.ApplyResources( this.columnHeader2, "columnHeader2" );
             // 
             // cmsThreadsMenu
             // 
-            resources.ApplyResources(this.cmsThreadsMenu, "cmsThreadsMenu");
-            this.cmsThreadsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.cmsThreadsMenu, "cmsThreadsMenu" );
+            this.cmsThreadsMenu.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.tsmiLAddThread,
             this.toolStripMenuItem3,
             this.tsmiMakeRead,
             this.tsmiMakeUnread,
             this.toolStripMenuItem1,
-            this.tsmiRemove});
+            this.tsmiRemove} );
             this.cmsThreadsMenu.Name = "cmsThreadsMenu";
             // 
             // tsmiLAddThread
             // 
-            resources.ApplyResources(this.tsmiLAddThread, "tsmiLAddThread");
+            resources.ApplyResources( this.tsmiLAddThread, "tsmiLAddThread" );
             this.tsmiLAddThread.Name = "tsmiLAddThread";
-            this.tsmiLAddThread.Click += new System.EventHandler(this.tsmiLAddThread_Click);
+            this.tsmiLAddThread.Click += new System.EventHandler( this.tsmiLAddThread_Click );
             // 
             // toolStripMenuItem3
             // 
-            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
+            resources.ApplyResources( this.toolStripMenuItem3, "toolStripMenuItem3" );
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             // 
             // tsmiMakeRead
             // 
-            resources.ApplyResources(this.tsmiMakeRead, "tsmiMakeRead");
+            resources.ApplyResources( this.tsmiMakeRead, "tsmiMakeRead" );
             this.tsmiMakeRead.Name = "tsmiMakeRead";
-            this.tsmiMakeRead.Click += new System.EventHandler(this.tsmiMakeRead_Click);
+            this.tsmiMakeRead.Click += new System.EventHandler( this.tsmiMakeRead_Click );
             // 
             // tsmiMakeUnread
             // 
-            resources.ApplyResources(this.tsmiMakeUnread, "tsmiMakeUnread");
+            resources.ApplyResources( this.tsmiMakeUnread, "tsmiMakeUnread" );
             this.tsmiMakeUnread.Name = "tsmiMakeUnread";
-            this.tsmiMakeUnread.Click += new System.EventHandler(this.tsmiMakeUnread_Click);
+            this.tsmiMakeUnread.Click += new System.EventHandler( this.tsmiMakeUnread_Click );
             // 
             // toolStripMenuItem1
             // 
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            resources.ApplyResources( this.toolStripMenuItem1, "toolStripMenuItem1" );
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             // 
             // tsmiRemove
             // 
-            resources.ApplyResources(this.tsmiRemove, "tsmiRemove");
+            resources.ApplyResources( this.tsmiRemove, "tsmiRemove" );
             this.tsmiRemove.Name = "tsmiRemove";
-            this.tsmiRemove.Click += new System.EventHandler(this.tsmiRemove_Click);
+            this.tsmiRemove.Click += new System.EventHandler( this.tsmiRemove_Click );
             // 
             // msMenu
             // 
-            resources.ApplyResources(this.msMenu, "msMenu");
-            this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.msMenu, "msMenu" );
+            this.msMenu.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.tsmiOptions,
             this.языкLanguageToolStripMenuItem,
-            this.помощьToolStripMenuItem});
+            this.помощьToolStripMenuItem} );
             this.msMenu.Name = "msMenu";
             // 
             // файлToolStripMenuItem
             // 
-            resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.файлToolStripMenuItem, "файлToolStripMenuItem" );
+            this.файлToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAddThreads,
             this.tsmiMarkAllRead,
             this.tsmiRemoveDuplicates,
             this.toolStripMenuItem7,
             this.tsmiOpenAllUnread,
             this.toolStripMenuItem6,
-            this.tsmiRefresh});
+            this.tsmiRefresh} );
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             // 
             // tsmiAddThreads
             // 
-            resources.ApplyResources(this.tsmiAddThreads, "tsmiAddThreads");
+            resources.ApplyResources( this.tsmiAddThreads, "tsmiAddThreads" );
             this.tsmiAddThreads.Name = "tsmiAddThreads";
-            this.tsmiAddThreads.Click += new System.EventHandler(this.tsmiAddThreads_Click);
+            this.tsmiAddThreads.Click += new System.EventHandler( this.tsmiAddThreads_Click );
             // 
             // tsmiMarkAllRead
             // 
-            resources.ApplyResources(this.tsmiMarkAllRead, "tsmiMarkAllRead");
+            resources.ApplyResources( this.tsmiMarkAllRead, "tsmiMarkAllRead" );
             this.tsmiMarkAllRead.Name = "tsmiMarkAllRead";
-            this.tsmiMarkAllRead.Click += new System.EventHandler(this.tsmiMarkAllRead_Click);
+            this.tsmiMarkAllRead.Click += new System.EventHandler( this.tsmiMarkAllRead_Click );
             // 
             // tsmiRemoveDuplicates
             // 
-            resources.ApplyResources(this.tsmiRemoveDuplicates, "tsmiRemoveDuplicates");
+            resources.ApplyResources( this.tsmiRemoveDuplicates, "tsmiRemoveDuplicates" );
             this.tsmiRemoveDuplicates.Name = "tsmiRemoveDuplicates";
-            this.tsmiRemoveDuplicates.Click += new System.EventHandler(this.tsmiRemoveDuplicates_Click);
+            this.tsmiRemoveDuplicates.Click += new System.EventHandler( this.tsmiRemoveDuplicates_Click );
             // 
             // toolStripMenuItem7
             // 
-            resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
+            resources.ApplyResources( this.toolStripMenuItem7, "toolStripMenuItem7" );
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             // 
             // tsmiOpenAllUnread
             // 
-            resources.ApplyResources(this.tsmiOpenAllUnread, "tsmiOpenAllUnread");
+            resources.ApplyResources( this.tsmiOpenAllUnread, "tsmiOpenAllUnread" );
             this.tsmiOpenAllUnread.Name = "tsmiOpenAllUnread";
-            this.tsmiOpenAllUnread.Click += new System.EventHandler(this.tsmiOpenAllUnread_Click);
+            this.tsmiOpenAllUnread.Click += new System.EventHandler( this.tsmiOpenAllUnread_Click );
             // 
             // toolStripMenuItem6
             // 
-            resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+            resources.ApplyResources( this.toolStripMenuItem6, "toolStripMenuItem6" );
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             // 
             // tsmiRefresh
             // 
-            resources.ApplyResources(this.tsmiRefresh, "tsmiRefresh");
+            resources.ApplyResources( this.tsmiRefresh, "tsmiRefresh" );
             this.tsmiRefresh.Name = "tsmiRefresh";
-            this.tsmiRefresh.Click += new System.EventHandler(this.tsmiRefresh_Click);
+            this.tsmiRefresh.Click += new System.EventHandler( this.tsmiRefresh_Click );
             // 
             // tsmiOptions
             // 
-            resources.ApplyResources(this.tsmiOptions, "tsmiOptions");
+            resources.ApplyResources( this.tsmiOptions, "tsmiOptions" );
             this.tsmiOptions.Name = "tsmiOptions";
-            this.tsmiOptions.Click += new System.EventHandler(this.tsmiOptions_Click);
+            this.tsmiOptions.Click += new System.EventHandler( this.tsmiOptions_Click );
             // 
             // языкLanguageToolStripMenuItem
             // 
-            resources.ApplyResources(this.языкLanguageToolStripMenuItem, "языкLanguageToolStripMenuItem");
-            this.языкLanguageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.языкLanguageToolStripMenuItem, "языкLanguageToolStripMenuItem" );
+            this.языкLanguageToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.englishToolStripMenuItem,
-            this.русскийToolStripMenuItem});
+            this.русскийToolStripMenuItem} );
             this.языкLanguageToolStripMenuItem.Name = "языкLanguageToolStripMenuItem";
             // 
             // englishToolStripMenuItem
             // 
-            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            resources.ApplyResources( this.englishToolStripMenuItem, "englishToolStripMenuItem" );
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Click += new System.EventHandler(this.tsmiEnglish_Click);
+            this.englishToolStripMenuItem.Click += new System.EventHandler( this.tsmiEnglish_Click );
             // 
             // русскийToolStripMenuItem
             // 
-            resources.ApplyResources(this.русскийToolStripMenuItem, "русскийToolStripMenuItem");
+            resources.ApplyResources( this.русскийToolStripMenuItem, "русскийToolStripMenuItem" );
             this.русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            this.русскийToolStripMenuItem.Click += new System.EventHandler(this.tsmiRussian_Click);
+            this.русскийToolStripMenuItem.Click += new System.EventHandler( this.tsmiRussian_Click );
             // 
             // помощьToolStripMenuItem
             // 
-            resources.ApplyResources(this.помощьToolStripMenuItem, "помощьToolStripMenuItem");
-            this.помощьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.помощьToolStripMenuItem, "помощьToolStripMenuItem" );
+            this.помощьToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOfficialThread,
             this.tsmiRepository,
             this.toolStripMenuItem5,
-            this.tsmiAbout});
+            this.tsmiAbout} );
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
             // 
             // tsmiOfficialThread
             // 
-            resources.ApplyResources(this.tsmiOfficialThread, "tsmiOfficialThread");
+            resources.ApplyResources( this.tsmiOfficialThread, "tsmiOfficialThread" );
             this.tsmiOfficialThread.Name = "tsmiOfficialThread";
-            this.tsmiOfficialThread.Click += new System.EventHandler(this.tsmiOfficialThread_Click);
+            this.tsmiOfficialThread.Click += new System.EventHandler( this.tsmiOfficialThread_Click );
             // 
             // tsmiRepository
             // 
-            resources.ApplyResources(this.tsmiRepository, "tsmiRepository");
+            resources.ApplyResources( this.tsmiRepository, "tsmiRepository" );
             this.tsmiRepository.Name = "tsmiRepository";
-            this.tsmiRepository.Click += new System.EventHandler(this.tsmiRepository_Click);
+            this.tsmiRepository.Click += new System.EventHandler( this.tsmiRepository_Click );
             // 
             // toolStripMenuItem5
             // 
-            resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
+            resources.ApplyResources( this.toolStripMenuItem5, "toolStripMenuItem5" );
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             // 
             // tsmiAbout
             // 
-            resources.ApplyResources(this.tsmiAbout, "tsmiAbout");
+            resources.ApplyResources( this.tsmiAbout, "tsmiAbout" );
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            this.tsmiAbout.Click += new System.EventHandler( this.tsmiAbout_Click );
             // 
             // tmrUpd
             // 
             this.tmrUpd.Interval = 1000;
-            this.tmrUpd.Tick += new System.EventHandler(this.tmrUpd_Tick);
+            this.tmrUpd.Tick += new System.EventHandler( this.tmrUpd_Tick );
             // 
             // niTray
             // 
-            resources.ApplyResources(this.niTray, "niTray");
+            resources.ApplyResources( this.niTray, "niTray" );
             this.niTray.ContextMenuStrip = this.cmsTray;
-            this.niTray.DoubleClick += new System.EventHandler(this.niTray_DoubleClick);
+            this.niTray.DoubleClick += new System.EventHandler( this.niTray_DoubleClick );
             // 
             // cmsTray
             // 
-            resources.ApplyResources(this.cmsTray, "cmsTray");
-            this.cmsTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.cmsTray, "cmsTray" );
+            this.cmsTray.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.tsmiExpand,
             this.toolStripMenuItem4,
             this.tsmiRefreshT,
+            this.toolStripMenuItem9,
+            this.tsmiOpenAllUnreadTray,
+            this.toolStripMenuItem8,
             this.добавитьТемыToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.tsmiExit});
+            this.tsmiExit} );
             this.cmsTray.Name = "cmsTray";
             // 
             // tsmiExpand
             // 
-            resources.ApplyResources(this.tsmiExpand, "tsmiExpand");
+            resources.ApplyResources( this.tsmiExpand, "tsmiExpand" );
             this.tsmiExpand.Name = "tsmiExpand";
-            this.tsmiExpand.Click += new System.EventHandler(this.tsmiExpand_Click);
+            this.tsmiExpand.Click += new System.EventHandler( this.tsmiExpand_Click );
             // 
             // toolStripMenuItem4
             // 
-            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
+            resources.ApplyResources( this.toolStripMenuItem4, "toolStripMenuItem4" );
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             // 
             // tsmiRefreshT
             // 
-            resources.ApplyResources(this.tsmiRefreshT, "tsmiRefreshT");
+            resources.ApplyResources( this.tsmiRefreshT, "tsmiRefreshT" );
             this.tsmiRefreshT.Name = "tsmiRefreshT";
-            this.tsmiRefreshT.Click += new System.EventHandler(this.tsmiRefreshT_Click);
+            this.tsmiRefreshT.Click += new System.EventHandler( this.tsmiRefreshT_Click );
+            // 
+            // toolStripMenuItem9
+            // 
+            resources.ApplyResources( this.toolStripMenuItem9, "toolStripMenuItem9" );
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            // 
+            // tsmiOpenAllUnreadTray
+            // 
+            resources.ApplyResources( this.tsmiOpenAllUnreadTray, "tsmiOpenAllUnreadTray" );
+            this.tsmiOpenAllUnreadTray.Name = "tsmiOpenAllUnreadTray";
+            // 
+            // toolStripMenuItem8
+            // 
+            resources.ApplyResources( this.toolStripMenuItem8, "toolStripMenuItem8" );
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             // 
             // добавитьТемыToolStripMenuItem
             // 
-            resources.ApplyResources(this.добавитьТемыToolStripMenuItem, "добавитьТемыToolStripMenuItem");
+            resources.ApplyResources( this.добавитьТемыToolStripMenuItem, "добавитьТемыToolStripMenuItem" );
             this.добавитьТемыToolStripMenuItem.Name = "добавитьТемыToolStripMenuItem";
-            this.добавитьТемыToolStripMenuItem.Click += new System.EventHandler(this.tsmiAddT_Click);
+            this.добавитьТемыToolStripMenuItem.Click += new System.EventHandler( this.tsmiAddT_Click );
             // 
             // toolStripMenuItem2
             // 
-            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            resources.ApplyResources( this.toolStripMenuItem2, "toolStripMenuItem2" );
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             // 
             // tsmiExit
             // 
-            resources.ApplyResources(this.tsmiExit, "tsmiExit");
+            resources.ApplyResources( this.tsmiExit, "tsmiExit" );
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
+            this.tsmiExit.Click += new System.EventHandler( this.tsmiExit_Click );
             // 
             // ssStatus
             // 
-            resources.ApplyResources(this.ssStatus, "ssStatus");
-            this.ssStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources( this.ssStatus, "ssStatus" );
+            this.ssStatus.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.pbCheckUpd});
+            this.pbCheckUpd} );
             this.ssStatus.Name = "ssStatus";
             // 
             // toolStripStatusLabel1
             // 
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            resources.ApplyResources( this.toolStripStatusLabel1, "toolStripStatusLabel1" );
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             // 
             // pbCheckUpd
             // 
-            resources.ApplyResources(this.pbCheckUpd, "pbCheckUpd");
+            resources.ApplyResources( this.pbCheckUpd, "pbCheckUpd" );
             this.pbCheckUpd.Name = "pbCheckUpd";
             // 
             // tbKeyword
             // 
-            resources.ApplyResources(this.tbKeyword, "tbKeyword");
+            resources.ApplyResources( this.tbKeyword, "tbKeyword" );
             this.tbKeyword.Name = "tbKeyword";
-            this.tbKeyword.TextChanged += new System.EventHandler(this.tbKeyword_TextChanged);
+            this.tbKeyword.TextChanged += new System.EventHandler( this.tbKeyword_TextChanged );
             // 
             // label2
             // 
-            resources.ApplyResources(this.label2, "label2");
+            resources.ApplyResources( this.label2, "label2" );
             this.label2.Name = "label2";
             // 
             // tmrUpdProgress
             // 
-            this.tmrUpdProgress.Tick += new System.EventHandler(this.tmrUpdProgress_Tick);
+            this.tmrUpdProgress.Tick += new System.EventHandler( this.tmrUpdProgress_Tick );
             // 
             // lblOnlyUnread
             // 
-            resources.ApplyResources(this.lblOnlyUnread, "lblOnlyUnread");
+            resources.ApplyResources( this.lblOnlyUnread, "lblOnlyUnread" );
             this.lblOnlyUnread.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblOnlyUnread.ForeColor = System.Drawing.Color.Blue;
             this.lblOnlyUnread.Name = "lblOnlyUnread";
-            this.lblOnlyUnread.Click += new System.EventHandler(this.lblOnlyUnread_Click);
+            this.lblOnlyUnread.Click += new System.EventHandler( this.lblOnlyUnread_Click );
             // 
             // FrmMain
             // 
-            resources.ApplyResources(this, "$this");
+            resources.ApplyResources( this, "$this" );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lblOnlyUnread);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbKeyword);
-            this.Controls.Add(this.ssStatus);
-            this.Controls.Add(this.lvThreads);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.msMenu);
+            this.Controls.Add( this.lblOnlyUnread );
+            this.Controls.Add( this.label2 );
+            this.Controls.Add( this.tbKeyword );
+            this.Controls.Add( this.ssStatus );
+            this.Controls.Add( this.lvThreads );
+            this.Controls.Add( this.label1 );
+            this.Controls.Add( this.msMenu );
             this.MainMenuStrip = this.msMenu;
             this.Name = "FrmMain";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Resize += new System.EventHandler(this.frmMain_Resize);
-            this.cmsThreadsMenu.ResumeLayout(false);
-            this.msMenu.ResumeLayout(false);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler( this.frmMain_FormClosing );
+            this.Load += new System.EventHandler( this.frmMain_Load );
+            this.Resize += new System.EventHandler( this.frmMain_Resize );
+            this.cmsThreadsMenu.ResumeLayout( false );
+            this.msMenu.ResumeLayout( false );
             this.msMenu.PerformLayout();
-            this.cmsTray.ResumeLayout(false);
-            this.ssStatus.ResumeLayout(false);
+            this.cmsTray.ResumeLayout( false );
+            this.ssStatus.ResumeLayout( false );
             this.ssStatus.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout( false );
             this.PerformLayout();
 
         }
@@ -449,6 +470,9 @@
         private System.Windows.Forms.Label lblOnlyUnread;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenAllUnread;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenAllUnreadTray;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
     }
 }
 
