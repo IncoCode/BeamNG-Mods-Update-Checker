@@ -58,13 +58,13 @@
             // 
             // btnOk
             // 
-            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // frmEnterPassword
+            // FrmEnterPassword
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -74,9 +74,11 @@
             this.Controls.Add(this.tbLogin);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmEnterPassword";
+            this.Name = "FrmEnterPassword";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmEnterPassword_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

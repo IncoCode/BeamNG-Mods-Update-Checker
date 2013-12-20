@@ -129,6 +129,9 @@
   <data name="error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="incorrectFilledFields" xml:space="preserve">
+    <value>Некорректно заполнены поля!</value>
+  </data>
   <data name="incorrectLoginPassword" xml:space="preserve">
     <value>Некорректные логин и/или пароль!</value>
   </data>

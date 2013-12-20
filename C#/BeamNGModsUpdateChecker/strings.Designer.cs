@@ -97,6 +97,15 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректно заполнены поля!.
+        /// </summary>
+        internal static string incorrectFilledFields {
+            get {
+                return ResourceManager.GetString("incorrectFilledFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Некорректные логин и/или пароль!.
         /// </summary>
         internal static string incorrectLoginPassword {

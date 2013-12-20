@@ -11,7 +11,7 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class FrmEnterPassword : Form
     {
-        private FrmMain _mainForm;
+        private readonly FrmMain _mainForm;
 
         public FrmEnterPassword( FrmMain mainForm )
         {
@@ -23,9 +23,23 @@ namespace BeamNGModsUpdateChecker
 
         private void btnOk_Click( object sender, EventArgs e )
         {
+            if ( string.IsNullOrEmpty( tbLogin.Text ) || string.IsNullOrEmpty( tbPassword.Text ) )
+            {
+                MessageBox.Show( strings.incorrectFilledFields, strings.error, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error );
+                return;
+            }
             this._mainForm.SetLoginPassword( tbLogin.Text, tbPassword.Text );
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void FrmEnterPassword_KeyDown( object sender, KeyEventArgs e )
+        {
+            if ( e.KeyData == Keys.Enter )
+            {
+                btnOk.PerformClick();
+            }
         }
     }
 }
