@@ -234,7 +234,8 @@ namespace BeamNGModsUpdateChecker
                 bool isAuth = this._upd.Auth();
                 while ( !isAuth )
                 {
-                    MessageBox.Show( strings.incorrectLoginPassword, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    MessageBox.Show( strings.incorrectLoginPassword, strings.error, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error );
                     frm = new FrmEnterPassword( this );
                     DialogResult dr = frm.ShowDialog();
                     if ( dr == DialogResult.Cancel )
@@ -523,7 +524,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiOpenAllUnreadTray_Click( object sender, EventArgs e )
         {
-            tsmiOpenAllUnread.PerformClick();
+            this.tsmiOpenAllUnread.PerformClick();
         }
     }
 

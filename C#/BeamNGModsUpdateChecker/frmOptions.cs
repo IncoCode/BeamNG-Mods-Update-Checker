@@ -15,7 +15,7 @@ namespace BeamNGModsUpdateChecker
         public FrmOptions( FrmMain mainForm )
         {
             this._mainForm = mainForm;
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void AddRemoveStartup( bool add )
@@ -67,17 +67,17 @@ namespace BeamNGModsUpdateChecker
 
         private void btnOk_Click( object sender, EventArgs e )
         {
-            this._mainForm.MinimizeWhenStart = cbMinimizeToTray.Checked;
-            this._mainForm.UpdInterval = (int)nudUpdInterval.Value;
-            this.AddRemoveStartup( cbAutorun.Checked );
+            this._mainForm.MinimizeWhenStart = this.cbMinimizeToTray.Checked;
+            this._mainForm.UpdInterval = (int)this.nudUpdInterval.Value;
+            this.AddRemoveStartup( this.cbAutorun.Checked );
             this.Close();
         }
 
         private void frmOptions_Load( object sender, EventArgs e )
         {
-            cbAutorun.Checked = this.IsStartupItem();
-            cbMinimizeToTray.Checked = this._mainForm.MinimizeWhenStart;
-            nudUpdInterval.Value = this._mainForm.UpdInterval;
+            this.cbAutorun.Checked = this.IsStartupItem();
+            this.cbMinimizeToTray.Checked = this._mainForm.MinimizeWhenStart;
+            this.nudUpdInterval.Value = this._mainForm.UpdInterval;
         }
     }
 }
