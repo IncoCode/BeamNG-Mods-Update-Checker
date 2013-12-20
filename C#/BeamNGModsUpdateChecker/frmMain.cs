@@ -216,7 +216,7 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_Load( object sender, EventArgs e )
         {
-            FrmEnterPassword frm = null;
+            FrmEnterPassword frm;
             if ( string.IsNullOrEmpty( this._login ) || string.IsNullOrEmpty( this._password ) )
             {
                 frm = new FrmEnterPassword( this );
@@ -234,6 +234,7 @@ namespace BeamNGModsUpdateChecker
                 bool isAuth = this._upd.Auth();
                 while ( !isAuth )
                 {
+                    MessageBox.Show( strings.incorrectLoginPassword, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
                     frm = new FrmEnterPassword( this );
                     DialogResult dr = frm.ShowDialog();
                     if ( dr == DialogResult.Cancel )
@@ -249,8 +250,9 @@ namespace BeamNGModsUpdateChecker
             {
                 MessageBox.Show( strings.unableSendRequest, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
                 Environment.Exit( 0 );
+                return;
             }
-            this._upd.UpdEvent += new EventHandler<UpdEventArgs>( this.UpdProgress );
+            this._upd.UpdEvent += this.UpdProgress;
             try
             {
                 this._upd.LoadThreads();

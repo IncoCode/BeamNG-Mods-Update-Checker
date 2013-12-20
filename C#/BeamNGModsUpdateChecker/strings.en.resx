@@ -129,6 +129,9 @@
   <data name="error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="incorrectLoginPassword" xml:space="preserve">
+    <value>Incorrect username and/or password!</value>
+  </data>
   <data name="loadThreadsError" xml:space="preserve">
     <value>Unable to load the threads list!</value>
   </data>

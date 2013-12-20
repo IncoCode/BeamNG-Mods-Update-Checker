@@ -97,6 +97,15 @@ namespace BeamNGModsUpdateChecker {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректные логин и/или пароль!.
+        /// </summary>
+        internal static string incorrectLoginPassword {
+            get {
+                return ResourceManager.GetString("incorrectLoginPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Невозможно загрузить список тем!.
         /// </summary>
         internal static string loadThreadsError {

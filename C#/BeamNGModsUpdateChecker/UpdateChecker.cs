@@ -164,7 +164,7 @@ namespace BeamNGModsUpdateChecker
                 request.AddParameter( "cookieuser", "1" );
                 IRestResponse response = client.Execute( request );
                 string content = response.Content;
-                if ( content.IndexOf( "Thank you for logging in" ) >= 0 )
+                if ( content.IndexOf( "id=\"redirect_button\"" ) >= 0 )
                 {
                     return true;
                 }
