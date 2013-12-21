@@ -55,7 +55,6 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.русскийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOfficialThread = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRepository = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -250,18 +249,11 @@
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiOfficialThread,
             this.tsmiRepository,
             this.toolStripMenuItem5,
             this.tsmiAbout});
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
             resources.ApplyResources(this.помощьToolStripMenuItem, "помощьToolStripMenuItem");
-            // 
-            // tsmiOfficialThread
-            // 
-            this.tsmiOfficialThread.Name = "tsmiOfficialThread";
-            resources.ApplyResources(this.tsmiOfficialThread, "tsmiOfficialThread");
-            this.tsmiOfficialThread.Click += new System.EventHandler(this.tsmiOfficialThread_Click);
             // 
             // tsmiRepository
             // 
@@ -457,7 +449,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem добавитьТемыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOfficialThread;
         private System.Windows.Forms.ToolStripMenuItem tsmiRepository;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;

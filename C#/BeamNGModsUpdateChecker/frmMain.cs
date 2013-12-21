@@ -36,7 +36,7 @@ namespace BeamNGModsUpdateChecker
             this.Size = this._mainFormSize;
         }
 
-        public void ChangeLanguage( string lang )
+        private void ChangeLanguage( string lang )
         {
             this.Lang = lang;
             this.SaveSettings();
@@ -377,10 +377,9 @@ namespace BeamNGModsUpdateChecker
                 for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
                     string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    this.lvThreads.SelectedItems[ i ].BackColor = Color.White;
-                    this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.White;
                     this._upd.ChangeReadStatus( link, true );
                 }
+                this.PrintAllThreads();
                 this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
                 this.SaveThreads();
             }
@@ -413,13 +412,12 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            for ( int i = 0; i < this._upd.Threads.Count; i++ )
+            foreach ( Topic t in this._upd.Threads )
             {
-                string link = this._upd.Threads[ i ].Link;
-                this.lvThreads.Items[ i ].BackColor = Color.White;
-                this.lvThreads.Items[ i ].SubItems[ 1 ].BackColor = Color.White;
+                string link = t.Link;
                 this._upd.ChangeReadStatus( link, true );
             }
+            this.PrintAllThreads();
             this.SaveThreads();
             this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
         }

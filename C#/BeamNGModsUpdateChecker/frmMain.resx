@@ -294,23 +294,17 @@
   <data name="языкLanguageToolStripMenuItem.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
-  <data name="tsmiOfficialThread.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="tsmiOfficialThread.Text" xml:space="preserve">
-    <value>Официальная тема</value>
-  </data>
   <data name="tsmiRepository.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsmiRepository.Text" xml:space="preserve">
     <value>Репозиторий</value>
   </data>
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsmiAbout.Text" xml:space="preserve">
     <value>О программе</value>
@@ -397,7 +391,7 @@
     <value>Выход</value>
   </data>
   <data name="cmsTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 160</value>
+    <value>306, 138</value>
   </data>
   <data name="&gt;&gt;cmsTray.Name" xml:space="preserve">
     <value>cmsTray</value>
@@ -4319,12 +4313,6 @@
     <value>помощьToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;помощьToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiOfficialThread.Name" xml:space="preserve">
-    <value>tsmiOfficialThread</value>
-  </data>
-  <data name="&gt;&gt;tsmiOfficialThread.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmiRepository.Name" xml:space="preserve">
