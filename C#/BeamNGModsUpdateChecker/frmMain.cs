@@ -464,11 +464,6 @@ namespace BeamNGModsUpdateChecker
             this.PrintAllThreads();
         }
 
-        private void tsmiOfficialThread_Click( object sender, EventArgs e )
-        {
-            Process.Start( "http://www.beamng.com/threads/4920-Mods-Update-Checker?p=54900#post54900" );
-        }
-
         private void tsmiAbout_Click( object sender, EventArgs e )
         {
             MessageBox.Show( strings.copyright.FixNewLines(), strings.aboutProg, MessageBoxButtons.OK,

@@ -17,20 +17,20 @@ namespace BeamNGModsUpdateChecker
         public FrmAddLinks( UpdateChecker upd, FrmMain mainForm )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
-            InitializeComponent();
+            this.InitializeComponent();
             this.upd = upd;
         }
 
         private void AddLinks()
         {
-            string[] links = tbLinks.Lines;
-            pb1.Maximum = links.Length;
+            string[] links = this.tbLinks.Lines;
+            this.pb1.Maximum = links.Length;
             for ( int i = 0; i < links.Length; i++ )
             {
                 string link = links[ i ];
                 this.upd.AddThread( link );
                 Thread.Sleep( 50 );
-                pb1.PerformStep();
+                this.pb1.PerformStep();
             }
             this._addingLinks = false;
             this.Close();
@@ -39,10 +39,10 @@ namespace BeamNGModsUpdateChecker
         private void btnAdd_Click( object sender, EventArgs e )
         {
             this._addingLinks = true;
-            pb1.Value = 0;
-            tbLinks.Enabled = false;
-            btnAdd.Enabled = false;
-            lblStatus.Show();
+            this.pb1.Value = 0;
+            this.tbLinks.Enabled = false;
+            this.btnAdd.Enabled = false;
+            this.lblStatus.Show();
             var thr = new Thread( this.AddLinks );
             thr.Start();
         }

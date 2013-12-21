@@ -16,20 +16,20 @@ namespace BeamNGModsUpdateChecker
         public FrmEnterPassword( FrmMain mainForm )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
-            InitializeComponent();
+            this.InitializeComponent();
             this._mainForm = mainForm;
             this.DialogResult = DialogResult.Cancel;
         }
 
         private void btnOk_Click( object sender, EventArgs e )
         {
-            if ( string.IsNullOrEmpty( tbLogin.Text ) || string.IsNullOrEmpty( tbPassword.Text ) )
+            if ( string.IsNullOrEmpty( this.tbLogin.Text ) || string.IsNullOrEmpty( this.tbPassword.Text ) )
             {
                 MessageBox.Show( strings.incorrectFilledFields, strings.error, MessageBoxButtons.OK,
                     MessageBoxIcon.Error );
                 return;
             }
-            this._mainForm.SetLoginPassword( tbLogin.Text, tbPassword.Text );
+            this._mainForm.SetLoginPassword( this.tbLogin.Text, this.tbPassword.Text );
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -38,7 +38,7 @@ namespace BeamNGModsUpdateChecker
         {
             if ( e.KeyData == Keys.Enter )
             {
-                btnOk.PerformClick();
+                this.btnOk.PerformClick();
             }
         }
     }
