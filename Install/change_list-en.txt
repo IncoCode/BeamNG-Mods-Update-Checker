@@ -1,4 +1,2 @@
-v1.0.2 Stable:
--Check for updates optimization;
--Added feature to display only unread topics;
--Added feature to open all unread threads in browser.
+v1.0.3 Stable:
+-Fixed: problem with displaying the new threads, when filter was activated.

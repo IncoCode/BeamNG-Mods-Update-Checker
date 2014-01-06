@@ -19,11 +19,6 @@ namespace BeamNGModsUpdateChecker
 
     #region Add. class
 
-    public class UpdEventArgs : EventArgs
-    {
-        public Topic Thread { get; set; }
-    }
-
     public class ThreadFilter
     {
         public bool ShowOnlyUnread = false;
@@ -34,7 +29,6 @@ namespace BeamNGModsUpdateChecker
 
     public class UpdateChecker
     {
-        public event EventHandler<UpdEventArgs> UpdEvent = delegate { };
         public readonly ThreadFilter ThreadFilter;
 
         private List<Topic> _threads;
@@ -210,7 +204,6 @@ namespace BeamNGModsUpdateChecker
         /// <returns>Returns the number of updates</returns>
         public int CheckUpdates()
         {
-            var args = new UpdEventArgs();
             this._updMaxProgress = this._threads.Count;
             this._updProgress = 0;
             if ( this.IsNeedAuth() )
@@ -224,11 +217,9 @@ namespace BeamNGModsUpdateChecker
                     string content = SendGet( thread.Link, this._cookieJar );
                     bool titleChanged = thread.UpdTitle( content );
                     bool attachmentsChanged = thread.UpdAttachments( content );
-                    args.Thread = thread;
                     if ( titleChanged || attachmentsChanged )
                     {
                         thread.Read = false;
-                        this.UpdEvent( this, args );
                     }
                 }
                 catch

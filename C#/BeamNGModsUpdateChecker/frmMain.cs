@@ -32,7 +32,7 @@ namespace BeamNGModsUpdateChecker
             this.LoadSettings();
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
             this.InitializeComponent();
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false;
             this.Size = this._mainFormSize;
         }
 
@@ -96,8 +96,7 @@ namespace BeamNGModsUpdateChecker
                 }
             }
             catch
-            {
-            }
+            { }
         }
 
         private void LoadSettings()
@@ -119,9 +118,7 @@ namespace BeamNGModsUpdateChecker
                 this._mainFormSize = mainFormSize;
             }
             catch
-            {
-                return;
-            }
+            { }
         }
 
         private void SaveThreads()
@@ -133,17 +130,6 @@ namespace BeamNGModsUpdateChecker
             catch
             {
                 MessageBox.Show( strings.saveThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
-            }
-        }
-
-        private void UpdProgress( object sender, UpdEventArgs e )
-        {
-            ListViewItem lvi = this.lvThreads.FindItemWithText( e.Thread.Link );
-            if ( lvi != null )
-            {
-                lvi.Text = e.Thread.Title;
-                lvi.BackColor = Color.GreenYellow;
-                lvi.SubItems[ 1 ].BackColor = Color.GreenYellow;
             }
         }
 
@@ -181,6 +167,7 @@ namespace BeamNGModsUpdateChecker
                     {
                         this.pbCheckUpd.Visible = false;
                         this.tmrUpdProgress.Stop();
+                        this.PrintAllThreads();
                     } ) );
                 }
                 catch
@@ -253,7 +240,6 @@ namespace BeamNGModsUpdateChecker
                 Environment.Exit( 0 );
                 return;
             }
-            this._upd.UpdEvent += this.UpdProgress;
             try
             {
                 this._upd.LoadThreads();
