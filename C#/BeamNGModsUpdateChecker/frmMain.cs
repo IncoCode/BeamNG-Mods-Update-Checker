@@ -17,15 +17,16 @@ namespace BeamNGModsUpdateChecker
     {
         public string Lang = "en-GB";
         public int UpdInterval = 30;
-        public bool MinimizeWhenStart = false;
+        public bool MinimizeWhenStart;
 
         private UpdateChecker _upd;
         private string _login = "";
         private string _password = "";
         private readonly double[] _lvColProp = { 0.6, 0.4 };
-        private bool _isUpdating = false;
+        private bool _isUpdating;
         private Size _mainFormSize = new Size( 748, 456 );
-        private Thread _updThread = null;
+        private Thread _updThread;
+        private bool _showOnlyUnread;
 
         public FrmMain()
         {
@@ -89,6 +90,7 @@ namespace BeamNGModsUpdateChecker
                 ini.Write( "Lang", this.Lang, "Options" );
                 ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
                 ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
+                ini.Write( "ShowOnlyUnread", this._upd.ThreadFilter.ShowOnlyUnread.ToString(), "Options" );
                 if ( this.WindowState != FormWindowState.Minimized )
                 {
                     ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
@@ -116,6 +118,7 @@ namespace BeamNGModsUpdateChecker
                     int.Parse( ini.Read( "MainFormHeight", "Options", this._mainFormSize.Height.ToString() ) );
                 var mainFormSize = new Size( mainFormWidth, mainFormHeight );
                 this._mainFormSize = mainFormSize;
+                this._showOnlyUnread = bool.Parse( ini.Read( "ShowOnlyUnread", "Options", "False" ) );
             }
             catch
             { }
@@ -247,6 +250,10 @@ namespace BeamNGModsUpdateChecker
             catch
             {
                 MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+            if ( this._showOnlyUnread )
+            {
+                lblOnlyUnread_Click( lblOnlyUnread, EventArgs.Empty );
             }
             this.PrintAllThreads();
             this.tmrUpd.Start();
