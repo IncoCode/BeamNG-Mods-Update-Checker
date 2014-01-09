@@ -217,6 +217,10 @@ namespace BeamNGModsUpdateChecker
                     string content = SendGet( thread.Link, this._cookieJar );
                     bool titleChanged = thread.UpdTitle( content );
                     bool attachmentsChanged = thread.UpdAttachments( content );
+                    if ( !attachmentsChanged )
+                    {
+                        attachmentsChanged = thread.UpdAttachmentsNew( content );
+                    }
                     if ( titleChanged || attachmentsChanged )
                     {
                         thread.Read = false;

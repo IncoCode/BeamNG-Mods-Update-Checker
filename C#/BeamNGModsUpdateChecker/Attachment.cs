@@ -26,19 +26,25 @@ namespace BeamNGModsUpdateChecker
 
         #endregion
 
+        #region Members
+
         public bool Equals( Attachment obj )
         {
+            if ( obj == null )
+            {
+                return false;
+            }
             return this.Name.Equals( obj.Name ) && this.Size.Equals( obj.Size );
         }
 
         public bool Equals( Attachment x, Attachment y )
         {
-            if ( Object.ReferenceEquals( x, y ) )
+            if ( ReferenceEquals( x, y ) )
             {
                 return true;
             }
 
-            if ( Object.ReferenceEquals( x, null ) || Object.ReferenceEquals( y, null ) )
+            if ( ReferenceEquals( x, null ) || ReferenceEquals( y, null ) )
             {
                 return false;
             }
@@ -46,18 +52,39 @@ namespace BeamNGModsUpdateChecker
             return x.Name == y.Name && x.Size == y.Size;
         }
 
-        public int GetHashCode( Attachment product )
+        public override bool Equals( object obj )
         {
-            if ( Object.ReferenceEquals( product, null ) )
+            if ( obj == null )
+            {
+                return false;
+            }
+            Attachment attachment = obj as Attachment;
+            if ( attachment == null )
+            {
+                return false;
+            }
+            return this.Equals( attachment );
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode() ^ this.Size.GetHashCode();
+        }
+
+        public int GetHashCode( Attachment attachment )
+        {
+            if ( ReferenceEquals( attachment, null ) )
             {
                 return 0;
             }
 
-            int hashName = product.Name == null ? 0 : product.Name.GetHashCode();
+            int hashName = attachment.Name == null ? 0 : attachment.Name.GetHashCode();
 
-            int hashSize = product.Size.GetHashCode();
+            int hashSize = attachment.Size.GetHashCode();
 
             return hashName ^ hashSize;
         }
+
+        #endregion
     }
 }

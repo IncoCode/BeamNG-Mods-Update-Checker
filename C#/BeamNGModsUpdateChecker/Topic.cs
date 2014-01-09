@@ -35,8 +35,10 @@ namespace BeamNGModsUpdateChecker
             client.CookieContainer = cookieJar;
             var request = new RestRequest( Method.GET );
             IRestResponse response = client.Execute( request );
-            this.UpdTitle( response.Content );
-            this.UpdAttachments( response.Content );
+            string content = response.Content;
+            this.UpdTitle( content );
+            this.UpdAttachments( content );
+            this.UpdAttachmentsNew( content );
         }
 
         #endregion
@@ -95,6 +97,35 @@ namespace BeamNGModsUpdateChecker
                 }
             }
             return WebUtility.HtmlDecode( result );
+        }
+
+        /// <summary>
+        /// Updates first post attachments (which looks like a links with random text)
+        /// </summary>
+        /// <param name="content">HTML</param>
+        /// <returns></returns>
+        public bool UpdAttachmentsNew( string content )
+        {
+            var attReg =
+                new Regex(
+                    "<a\\shref=\"http://www\\.beamng\\.com/attachment\\.php\\?attachmentid=[^\"]*\"\\s+title=\"Name:\\s+(.*)\\s+Views:\\s[0-9]+\\s+Size:\\s+([^\"]*)\">([^<>]*)</a>" );
+            MatchCollection attRegCollection = attReg.Matches( content );
+            if ( attRegCollection.Count == 0 )
+            {
+                return false;
+            }
+            var attachmentsList = ( from Match attMatch in attRegCollection
+                                    select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList();
+            if ( this.Attachments == null )
+            {
+                this.Attachments = new List<Attachment>();
+            }
+            if ( attachmentsList.SequenceEqual( this.Attachments, new Attachment() ) )
+            {
+                return false;
+            }
+            this.Attachments.AddRange( attachmentsList );
+            return true;
         }
 
         /// <summary>
