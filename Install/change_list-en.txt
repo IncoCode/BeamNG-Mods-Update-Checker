@@ -1,2 +1,3 @@
 v1.0.3 Stable:
--Fixed: problem with displaying the new threads, when filter was activated.
+-Fixed: problem with displaying the new threads, when filter was activated;
+-Improved definition of attachments.
