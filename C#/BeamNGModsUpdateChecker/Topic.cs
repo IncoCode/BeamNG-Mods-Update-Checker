@@ -35,8 +35,9 @@ namespace BeamNGModsUpdateChecker
             client.CookieContainer = cookieJar;
             var request = new RestRequest( Method.GET );
             IRestResponse response = client.Execute( request );
-            this.UpdTitle( response.Content );
-            this.UpdAttachments( response.Content );
+            string content = response.Content;
+            this.UpdTitle( content );
+            this.UpdAttachments( content );
         }
 
         #endregion
