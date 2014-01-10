@@ -127,11 +127,11 @@ namespace BeamNGModsUpdateChecker
             }
             if ( l != null )
             {
-                for ( int i = 0; i < l.Count; i++ )
+                foreach ( HtmlNode node in l )
                 {
-                    if ( l[ i ].InnerHtml.IndexOf( "Attached Files" ) >= 0 )
+                    if ( node.InnerHtml.IndexOf( "Attached Files" ) >= 0 )
                     {
-                        attachments = l[ i ];
+                        attachments = node;
                         break;
                     }
                 }
@@ -143,15 +143,15 @@ namespace BeamNGModsUpdateChecker
                     if ( match.Count > 1 )
                     {
                         int count = 0;
-                        for ( int i = 0; i < attachments.ChildNodes.Count; i++ )
+                        foreach ( HtmlNode node in attachments.ChildNodes )
                         {
-                            if ( attachments.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postcontent" )
+                            if ( node.GetAttributeValue( "class", "" ) == "postcontent" )
                             {
                                 count++;
                             }
                             if ( count > 1 )
                             {
-                                attachment = attachments.ChildNodes[ i ];
+                                attachment = node;
                                 break;
                             }
                         }
@@ -163,32 +163,31 @@ namespace BeamNGModsUpdateChecker
                     HtmlNode files = null;
                     if ( attachment != null )
                     {
-                        for ( int i = 0; i < attachment.ChildNodes.Count; i++ )
+                        foreach ( HtmlNode t in attachment.ChildNodes )
                         {
-                            if ( attachment.ChildNodes[ i ].Name == "ul" )
+                            if ( t.Name == "ul" )
                             {
-                                files = attachment.ChildNodes[ i ];
+                                files = t;
                                 break;
                             }
                         }
                         if ( files != null )
                         {
-                            for ( int i = 0; i < files.ChildNodes.Count; i++ )
+                            foreach ( HtmlNode file in files.ChildNodes )
                             {
-                                HtmlNode file = files.ChildNodes[ i ];
                                 for ( int j = 0; j < file.ChildNodes.Count; j++ )
                                 {
                                     if ( file.ChildNodes[ j ].Name == "a" )
                                     {
                                         string name = file.ChildNodes[ j ].InnerText;
                                         string s = file.InnerText;
-                                        string size = s.Substring( s.IndexOf( "(" ) + 1, s.IndexOf( "," ) - 1 - s.IndexOf( "(" ) );
+                                        string size = s.Substring( s.IndexOf( "(" ) + 1,
+                                            s.IndexOf( "," ) - 1 - s.IndexOf( "(" ) );
                                         attachmentsList.Add( new Attachment( name, size ) );
                                     }
                                 }
                             }
                         }
-
                     }
                 }
             }
@@ -203,7 +202,7 @@ namespace BeamNGModsUpdateChecker
             if ( attRegCollection.Count != 0 )
             {
                 attachmentsList.AddRange( ( from Match attMatch in attRegCollection
-                    select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList() );
+                                            select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList() );
             }
 
             #endregion
