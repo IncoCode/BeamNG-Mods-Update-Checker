@@ -38,7 +38,6 @@ namespace BeamNGModsUpdateChecker
             string content = response.Content;
             this.UpdTitle( content );
             this.UpdAttachments( content );
-            this.UpdAttachmentsNew( content );
         }
 
         #endregion
@@ -100,35 +99,6 @@ namespace BeamNGModsUpdateChecker
         }
 
         /// <summary>
-        /// Updates first post attachments (which looks like a links with random text)
-        /// </summary>
-        /// <param name="content">HTML</param>
-        /// <returns></returns>
-        public bool UpdAttachmentsNew( string content )
-        {
-            var attReg =
-                new Regex(
-                    "<a\\shref=\"http://www\\.beamng\\.com/attachment\\.php\\?attachmentid=[^\"]*\"\\s+title=\"Name:\\s+(.*)\\s+Views:\\s[0-9]+\\s+Size:\\s+([^\"]*)\">([^<>]*)</a>" );
-            MatchCollection attRegCollection = attReg.Matches( content );
-            if ( attRegCollection.Count == 0 )
-            {
-                return false;
-            }
-            var attachmentsList = ( from Match attMatch in attRegCollection
-                                    select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList();
-            if ( this.Attachments == null )
-            {
-                this.Attachments = new List<Attachment>();
-            }
-            if ( attachmentsList.SequenceEqual( this.Attachments, new Attachment() ) )
-            {
-                return false;
-            }
-            this.Attachments.AddRange( attachmentsList );
-            return true;
-        }
-
-        /// <summary>
         /// Updates first post attachments
         /// </summary>
         /// <param name="content">HTML</param>
@@ -144,6 +114,7 @@ namespace BeamNGModsUpdateChecker
                 return false;
             }
 
+            var attachmentsList = new List<Attachment>();
             HtmlNodeCollection l =
                 posts.SelectNodes(
                     "//div[@class][1]//div[@class][2]//div[@id][5]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
@@ -154,83 +125,98 @@ namespace BeamNGModsUpdateChecker
                     posts.SelectNodes(
                         "//div[@class][1]//div[@class][2]//div[@id][6]//ol[@id][1]//li[@id][1]//div[@class][2]//div[@class][1]//div[@class][1]//div[@class][1]" );
             }
-            if ( l == null )
+            if ( l != null )
             {
-                return false;
-            }
-            for ( int i = 0; i < l.Count; i++ )
-            {
-                if ( l[ i ].InnerHtml.IndexOf( "Attached Files" ) >= 0 )
+                for ( int i = 0; i < l.Count; i++ )
                 {
-                    attachments = l[ i ];
-                    break;
-                }
-            }
-            HtmlNode attachment = null;
-            if ( attachments != null )
-            {
-                var regex = new Regex( "\"postcontent\"" );
-                MatchCollection match = regex.Matches( attachments.InnerHtml );
-                if ( match.Count > 1 )
-                {
-                    int count = 0;
-                    for ( int i = 0; i < attachments.ChildNodes.Count; i++ )
+                    if ( l[ i ].InnerHtml.IndexOf( "Attached Files" ) >= 0 )
                     {
-                        if ( attachments.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postcontent" )
-                        {
-                            count++;
-                        }
-                        if ( count > 1 )
-                        {
-                            attachment = attachments.ChildNodes[ i ];
-                            break;
-                        }
+                        attachments = l[ i ];
+                        break;
                     }
                 }
-                else
+                HtmlNode attachment = null;
+                if ( attachments != null )
                 {
-                    attachment = attachments.ChildNodes[ 1 ];
-                }
-                HtmlNode files = null;
-                if ( attachment != null )
-                {
-                    for ( int i = 0; i < attachment.ChildNodes.Count; i++ )
+                    var regex = new Regex( "\"postcontent\"" );
+                    MatchCollection match = regex.Matches( attachments.InnerHtml );
+                    if ( match.Count > 1 )
                     {
-                        if ( attachment.ChildNodes[ i ].Name == "ul" )
+                        int count = 0;
+                        for ( int i = 0; i < attachments.ChildNodes.Count; i++ )
                         {
-                            files = attachment.ChildNodes[ i ];
-                            break;
-                        }
-                    }
-                    if ( files == null )
-                    {
-                        return false;
-                    }
-                    var attachmentsList = new List<Attachment>();
-                    for ( int i = 0; i < files.ChildNodes.Count; i++ )
-                    {
-                        HtmlNode file = files.ChildNodes[ i ];
-                        for ( int j = 0; j < file.ChildNodes.Count; j++ )
-                        {
-                            if ( file.ChildNodes[ j ].Name == "a" )
+                            if ( attachments.ChildNodes[ i ].GetAttributeValue( "class", "" ) == "postcontent" )
                             {
-                                string name = file.ChildNodes[ j ].InnerText;
-                                string s = file.InnerText;
-                                string size = s.Substring( s.IndexOf( "(" ) + 1, s.IndexOf( "," ) - 1 - s.IndexOf( "(" ) );
-                                attachmentsList.Add( new Attachment( name, size ) );
+                                count++;
+                            }
+                            if ( count > 1 )
+                            {
+                                attachment = attachments.ChildNodes[ i ];
+                                break;
                             }
                         }
                     }
-                    if ( this.Attachments == null )
+                    else
                     {
-                        this.Attachments = new List<Attachment>();
+                        attachment = attachments.ChildNodes[ 1 ];
                     }
-                    if ( !attachmentsList.SequenceEqual( this.Attachments, new Attachment() ) )
+                    HtmlNode files = null;
+                    if ( attachment != null )
                     {
-                        result = true;
-                        this.Attachments = attachmentsList;
+                        for ( int i = 0; i < attachment.ChildNodes.Count; i++ )
+                        {
+                            if ( attachment.ChildNodes[ i ].Name == "ul" )
+                            {
+                                files = attachment.ChildNodes[ i ];
+                                break;
+                            }
+                        }
+                        if ( files != null )
+                        {
+                            for ( int i = 0; i < files.ChildNodes.Count; i++ )
+                            {
+                                HtmlNode file = files.ChildNodes[ i ];
+                                for ( int j = 0; j < file.ChildNodes.Count; j++ )
+                                {
+                                    if ( file.ChildNodes[ j ].Name == "a" )
+                                    {
+                                        string name = file.ChildNodes[ j ].InnerText;
+                                        string s = file.InnerText;
+                                        string size = s.Substring( s.IndexOf( "(" ) + 1, s.IndexOf( "," ) - 1 - s.IndexOf( "(" ) );
+                                        attachmentsList.Add( new Attachment( name, size ) );
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
+            }
+
+            #region Getting attachments with random link name
+
+            string firstPostHTML = posts.ChildNodes[ 1 ].InnerHtml; // getting first post html
+            var attReg =
+                new Regex(
+                    "<a\\shref=\"http://www\\.beamng\\.com/attachment\\.php\\?attachmentid=[^\"]*\"\\s+title=\"Name:\\s+(.*)\\s+Views:\\s[0-9]+\\s+Size:\\s+([^\"]*)\">([^<>]*)</a>" );
+            MatchCollection attRegCollection = attReg.Matches( firstPostHTML );
+            if ( attRegCollection.Count != 0 )
+            {
+                attachmentsList.AddRange( ( from Match attMatch in attRegCollection
+                    select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList() );
+            }
+
+            #endregion
+
+            attachmentsList = attachmentsList.Distinct().ToList();
+            if ( this.Attachments == null )
+            {
+                this.Attachments = new List<Attachment>();
+            }
+            if ( !attachmentsList.SequenceEqual( this.Attachments, new Attachment() ) )
+            {
+                result = true;
+                this.Attachments = attachmentsList;
             }
             return result;
         }
