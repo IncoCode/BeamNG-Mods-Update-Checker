@@ -98,7 +98,8 @@ namespace BeamNGModsUpdateChecker
                 }
             }
             catch
-            { }
+            {
+            }
         }
 
         private void LoadSettings()
@@ -121,7 +122,8 @@ namespace BeamNGModsUpdateChecker
                 this._showOnlyUnread = bool.Parse( ini.Read( "ShowOnlyUnread", "Options", "False" ) );
             }
             catch
-            { }
+            {
+            }
         }
 
         private void SaveThreads()
@@ -253,7 +255,7 @@ namespace BeamNGModsUpdateChecker
             }
             if ( this._showOnlyUnread )
             {
-                lblOnlyUnread_Click( lblOnlyUnread, EventArgs.Empty );
+                this.lblOnlyUnread_Click( this.lblOnlyUnread, EventArgs.Empty );
             }
             this.PrintAllThreads();
             this.tmrUpd.Start();
