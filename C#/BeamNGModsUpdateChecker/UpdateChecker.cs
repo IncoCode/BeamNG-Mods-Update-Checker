@@ -121,6 +121,18 @@ namespace BeamNGModsUpdateChecker
             get { return this._updMaxProgress; }
         }
 
+        public Topic this[ int index ]
+        {
+            get
+            {
+                if ( index > this._threads.Count - 1 )
+                {
+                    return null;
+                }
+                return this._threads[ index ];
+            }
+        }
+
         #endregion Fields
 
         public UpdateChecker( string login, string password, string progPath )
@@ -227,6 +239,10 @@ namespace BeamNGModsUpdateChecker
         {
             await TaskEx.Run( () =>
             {
+                if ( thread == null )
+                {
+                    return;
+                }
                 try
                 {
                     string content = SendGet( thread.Link, this._cookieJar );
@@ -263,7 +279,7 @@ namespace BeamNGModsUpdateChecker
                 Task[] tasks = new Task[ taskArrSize ];
                 for ( int j = 0; j < taskArrSize; j++ )
                 {
-                    tasks[ j ] = this.CheckTopicUpdate( this.Threads[ j + i ] );
+                    tasks[ j ] = this.CheckTopicUpdate( this[ j + i ] );
                 }
                 Task.WaitAll( tasks );
                 i += taskArrSize;
