@@ -9,6 +9,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -30,6 +31,7 @@ namespace BeamNGModsUpdateChecker
     public class UpdateChecker
     {
         public readonly ThreadFilter ThreadFilter;
+        private const int MaxCheckUpdCount = 3;
 
         private List<Topic> _threads;
         private string _login;
@@ -198,19 +200,32 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        /// <summary>
-        /// Check for updates
-        /// </summary>
-        /// <returns>Returns the number of updates</returns>
-        public int CheckUpdates()
+        private int GetMaxCheckUpdCount( int index, int maxCheckUpdCount )
         {
-            this._updMaxProgress = this._threads.Count;
-            this._updProgress = 0;
-            if ( this.IsNeedAuth() )
+            int newMaxCheckUpdCount = maxCheckUpdCount;
+            if ( index > this._threads.Count - 1 )
             {
-                this.Auth();
+                return 0;
             }
-            foreach ( Topic thread in this._threads )
+            while ( index + newMaxCheckUpdCount > this._threads.Count - 1 )
+            {
+                newMaxCheckUpdCount--;
+            }
+            if ( newMaxCheckUpdCount == 0 )
+            {
+                return 1;
+            }
+            return newMaxCheckUpdCount;
+        }
+
+        /// <summary>
+        /// Check for updates (one thread)
+        /// </summary>
+        /// <param name="thread">Thread object</param>
+        /// <returns></returns>
+        private async Task CheckTopicUpdate( Topic thread )
+        {
+            await TaskEx.Run( () =>
             {
                 try
                 {
@@ -226,6 +241,32 @@ namespace BeamNGModsUpdateChecker
                 {
                 }
                 this._updProgress++;
+            } );
+        }
+
+        /// <summary>
+        /// Check for updates
+        /// </summary>
+        /// <returns>Returns the number of updates</returns>
+        public int CheckUpdates()
+        {
+            this._updMaxProgress = this._threads.Count;
+            this._updProgress = 0;
+            if ( this.IsNeedAuth() )
+            {
+                this.Auth();
+            }
+            int i = 0;
+            while ( i < this._threads.Count )
+            {
+                int taskArrSize = this.GetMaxCheckUpdCount( i, MaxCheckUpdCount );
+                Task[] tasks = new Task[ taskArrSize ];
+                for ( int j = 0; j < taskArrSize; j++ )
+                {
+                    tasks[ j ] = this.CheckTopicUpdate( this.Threads[ j + i ] );
+                }
+                Task.WaitAll( tasks );
+                i += taskArrSize;
                 Thread.Sleep( 30 );
             }
             return this.UnreadThreadsCount;
