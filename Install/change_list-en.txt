@@ -1,2 +1,2 @@
-v1.0.3 Stable:
--Fixed: problem with displaying the new threads, when filter was activated.
+v1.0.4 Stable:
+-Added: simultaneous update check several threads.
