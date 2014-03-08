@@ -28,6 +28,9 @@ namespace BeamNGModsUpdateChecker
         private Thread _updThread;
         private bool _showOnlyUnread;
 
+        [System.Runtime.InteropServices.DllImport( "user32.dll" )]
+        private static extern IntPtr SendMessage( IntPtr hWnd, int msg, IntPtr wp, IntPtr lp );
+
         public FrmMain()
         {
             this.LoadSettings();
@@ -263,6 +266,20 @@ namespace BeamNGModsUpdateChecker
             {
                 this.WindowState = FormWindowState.Minimized;
             }
+
+            var btn = new Button { Size = new Size( 25, this.tbKeyword.ClientSize.Height + 2 ) };
+            btn.Location = new Point( tbKeyword.ClientSize.Width - btn.Width, -1 );
+            btn.Cursor = Cursors.Hand;
+            btn.BackColor = this.BackColor;
+            btn.Text = "X";
+            btn.Click += btnClear_Click;
+            tbKeyword.Controls.Add( btn );
+            SendMessage( tbKeyword.Handle, 0xd3, (IntPtr)2, (IntPtr)( btn.Width << 16 ) );
+        }
+
+        private void btnClear_Click( object sender, EventArgs e )
+        {
+            tbKeyword.Text = "";
         }
 
         private void frmMain_FormClosing( object sender, FormClosingEventArgs e )

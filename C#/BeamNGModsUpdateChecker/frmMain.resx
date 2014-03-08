@@ -2271,7 +2271,7 @@
     <value>535, 24</value>
   </data>
   <data name="tbKeyword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 20</value>
+    <value>195, 20</value>
   </data>
   <data name="tbKeyword.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
