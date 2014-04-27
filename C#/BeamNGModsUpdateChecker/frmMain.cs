@@ -27,6 +27,7 @@ namespace BeamNGModsUpdateChecker
         private Size _mainFormSize = new Size( 748, 456 );
         private Thread _updThread;
         private bool _showOnlyUnread;
+        private int _delayBeforeUpdCheck = 0;
 
         [System.Runtime.InteropServices.DllImport( "user32.dll" )]
         private static extern IntPtr SendMessage( IntPtr hWnd, int msg, IntPtr wp, IntPtr lp );
@@ -94,6 +95,7 @@ namespace BeamNGModsUpdateChecker
                 ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
                 ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
                 ini.Write( "ShowOnlyUnread", this._upd.ThreadFilter.ShowOnlyUnread.ToString(), "Options" );
+                ini.Write( "DelayBeforeUpdCheck", this._delayBeforeUpdCheck.ToString(), "Options" );
                 if ( this.WindowState != FormWindowState.Minimized )
                 {
                     ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
@@ -123,6 +125,7 @@ namespace BeamNGModsUpdateChecker
                 var mainFormSize = new Size( mainFormWidth, mainFormHeight );
                 this._mainFormSize = mainFormSize;
                 this._showOnlyUnread = bool.Parse( ini.Read( "ShowOnlyUnread", "Options", "False" ) );
+                this._delayBeforeUpdCheck = int.Parse( ini.Read( "DelayBeforeUpdCheck", "Options", "0" ) );
             }
             catch
             {
@@ -141,7 +144,17 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
+        private void CheckUpdatesProgramRun()
+        {
+            this.CheckUpdates( true );
+        }
+
         private void CheckUpdates()
+        {
+            this.CheckUpdates( false );
+        }
+
+        private void CheckUpdates( bool programRun )
         {
             if ( this._isUpdating )
             {
@@ -158,6 +171,10 @@ namespace BeamNGModsUpdateChecker
             this.tbKeyword.Enabled = false;
             this.ssStatus.Items[ 0 ].Text = strings.checkingForUpdates;
             this.niTray.Text = strings.checkingForUpdates;
+            if ( programRun )
+            {
+                Thread.Sleep( this._delayBeforeUpdCheck * 1000 );
+            }
             try
             {
                 int updatesCount = this._upd.CheckUpdates();
@@ -268,18 +285,18 @@ namespace BeamNGModsUpdateChecker
             }
 
             var btn = new Button { Size = new Size( 25, this.tbKeyword.ClientSize.Height + 2 ) };
-            btn.Location = new Point( tbKeyword.ClientSize.Width - btn.Width, -1 );
+            btn.Location = new Point( this.tbKeyword.ClientSize.Width - btn.Width, -1 );
             btn.Cursor = Cursors.Hand;
             btn.BackColor = this.BackColor;
             btn.Text = "X";
-            btn.Click += btnClear_Click;
-            tbKeyword.Controls.Add( btn );
-            SendMessage( tbKeyword.Handle, 0xd3, (IntPtr)2, (IntPtr)( btn.Width << 16 ) );
+            btn.Click += this.btnClear_Click;
+            this.tbKeyword.Controls.Add( btn );
+            SendMessage( this.tbKeyword.Handle, 0xd3, (IntPtr)2, (IntPtr)( btn.Width << 16 ) );
         }
 
         private void btnClear_Click( object sender, EventArgs e )
         {
-            tbKeyword.Text = "";
+            this.tbKeyword.Text = "";
         }
 
         private void frmMain_FormClosing( object sender, FormClosingEventArgs e )
@@ -351,9 +368,10 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
+            bool programRun = this.tmrUpd.Interval == 1000;
             this.tmrUpdProgress.Start();
             this.tmrUpd.Interval = this.UpdInterval * 60 * 1000;
-            this._updThread = new Thread( this.CheckUpdates );
+            this._updThread = programRun ? new Thread( this.CheckUpdatesProgramRun ) : new Thread( this.CheckUpdates );
             this._updThread.Start();
         }
 
