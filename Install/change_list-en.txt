@@ -1,2 +1,2 @@
 v1.0.4 Stable:
--Added: simultaneous update check several threads.
+-Added: checking for updates in multiple threads.
