@@ -3,7 +3,7 @@ The program checks changes of title of a thread and changes in attachments in th
 You need to specify links to threads, whose updates you want to track (Threads => Add threads). Updates are checked every 120 minutes (interval can be changed in the options).
 
 *Bad news*:
-![badnews](https://bitbucket.org/IncoCode/beamng-mods-update-checker/raw/master/badnews.png)
+![badnews](https://raw.githubusercontent.com/IncoCode/BeamNG-Mods-Update-Checker/master/badnews.png)
 
 I do not understand their decision, but with this I can not do anything.
 
