@@ -188,7 +188,7 @@ namespace BeamNGModsUpdateChecker
             while ( i < this._threads.Count )
             {
                 int taskArrSize = this.GetMaxCheckUpdCount( i, MaxCheckUpdCount );
-                Task[] tasks = new Task[ taskArrSize ];
+                var tasks = new Task[ taskArrSize ];
                 for ( int j = 0; j < taskArrSize; j++ )
                 {
                     tasks[ j ] = this.CheckTopicUpdate( this[ j + i ] );
@@ -229,18 +229,18 @@ namespace BeamNGModsUpdateChecker
             {
                 link = link.Substring( 0, link.IndexOf( "/page", StringComparison.Ordinal ) );
             }
-            if ( !this._threads.Contains( new Topic { Link = link } ) )
+            if ( this._threads.Contains( new Topic { Link = link } ) )
             {
-                var topic = new Topic( link, this._cookieJar );
-                if ( string.IsNullOrEmpty( topic.Title ) )
-                {
-                    return false;
-                }
-
-                this._threads.Add( topic );
-                return true;
+                return false;
             }
-            return false;
+            var topic = new Topic( link, this._cookieJar );
+            if ( string.IsNullOrEmpty( topic.Title ) )
+            {
+                return false;
+            }
+
+            this._threads.Add( topic );
+            return true;
         }
 
         /// <summary>
@@ -313,22 +313,23 @@ namespace BeamNGModsUpdateChecker
         public void LoadThreads()
         {
             string fileName = this._progPath + @"\Threads.json";
-            if ( File.Exists( fileName ) )
+            if ( !File.Exists( fileName ) )
             {
-                try
+                return;
+            }
+            try
+            {
+                string s = File.ReadAllText( fileName );
+                var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
+                if ( threads.Threads != null )
                 {
-                    string s = File.ReadAllText( fileName );
-                    var threads = JsonConvert.DeserializeObject<JSONClasses.ThreadsRoot>( s );
-                    if ( threads.Threads != null )
-                    {
-                        this._threads = threads.Threads;
-                    }
+                    this._threads = threads.Threads;
                 }
-                catch
-                {
-                    this._threads = new List<Topic>();
-                    throw new Exception( "Load error!" );
-                }
+            }
+            catch
+            {
+                this._threads = new List<Topic>();
+                throw new Exception( "Load error!" );
             }
         }
 
