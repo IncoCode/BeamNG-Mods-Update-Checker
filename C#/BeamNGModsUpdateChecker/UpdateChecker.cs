@@ -2,12 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -41,29 +40,11 @@ namespace BeamNGModsUpdateChecker
 
         #region Additional methods
 
-        /// <summary>
-        /// MD5 hash
-        /// </summary>
-        /// <param name="input">Some string</param>
-        /// <returns>Returns MD5 hash</returns>
-        public static string GetMd5Hash( string input )
-        {
-            var md5Hash = MD5.Create();
-            byte[] data = md5Hash.ComputeHash( Encoding.UTF8.GetBytes( input ) );
-            var sb = new StringBuilder();
-            for ( int i = 0; i < data.Length; i++ )
-            {
-                sb.Append( data[ i ].ToString( "x2" ) );
-            }
-            return sb.ToString();
-        }
-
-        public static string SendGet( string url, CookieContainer cookieJar )
+        private static string SendGet( string url, CookieContainer cookieJar )
         {
             try
             {
-                var client = new RestClient( url );
-                client.CookieContainer = cookieJar;
+                var client = new RestClient( url ) { CookieContainer = cookieJar };
                 var request = new RestRequest( Method.GET );
                 IRestResponse response = client.Execute( request );
                 return response.Content;
@@ -133,9 +114,9 @@ namespace BeamNGModsUpdateChecker
 
         #endregion Fields
 
-        public UpdateChecker( string progPath )
+        public UpdateChecker()
         {
-            this._progPath = progPath;
+            this._progPath = Directory.GetParent( Path.GetDirectoryName( ConfigurationManager.OpenExeConfiguration( ConfigurationUserLevel.PerUserRoamingAndLocal ).FilePath ) ).FullName;
             this._threads = new List<Topic>();
             this.ThreadFilter = new ThreadFilter();
             try
@@ -316,6 +297,10 @@ namespace BeamNGModsUpdateChecker
                         File.Delete( fileNameBak );
                     }
                     File.Move( fileName, fileNameBak );
+                }
+                if ( !Directory.Exists( this._progPath ) )
+                {
+                    Directory.CreateDirectory( this._progPath );
                 }
                 File.WriteAllText( fileName, s );
             }

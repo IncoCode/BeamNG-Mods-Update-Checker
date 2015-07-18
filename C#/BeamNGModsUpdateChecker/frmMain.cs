@@ -30,7 +30,7 @@ namespace BeamNGModsUpdateChecker
             this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.Size = new Size( this._settings.MainFormWidth, this._settings.MainFormHeight );
-            this._updateChecker = new UpdateChecker( Application.StartupPath );
+            this._updateChecker = new UpdateChecker();
         }
 
         private void ChangeLanguage( string lang )
