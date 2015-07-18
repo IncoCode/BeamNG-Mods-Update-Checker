@@ -84,8 +84,8 @@
             // 
             // btnOk
             // 
-            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btnOk, "btnOk");
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOk.Name = "btnOk";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

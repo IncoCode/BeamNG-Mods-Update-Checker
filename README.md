@@ -1,10 +1,5 @@
-The program checks changes of title of a thread and changes in attachments in the first message of a thread. If changes are noticed - the program shows the notification (and highlights the updated threads in a green color).
+![screenshot](https://raw.githubusercontent.com/IncoCode/BeamNG-Mods-Update-Checker/master/screenshot.png)
 
-You need to specify links to threads, whose updates you want to track (Threads => Add threads). Updates are checked every 120 minutes (interval can be changed in the options).
+The program checks changes of thread title and the changes in attachments which are in the first message of this thread. If some changes are happened - the program shows the notification (and highlights the updated threads in a green color).
 
-*Bad news*:
-![badnews](https://raw.githubusercontent.com/IncoCode/BeamNG-Mods-Update-Checker/master/badnews.png)
-
-I do not understand their decision, but with this I can not do anything.
-
-**So, the new versions you can get ONLY in the "Downloads" section!**
+Just select in menu Threads => Add threads to add new threads in the list. Updates are checked every 120 minutes (interval can be changed in the options).

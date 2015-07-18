@@ -43,8 +43,8 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btnAdd, "btnAdd");
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -65,7 +65,7 @@
             this.pb1.Name = "pb1";
             this.pb1.Step = 1;
             // 
-            // frmAddLinks
+            // FrmAddLinks
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +77,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAddLinks";
+            this.Name = "FrmAddLinks";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddLinks_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
