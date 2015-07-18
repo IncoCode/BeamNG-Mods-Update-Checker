@@ -1,4 +1,4 @@
-![screenshot](https://raw.githubusercontent.com/IncoCode/BeamNG-Mods-Update-Checker/master/screenshot.png)
+<img src="screenshot.png" alt="alt text" width="750" height="457">
 
 The program checks changes of thread title and the changes in attachments which are in the first message of this thread. If some changes are happened - the program shows the notification (and highlights the updated threads in a green color).
 
