@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using BeamNGModsUpdateChecker.Properties;
 
 #endregion
 
@@ -13,10 +14,11 @@ namespace BeamNGModsUpdateChecker
     {
         private readonly UpdateChecker _upd;
         private bool _addingLinks;
+        private readonly Settings _settings = Settings.Default;
 
         public FrmAddLinks( UpdateChecker upd, FrmMain mainForm )
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this._settings.Lang );
             this.InitializeComponent();
             this._upd = upd;
         }

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
+﻿#region Using
+
+using System;
 using System.Threading;
 using System.Windows.Forms;
 
+#endregion
+
 namespace BeamNGModsUpdateChecker
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             using ( Mutex mutex = new Mutex( false, "Global\\" + appGuid ) )
             {

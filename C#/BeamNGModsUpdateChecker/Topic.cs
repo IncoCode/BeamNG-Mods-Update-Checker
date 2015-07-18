@@ -181,7 +181,9 @@ namespace BeamNGModsUpdateChecker
                                     {
                                         string name = file.ChildNodes[ j ].InnerText;
                                         string s = file.InnerText;
-                                        string size = s.Substring( s.IndexOf( "(", StringComparison.Ordinal ) + 1, s.IndexOf( ",", StringComparison.Ordinal ) - 1 - s.IndexOf( "(", StringComparison.Ordinal ) );
+                                        string size = s.Substring( s.IndexOf( "(", StringComparison.Ordinal ) + 1,
+                                            s.IndexOf( ",", StringComparison.Ordinal ) - 1 -
+                                            s.IndexOf( "(", StringComparison.Ordinal ) );
                                         attachmentsList.Add( new Attachment( name, size ) );
                                     }
                                 }
@@ -201,7 +203,7 @@ namespace BeamNGModsUpdateChecker
             if ( attRegCollection.Count != 0 )
             {
                 attachmentsList.AddRange( ( from Match attMatch in attRegCollection
-                                            select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList() );
+                    select new Attachment( attMatch.Groups[ 3 ].ToString(), attMatch.Groups[ 2 ].ToString() ) ).ToList() );
             }
 
             #endregion

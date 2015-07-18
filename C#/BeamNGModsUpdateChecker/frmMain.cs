@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using Ini;
+using BeamNGModsUpdateChecker.Properties;
 
 #endregion
 
@@ -15,36 +15,29 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class FrmMain : Form
     {
-        public string Lang = "en-GB";
-        public int UpdInterval = 30;
-        public bool MinimizeWhenStart;
-
         private readonly UpdateChecker _updateChecker;
         private readonly double[] _lvColProp = { 0.6, 0.4 };
         private bool _isUpdating;
-        private Size _mainFormSize = new Size( 748, 456 );
         private Thread _updThread;
-        private bool _showOnlyUnread;
-        private int _delayBeforeUpdCheck;
+        private readonly Settings _settings = Settings.Default;
 
         [System.Runtime.InteropServices.DllImport( "user32.dll" )]
         private static extern IntPtr SendMessage( IntPtr hWnd, int msg, IntPtr wp, IntPtr lp );
 
         public FrmMain()
         {
-            this.LoadSettings();
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this._settings.Lang );
             this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.Size = this._mainFormSize;
+            this.Size = new Size( this._settings.MainFormWidth, this._settings.MainFormHeight );
             this._updateChecker = new UpdateChecker( Application.StartupPath );
         }
 
         private void ChangeLanguage( string lang )
         {
-            this.Lang = lang;
+            this._settings.Lang = lang;
             this.SaveSettings();
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this._settings.Lang );
             DialogResult res = MessageBox.Show( strings.restartApp, strings.warning, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning );
             if ( res == DialogResult.Yes )
@@ -79,46 +72,9 @@ namespace BeamNGModsUpdateChecker
 
         private void SaveSettings()
         {
-            try
-            {
-                var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                ini.Write( "Lang", this.Lang, "Options" );
-                ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
-                ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
-                ini.Write( "ShowOnlyUnread", this._updateChecker.ThreadFilter.ShowOnlyUnread.ToString(), "Options" );
-                ini.Write( "DelayBeforeUpdCheck", this._delayBeforeUpdCheck.ToString(), "Options" );
-                if ( this.WindowState != FormWindowState.Minimized )
-                {
-                    ini.Write( "MainFormWidth", this.Size.Width.ToString(), "Options" );
-                    ini.Write( "MainFormHeight", this.Size.Height.ToString(), "Options" );
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        private void LoadSettings()
-        {
-            try
-            {
-                var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                this.Lang = ini.Read( "Lang", "Options", this.Lang );
-                this.UpdInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.UpdInterval.ToString() ) );
-                this.MinimizeWhenStart =
-                    bool.Parse( ini.Read( "MinimizeWhenStart", "Options", this.MinimizeWhenStart.ToString() ) );
-                int mainFormWidth =
-                    int.Parse( ini.Read( "MainFormWidth", "Options", this._mainFormSize.Width.ToString() ) );
-                int mainFormHeight =
-                    int.Parse( ini.Read( "MainFormHeight", "Options", this._mainFormSize.Height.ToString() ) );
-                var mainFormSize = new Size( mainFormWidth, mainFormHeight );
-                this._mainFormSize = mainFormSize;
-                this._showOnlyUnread = bool.Parse( ini.Read( "ShowOnlyUnread", "Options", "False" ) );
-                this._delayBeforeUpdCheck = int.Parse( ini.Read( "DelayBeforeUpdCheck", "Options", "0" ) );
-            }
-            catch
-            {
-            }
+            this._settings.MainFormWidth = this.Size.Width;
+            this._settings.MainFormHeight = this.Size.Height;
+            this._settings.Save();
         }
 
         private void SaveThreads()
@@ -150,7 +106,7 @@ namespace BeamNGModsUpdateChecker
                 return;
             }
             this._isUpdating = true;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this._settings.Lang );
             this.Invoke( new MethodInvoker( delegate()
             {
                 this.pbCheckUpd.Visible = true;
@@ -162,7 +118,7 @@ namespace BeamNGModsUpdateChecker
             this.niTray.Text = strings.checkingForUpdates;
             if ( programRun )
             {
-                Thread.Sleep( this._delayBeforeUpdCheck * 1000 );
+                Thread.Sleep( this._settings.StartupDelayBeforeCheck * 1000 );
             }
             try
             {
@@ -193,7 +149,7 @@ namespace BeamNGModsUpdateChecker
 
         private void ShowUpdNot( int updatesCount, bool showBalloon = true )
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this.Lang );
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo( this._settings.Lang );
             this.niTray.Text = string.Format( strings.updatesCount, updatesCount );
             this.ssStatus.Items[ 0 ].Text = string.Format( strings.updatesCount, updatesCount );
             if ( updatesCount > 0 && showBalloon )
@@ -227,13 +183,13 @@ namespace BeamNGModsUpdateChecker
             //{
             //    MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
             //}
-            if ( this._showOnlyUnread )
+            if ( this._settings.ShowOnlyUnread )
             {
                 this.lblOnlyUnread_Click( this.lblOnlyUnread, EventArgs.Empty );
             }
             this.PrintAllThreads();
             this.tmrUpd.Start();
-            if ( this.MinimizeWhenStart )
+            if ( this._settings.MinimizeOnStart )
             {
                 this.WindowState = FormWindowState.Minimized;
             }
@@ -324,7 +280,7 @@ namespace BeamNGModsUpdateChecker
         {
             bool programRun = this.tmrUpd.Interval == 1000;
             this.tmrUpdProgress.Start();
-            this.tmrUpd.Interval = this.UpdInterval * 60 * 1000;
+            this.tmrUpd.Interval = this._settings.UpdInterval * 60 * 1000;
             this._updThread = programRun ? new Thread( this.CheckUpdatesProgramRun ) : new Thread( this.CheckUpdates );
             this._updThread.Start();
         }
@@ -339,13 +295,15 @@ namespace BeamNGModsUpdateChecker
             this.Visible = true;
             this.ShowInTaskbar = true;
             this.WindowState = FormWindowState.Normal;
-            this.Size = this._mainFormSize;
+            this.Size = new Size( this._settings.MainFormWidth, this._settings.MainFormHeight );
         }
 
         private void frmMain_Resize( object sender, EventArgs e )
         {
             this.LvColAutosize();
-            this._mainFormSize = this.Size;
+            this._settings.MainFormWidth = this.Size.Width;
+            this._settings.MainFormHeight = this.Size.Height;
+            this.SaveSettings();
             this.SaveSettings();
             if ( this.WindowState == FormWindowState.Minimized )
             {
@@ -386,7 +344,7 @@ namespace BeamNGModsUpdateChecker
 
         private void tsmiOptions_Click( object sender, EventArgs e )
         {
-            var frm = new FrmOptions( this );
+            var frm = new FrmOptions();
             frm.ShowDialog();
         }
 
@@ -479,7 +437,9 @@ namespace BeamNGModsUpdateChecker
             }
             this._updateChecker.ThreadFilter.ShowOnlyUnread = !this._updateChecker.ThreadFilter.ShowOnlyUnread;
             this.PrintAllThreads();
-            this.lblOnlyUnread.Text = this._updateChecker.ThreadFilter.ShowOnlyUnread ? strings.showAll : strings.showOnlyUnread;
+            this.lblOnlyUnread.Text = this._updateChecker.ThreadFilter.ShowOnlyUnread
+                ? strings.showAll
+                : strings.showOnlyUnread;
         }
 
         private void tsmiOpenAllUnread_Click( object sender, EventArgs e )

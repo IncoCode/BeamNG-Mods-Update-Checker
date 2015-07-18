@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Forms;
+using BeamNGModsUpdateChecker.Properties;
 using Microsoft.Win32;
 
 #endregion
@@ -10,11 +11,10 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class FrmOptions : Form
     {
-        private readonly FrmMain _mainForm;
+        private readonly Settings _settings = Settings.Default;
 
-        public FrmOptions( FrmMain mainForm )
+        public FrmOptions()
         {
-            this._mainForm = mainForm;
             this.InitializeComponent();
         }
 
@@ -67,8 +67,8 @@ namespace BeamNGModsUpdateChecker
 
         private void btnOk_Click( object sender, EventArgs e )
         {
-            this._mainForm.MinimizeWhenStart = this.cbMinimizeToTray.Checked;
-            this._mainForm.UpdInterval = (int)this.nudUpdInterval.Value;
+            this._settings.MinimizeOnStart = this.cbMinimizeToTray.Checked;
+            this._settings.UpdInterval = (int)this.nudUpdInterval.Value;
             this.AddRemoveStartup( this.cbAutorun.Checked );
             this.Close();
         }
@@ -76,8 +76,8 @@ namespace BeamNGModsUpdateChecker
         private void frmOptions_Load( object sender, EventArgs e )
         {
             this.cbAutorun.Checked = this.IsStartupItem();
-            this.cbMinimizeToTray.Checked = this._mainForm.MinimizeWhenStart;
-            this.nudUpdInterval.Value = this._mainForm.UpdInterval;
+            this.cbMinimizeToTray.Checked = this._settings.MinimizeOnStart;
+            this.nudUpdInterval.Value = this._settings.UpdInterval;
         }
     }
 }
