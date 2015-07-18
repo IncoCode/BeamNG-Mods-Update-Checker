@@ -19,15 +19,13 @@ namespace BeamNGModsUpdateChecker
         public int UpdInterval = 30;
         public bool MinimizeWhenStart;
 
-        private UpdateChecker _upd;
-        private string _login = "";
-        private string _password = "";
+        private readonly UpdateChecker _updateChecker;
         private readonly double[] _lvColProp = { 0.6, 0.4 };
         private bool _isUpdating;
         private Size _mainFormSize = new Size( 748, 456 );
         private Thread _updThread;
         private bool _showOnlyUnread;
-        private int _delayBeforeUpdCheck = 0;
+        private int _delayBeforeUpdCheck;
 
         [System.Runtime.InteropServices.DllImport( "user32.dll" )]
         private static extern IntPtr SendMessage( IntPtr hWnd, int msg, IntPtr wp, IntPtr lp );
@@ -39,6 +37,7 @@ namespace BeamNGModsUpdateChecker
             this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.Size = this._mainFormSize;
+            this._updateChecker = new UpdateChecker( Application.StartupPath );
         }
 
         private void ChangeLanguage( string lang )
@@ -54,18 +53,12 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        public void SetLoginPassword( string login, string password )
-        {
-            this._login = Crypto.EncryptPassword( login );
-            this._password = Crypto.EncryptPassword( password );
-        }
-
         private void PrintAllThreads( List<Topic> threads = null )
         {
             this.lvThreads.Items.Clear();
             if ( threads == null )
             {
-                threads = this._upd.Threads;
+                threads = this._updateChecker.Threads;
             }
             foreach ( Topic thread in threads )
             {
@@ -89,12 +82,10 @@ namespace BeamNGModsUpdateChecker
             try
             {
                 var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                ini.Write( "Login", this._login, "Auth" );
-                ini.Write( "Password", this._password, "Auth" );
                 ini.Write( "Lang", this.Lang, "Options" );
                 ini.Write( "UpdInterval", this.UpdInterval.ToString(), "Options" );
                 ini.Write( "MinimizeWhenStart", this.MinimizeWhenStart.ToString(), "Options" );
-                ini.Write( "ShowOnlyUnread", this._upd.ThreadFilter.ShowOnlyUnread.ToString(), "Options" );
+                ini.Write( "ShowOnlyUnread", this._updateChecker.ThreadFilter.ShowOnlyUnread.ToString(), "Options" );
                 ini.Write( "DelayBeforeUpdCheck", this._delayBeforeUpdCheck.ToString(), "Options" );
                 if ( this.WindowState != FormWindowState.Minimized )
                 {
@@ -112,8 +103,6 @@ namespace BeamNGModsUpdateChecker
             try
             {
                 var ini = new IniFile( Application.StartupPath + @"\Settings.ini" );
-                this._login = ini.Read( "Login", "Auth", "" );
-                this._password = ini.Read( "Password", "Auth", "" );
                 this.Lang = ini.Read( "Lang", "Options", this.Lang );
                 this.UpdInterval = int.Parse( ini.Read( "UpdInterval", "Options", this.UpdInterval.ToString() ) );
                 this.MinimizeWhenStart =
@@ -136,7 +125,7 @@ namespace BeamNGModsUpdateChecker
         {
             try
             {
-                this._upd.SaveThreads();
+                this._updateChecker.SaveThreads();
             }
             catch
             {
@@ -177,7 +166,7 @@ namespace BeamNGModsUpdateChecker
             }
             try
             {
-                int updatesCount = this._upd.CheckUpdates();
+                int updatesCount = this._updateChecker.CheckUpdates();
                 this.ShowUpdNot( updatesCount );
                 this.SaveThreads();
             }
@@ -228,51 +217,16 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_Load( object sender, EventArgs e )
         {
-            FrmEnterPassword frm;
-            if ( string.IsNullOrEmpty( this._login ) || string.IsNullOrEmpty( this._password ) )
-            {
-                frm = new FrmEnterPassword( this );
-                DialogResult dr = frm.ShowDialog();
-                if ( dr == DialogResult.Cancel )
-                {
-                    this.niTray.Dispose();
-                    Environment.Exit( 0 );
-                    return;
-                }
-            }
-            this._upd = new UpdateChecker( this._login, this._password, Application.StartupPath );
-            try
-            {
-                bool isAuth = this._upd.Auth();
-                while ( !isAuth )
-                {
-                    MessageBox.Show( strings.incorrectLoginPassword, strings.error, MessageBoxButtons.OK,
-                        MessageBoxIcon.Error );
-                    frm = new FrmEnterPassword( this );
-                    DialogResult dr = frm.ShowDialog();
-                    if ( dr == DialogResult.Cancel )
-                    {
-                        this.niTray.Dispose();
-                        Environment.Exit( 0 );
-                        return;
-                    }
-                    isAuth = this._upd.Auth( this._login, this._password );
-                }
-            }
-            catch
-            {
-                MessageBox.Show( strings.unableSendRequest, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
-                Environment.Exit( 0 );
-                return;
-            }
-            try
-            {
-                this._upd.LoadThreads();
-            }
-            catch
-            {
-                MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
-            }
+            this._updateChecker.LoadThreads();
+
+            //try
+            //{
+            //    this._upd.LoadThreads();
+            //}
+            //catch
+            //{
+            //    MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+            //}
             if ( this._showOnlyUnread )
             {
                 this.lblOnlyUnread_Click( this.lblOnlyUnread, EventArgs.Empty );
@@ -323,7 +277,7 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            var frm = new FrmAddLinks( this._upd, this );
+            var frm = new FrmAddLinks( this._updateChecker, this );
             frm.ShowDialog();
             this.PrintAllThreads();
             this.SaveThreads();
@@ -341,10 +295,10 @@ namespace BeamNGModsUpdateChecker
                 for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
                     string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    this._upd.RemoveThread( link );
+                    this._updateChecker.RemoveThread( link );
                 }
                 this.PrintAllThreads();
-                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+                this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
             }
         }
 
@@ -356,13 +310,13 @@ namespace BeamNGModsUpdateChecker
                 Process.Start( link );
                 this.lvThreads.SelectedItems[ 0 ].BackColor = Color.White;
                 this.lvThreads.SelectedItems[ 0 ].SubItems[ 1 ].BackColor = Color.White;
-                this._upd.ChangeReadStatus( link, true );
-                if ( this._upd.ThreadFilter.ShowOnlyUnread )
+                this._updateChecker.ChangeReadStatus( link, true );
+                if ( this._updateChecker.ThreadFilter.ShowOnlyUnread )
                 {
                     this.lvThreads.Items.Remove( this.lvThreads.SelectedItems[ 0 ] );
                 }
                 this.lvThreads.Refresh();
-                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+                this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
             }
         }
 
@@ -407,10 +361,10 @@ namespace BeamNGModsUpdateChecker
                 for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
                     string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
-                    this._upd.ChangeReadStatus( link, true );
+                    this._updateChecker.ChangeReadStatus( link, true );
                 }
                 this.PrintAllThreads();
-                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+                this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
                 this.SaveThreads();
             }
         }
@@ -442,14 +396,14 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            foreach ( Topic t in this._upd.Threads )
+            foreach ( Topic t in this._updateChecker.Threads )
             {
                 string link = t.Link;
-                this._upd.ChangeReadStatus( link, true );
+                this._updateChecker.ChangeReadStatus( link, true );
             }
             this.PrintAllThreads();
             this.SaveThreads();
-            this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+            this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
         }
 
         private void tsmiMakeUnread_Click( object sender, EventArgs e )
@@ -461,9 +415,9 @@ namespace BeamNGModsUpdateChecker
                     string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;
                     this.lvThreads.SelectedItems[ i ].BackColor = Color.GreenYellow;
                     this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].BackColor = Color.GreenYellow;
-                    this._upd.ChangeReadStatus( link, false );
+                    this._updateChecker.ChangeReadStatus( link, false );
                 }
-                this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+                this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
                 this.SaveThreads();
             }
         }
@@ -490,7 +444,7 @@ namespace BeamNGModsUpdateChecker
         private void tbKeyword_TextChanged( object sender, EventArgs e )
         {
             string keyword = this.tbKeyword.Text;
-            this._upd.ThreadFilter.SearchKeyword = keyword;
+            this._updateChecker.ThreadFilter.SearchKeyword = keyword;
             this.PrintAllThreads();
         }
 
@@ -502,13 +456,13 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpdProgress_Tick( object sender, EventArgs e )
         {
-            this.pbCheckUpd.Maximum = this._upd.UpdMaxProgress;
-            this.pbCheckUpd.Value = this._upd.UpdProgress;
+            this.pbCheckUpd.Maximum = this._updateChecker.UpdMaxProgress;
+            this.pbCheckUpd.Value = this._updateChecker.UpdProgress;
         }
 
         private void tsmiRemoveDuplicates_Click( object sender, EventArgs e )
         {
-            this._upd.RemoveDuplicates();
+            this._updateChecker.RemoveDuplicates();
             this.PrintAllThreads();
         }
 
@@ -523,9 +477,9 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            this._upd.ThreadFilter.ShowOnlyUnread = !this._upd.ThreadFilter.ShowOnlyUnread;
+            this._updateChecker.ThreadFilter.ShowOnlyUnread = !this._updateChecker.ThreadFilter.ShowOnlyUnread;
             this.PrintAllThreads();
-            this.lblOnlyUnread.Text = this._upd.ThreadFilter.ShowOnlyUnread ? strings.showAll : strings.showOnlyUnread;
+            this.lblOnlyUnread.Text = this._updateChecker.ThreadFilter.ShowOnlyUnread ? strings.showAll : strings.showOnlyUnread;
         }
 
         private void tsmiOpenAllUnread_Click( object sender, EventArgs e )
@@ -534,7 +488,7 @@ namespace BeamNGModsUpdateChecker
             {
                 return;
             }
-            List<Topic> threads = this._upd.UnreadThreads;
+            List<Topic> threads = this._updateChecker.UnreadThreads;
             foreach ( var thread in threads )
             {
                 Process.Start( thread.Link );
@@ -542,7 +496,7 @@ namespace BeamNGModsUpdateChecker
                 Thread.Sleep( 150 );
             }
             this.PrintAllThreads();
-            this.ShowUpdNot( this._upd.UnreadThreadsCount, false );
+            this.ShowUpdNot( this._updateChecker.UnreadThreadsCount, false );
         }
 
         private void tsmiOpenAllUnreadTray_Click( object sender, EventArgs e )

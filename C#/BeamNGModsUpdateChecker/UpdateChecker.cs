@@ -34,8 +34,6 @@ namespace BeamNGModsUpdateChecker
         private const int MaxCheckUpdCount = 3;
 
         private List<Topic> _threads;
-        private string _login;
-        private string _password;
         private readonly string _progPath;
         private readonly CookieContainer _cookieJar = new CookieContainer();
         private volatile int _updProgress;
@@ -135,10 +133,8 @@ namespace BeamNGModsUpdateChecker
 
         #endregion Fields
 
-        public UpdateChecker( string login, string password, string progPath )
+        public UpdateChecker( string progPath )
         {
-            this._login = login;
-            this._password = password;
             this._progPath = progPath;
             this._threads = new List<Topic>();
             this.ThreadFilter = new ThreadFilter();
@@ -148,67 +144,6 @@ namespace BeamNGModsUpdateChecker
             }
             catch
             {
-            }
-        }
-
-        /// <summary>
-        /// Authorization
-        /// </summary>
-        /// <returns>Returns the value indicating success of authorization</returns>
-        public bool Auth()
-        {
-            try
-            {
-                var client = new RestClient( "http://www.beamng.com/login.php?do=login" );
-                client.CookieContainer = this._cookieJar;
-                RestRequest request = new RestRequest( Method.POST );
-                request.AddParameter( "do", "login" );
-                request.AddParameter( "url", "login.php?do=logout" );
-                request.AddParameter( "vb_login_md5password", GetMd5Hash( Crypto.DecryptPassword( this._password ) ) );
-                request.AddParameter( "vb_login_md5password_utf", GetMd5Hash( Crypto.DecryptPassword( this._password ) ) );
-                request.AddParameter( "s", "" );
-                request.AddParameter( "securitytoken", "guest" );
-                request.AddParameter( "vb_login_username", Crypto.DecryptPassword( this._login ) );
-                request.AddParameter( "cookieuser", "1" );
-                IRestResponse response = client.Execute( request );
-                string content = response.Content;
-                if ( content.IndexOf( "id=\"redirect_button\"" ) >= 0 )
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                throw new Exception( "Unable to send a request!" );
-            }
-        }
-
-        public bool Auth( string login, string password )
-        {
-            this._login = login;
-            this._password = password;
-            return this.Auth();
-        }
-
-        /// <summary>
-        /// Do we need authorization
-        /// </summary>
-        /// <returns></returns>
-        private bool IsNeedAuth()
-        {
-            try
-            {
-                string content = SendGet( "http://www.beamng.com/forum/", this._cookieJar );
-                if ( content.IndexOf( "Welcome," ) >= 0 )
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return true;
             }
         }
 
@@ -268,10 +203,6 @@ namespace BeamNGModsUpdateChecker
         {
             this._updMaxProgress = this._threads.Count;
             this._updProgress = 0;
-            if ( this.IsNeedAuth() )
-            {
-                this.Auth();
-            }
             int i = 0;
             while ( i < this._threads.Count )
             {
@@ -309,13 +240,13 @@ namespace BeamNGModsUpdateChecker
             {
                 return false;
             }
-            if ( link.IndexOf( "?" ) >= 0 )
+            if ( link.IndexOf( "?", StringComparison.Ordinal ) >= 0 )
             {
-                link = link.Substring( 0, link.IndexOf( "?" ) );
+                link = link.Substring( 0, link.IndexOf( "?", StringComparison.Ordinal ) );
             }
-            if ( link.IndexOf( "/page" ) >= 0 )
+            if ( link.IndexOf( "/page", StringComparison.Ordinal ) >= 0 )
             {
-                link = link.Substring( 0, link.IndexOf( "/page" ) );
+                link = link.Substring( 0, link.IndexOf( "/page", StringComparison.Ordinal ) );
             }
             if ( !this._threads.Contains( new Topic { Link = link } ) )
             {
@@ -372,8 +303,7 @@ namespace BeamNGModsUpdateChecker
 
         public void SaveThreads()
         {
-            var threads = new JSONClasses.ThreadsRoot();
-            threads.Threads = this._threads;
+            var threads = new JSONClasses.ThreadsRoot { Threads = this._threads };
             string s = JsonConvert.SerializeObject( threads );
             string fileName = this._progPath + @"\Threads.json";
             string fileNameBak = fileName + ".bak";

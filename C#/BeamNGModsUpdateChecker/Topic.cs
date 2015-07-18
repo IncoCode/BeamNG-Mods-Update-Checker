@@ -54,7 +54,7 @@ namespace BeamNGModsUpdateChecker
                 this.Title = this.NormalTitle( this.Title );
             }
             bool result = false;
-            var h = new HtmlAgilityPack.HtmlDocument();
+            var h = new HtmlDocument();
             h.LoadHtml( content );
             HtmlNodeCollection nodes = h.DocumentNode.SelectNodes( "//title" );
             if ( nodes == null )
@@ -106,7 +106,7 @@ namespace BeamNGModsUpdateChecker
         public bool UpdAttachments( string content )
         {
             bool result = false;
-            var h = new HtmlAgilityPack.HtmlDocument();
+            var h = new HtmlDocument();
             h.LoadHtml( content );
             HtmlNode posts = h.GetElementbyId( "posts" );
             if ( posts == null )
@@ -129,7 +129,7 @@ namespace BeamNGModsUpdateChecker
             {
                 foreach ( HtmlNode node in l )
                 {
-                    if ( node.InnerHtml.IndexOf( "Attached Files" ) >= 0 )
+                    if ( node.InnerHtml.IndexOf( "Attached Files", StringComparison.Ordinal ) >= 0 )
                     {
                         attachments = node;
                         break;
@@ -181,8 +181,7 @@ namespace BeamNGModsUpdateChecker
                                     {
                                         string name = file.ChildNodes[ j ].InnerText;
                                         string s = file.InnerText;
-                                        string size = s.Substring( s.IndexOf( "(" ) + 1,
-                                            s.IndexOf( "," ) - 1 - s.IndexOf( "(" ) );
+                                        string size = s.Substring( s.IndexOf( "(", StringComparison.Ordinal ) + 1, s.IndexOf( ",", StringComparison.Ordinal ) - 1 - s.IndexOf( "(", StringComparison.Ordinal ) );
                                         attachmentsList.Add( new Attachment( name, size ) );
                                     }
                                 }
@@ -236,17 +235,9 @@ namespace BeamNGModsUpdateChecker
 
         public override bool Equals( object obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
             var t = obj as Topic;
             // if not a Topic
-            if ( t == null )
-            {
-                return false;
-            }
-            return this.Equals( t );
+            return t != null && this.Equals( t );
         }
 
         public override int GetHashCode()

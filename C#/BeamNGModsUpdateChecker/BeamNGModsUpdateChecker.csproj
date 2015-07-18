@@ -34,6 +34,24 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -71,12 +89,6 @@
     <Compile Include="FrmAddLinks.Designer.cs">
       <DependentUpon>FrmAddLinks.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEnterPassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEnterPassword.Designer.cs">
-      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,12 +117,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddLinks.resx">
       <DependentUpon>FrmAddLinks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEnterPassword.en-GB.resx">
-      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEnterPassword.resx">
-      <DependentUpon>FrmEnterPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.en-GB.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

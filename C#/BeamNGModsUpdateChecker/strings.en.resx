@@ -124,7 +124,7 @@
     <value>Checking for updates...</value>
   </data>
   <data name="copyright" xml:space="preserve">
-    <value>Made by Incognito.\n\nLibs used:\nJSON.NET (http://json.codeplex.com/)\nRestSharp (http://restsharp.org/)\nHtml Agility Pack (http://htmlagilitypack.codeplex.com/)</value>
+    <value>Author: Incognito.</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Error</value>

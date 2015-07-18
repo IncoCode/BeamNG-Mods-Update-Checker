@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle( "BeamNGModsUpdateChecker" )]
 [assembly: AssemblyDescription( "" )]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "Incognito" )]
+[assembly: AssemblyCompany( "IncoCode" )]
 [assembly: AssemblyProduct( "BeamNGModsUpdateChecker" )]
-[assembly: AssemblyCopyright( "Copyright © Incognito, 2014" )]
+[assembly: AssemblyCopyright( "Copyright © IncoCode, 2015" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номер построения и номер редакции по умолчанию, 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "1.0.4.0" )]
-[assembly: AssemblyFileVersion( "1.0.4.51" )]
+[assembly: AssemblyVersion( "1.1.0.0" )]
+[assembly: AssemblyFileVersion( "1.1.0.19" )]

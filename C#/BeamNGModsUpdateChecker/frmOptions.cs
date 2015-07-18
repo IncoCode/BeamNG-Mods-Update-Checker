@@ -10,7 +10,7 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class FrmOptions : Form
     {
-        private FrmMain _mainForm;
+        private readonly FrmMain _mainForm;
 
         public FrmOptions( FrmMain mainForm )
         {

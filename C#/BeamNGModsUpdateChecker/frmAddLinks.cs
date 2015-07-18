@@ -11,24 +11,23 @@ namespace BeamNGModsUpdateChecker
 {
     public partial class FrmAddLinks : Form
     {
-        private UpdateChecker upd;
-        private bool _addingLinks = false;
+        private readonly UpdateChecker _upd;
+        private bool _addingLinks;
 
         public FrmAddLinks( UpdateChecker upd, FrmMain mainForm )
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo( mainForm.Lang );
             this.InitializeComponent();
-            this.upd = upd;
+            this._upd = upd;
         }
 
         private void AddLinks()
         {
             string[] links = this.tbLinks.Lines;
             this.pb1.Maximum = links.Length;
-            for ( int i = 0; i < links.Length; i++ )
+            foreach ( string link in links )
             {
-                string link = links[ i ];
-                this.upd.AddThread( link );
+                this._upd.AddThread( link );
                 Thread.Sleep( 50 );
                 this.pb1.PerformStep();
             }

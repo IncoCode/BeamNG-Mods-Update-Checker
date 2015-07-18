@@ -18,10 +18,10 @@ namespace BeamNGModsUpdateChecker
         {
         }
 
-        public Attachment( string Name, string Size )
+        public Attachment( string name, string size )
         {
-            this.Name = Name;
-            this.Size = Size;
+            this.Name = name;
+            this.Size = size;
         }
 
         #endregion
@@ -54,16 +54,8 @@ namespace BeamNGModsUpdateChecker
 
         public override bool Equals( object obj )
         {
-            if ( obj == null )
-            {
-                return false;
-            }
             Attachment attachment = obj as Attachment;
-            if ( attachment == null )
-            {
-                return false;
-            }
-            return this.Equals( attachment );
+            return attachment != null && this.Equals( attachment );
         }
 
         public override int GetHashCode()
