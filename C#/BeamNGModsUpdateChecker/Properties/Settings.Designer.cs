@@ -25,7 +25,7 @@ namespace BeamNGModsUpdateChecker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
         public int UpdInterval {
             get {
                 return ((int)(this["UpdInterval"]));
