@@ -1,2 +1,3 @@
-v1.0.4 Stable:
--Added: checking for updates in multiple threads.
+v1.1.0 Stable:
+- Removed authentification;
+- Some code refactor.

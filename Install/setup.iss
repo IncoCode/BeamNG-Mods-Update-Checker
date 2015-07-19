@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "BeamNG Mods Update Checker"
-#define MyAppVersion "1.0.4"
-#define MyAppPublisher "Incognito"
+#define MyAppVersion "1.1.0"
+#define MyAppPublisher "IncoCode"
 #define MyAppExeName "BeamNGModsUpdateChecker.exe"
 
 [Setup]
@@ -21,9 +21,9 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 OutputDir=bin\
 OutputBaseFilename=beamng_mods_update_checker_setup
-Compression=lzma2/ultra64
+Compression=lzma/ultra64
 SolidCompression=yes
-InternalCompressLevel=ultra
+InternalCompressLevel=ultra64
 CompressionThreads=2
 
 [Languages]
