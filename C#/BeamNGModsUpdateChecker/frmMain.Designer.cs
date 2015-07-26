@@ -400,10 +400,12 @@
             this.Controls.Add(this.lvThreads);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.msMenu);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.msMenu;
             this.Name = "FrmMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmMain_KeyDown);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.cmsThreadsMenu.ResumeLayout(false);
             this.msMenu.ResumeLayout(false);

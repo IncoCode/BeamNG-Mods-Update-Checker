@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using BeamNGModsUpdateChecker.Properties;
@@ -471,6 +472,17 @@ namespace BeamNGModsUpdateChecker
         private void tsmiOpenAllUnreadTray_Click( object sender, EventArgs e )
         {
             this.tsmiOpenAllUnread.PerformClick();
+        }
+
+        private void FrmMain_KeyDown( object sender, KeyEventArgs e )
+        {
+            if ( e.Control && e.KeyCode == Keys.A )
+            {
+                foreach ( ListViewItem item in lvThreads.Items )
+                {
+                    item.Selected = true;
+                }
+            }
         }
     }
 
