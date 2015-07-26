@@ -30,7 +30,14 @@ namespace BeamNGModsUpdateChecker
             this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.Size = new Size( this._settings.MainFormWidth, this._settings.MainFormHeight );
-            this._updateChecker = new UpdateChecker();
+            try
+            {
+                this._updateChecker = new UpdateChecker();
+            }
+            catch ( Exception exception )
+            {
+                MessageBox.Show( exception.Message, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
         }
 
         private void ChangeLanguage( string lang )
@@ -174,14 +181,6 @@ namespace BeamNGModsUpdateChecker
 
         private void frmMain_Load( object sender, EventArgs e )
         {
-            try
-            {
-                this._updateChecker.LoadThreads();
-            }
-            catch
-            {
-                MessageBox.Show( strings.loadThreadsError, strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error );
-            }
             if ( this._settings.ShowOnlyUnread )
             {
                 this.lblOnlyUnread_Click( this.lblOnlyUnread, EventArgs.Empty );

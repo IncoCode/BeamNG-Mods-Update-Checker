@@ -119,13 +119,7 @@ namespace BeamNGModsUpdateChecker
             this._progPath = Directory.GetParent( Path.GetDirectoryName( ConfigurationManager.OpenExeConfiguration( ConfigurationUserLevel.PerUserRoamingAndLocal ).FilePath ) ).FullName;
             this._threads = new List<Topic>();
             this.ThreadFilter = new ThreadFilter();
-            try
-            {
-                this.LoadThreads();
-            }
-            catch
-            {
-            }
+            this.LoadThreads();
         }
 
         private int GetMaxCheckUpdCount( int index, int maxCheckUpdCount )
@@ -335,7 +329,7 @@ namespace BeamNGModsUpdateChecker
             catch
             {
                 this._threads = new List<Topic>();
-                throw new Exception( "Load error!" );
+                throw new Exception( strings.loadThreadsError );
             }
         }
 
