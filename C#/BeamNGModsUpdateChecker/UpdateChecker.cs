@@ -315,7 +315,13 @@ namespace BeamNGModsUpdateChecker
             string fileName = this._progPath + @"\Threads.json";
             if ( !File.Exists( fileName ) )
             {
-                return;
+                string searchDir = Directory.GetParent( this._progPath ).FullName;
+                string[] files = Directory.GetFiles( searchDir, "Threads.json", SearchOption.AllDirectories );
+                if ( files.Length == 0 )
+                {
+                    return;
+                }
+                File.Move( files[ 0 ], this._progPath + @"\Threads.json" );
             }
             try
             {
