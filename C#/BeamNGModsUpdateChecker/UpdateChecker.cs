@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -116,7 +117,14 @@ namespace BeamNGModsUpdateChecker
 
         public UpdateChecker()
         {
-            this._progPath = Directory.GetParent( Path.GetDirectoryName( ConfigurationManager.OpenExeConfiguration( ConfigurationUserLevel.PerUserRoamingAndLocal ).FilePath ) ).FullName;
+            this._progPath =
+                Directory.GetParent(
+                    Path.GetDirectoryName(
+                        ConfigurationManager.OpenExeConfiguration( ConfigurationUserLevel.PerUserRoamingAndLocal )
+                            .FilePath ) ).FullName;
+            #if DEBUG
+                this._progPath = Application.StartupPath;
+            #endif
             this._threads = new List<Topic>();
             this.ThreadFilter = new ThreadFilter();
             this.LoadThreads();
@@ -304,7 +312,7 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        public void LoadThreads()
+        private void LoadThreads()
         {
             string fileName = this._progPath + @"\Threads.json";
             if ( !File.Exists( fileName ) )
@@ -315,7 +323,18 @@ namespace BeamNGModsUpdateChecker
                 {
                     return;
                 }
-                File.Move( files[ 0 ], this._progPath + @"\Threads.json" );
+                try
+                {
+                    File.Move( files[ 0 ], this._progPath + @"\Threads.json" );
+                    if ( File.Exists( files[ 0 ] + ".bak" ) )
+                    {
+                        File.Move( files[ 0 ] + ".bak", this._progPath + @"\Threads.json.bak" );
+                    }
+                }
+                catch
+                {
+                    return;
+                }
             }
             try
             {
