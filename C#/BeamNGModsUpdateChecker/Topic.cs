@@ -95,7 +95,7 @@ namespace BeamNGModsUpdateChecker
                     result = str.Replace( findTag, "[" + findTag + "]" );
                 }
             }
-            return WebUtility.HtmlDecode( result );
+            return WebUtility.HtmlDecode( result ).Trim();
         }
 
         /// <summary>
