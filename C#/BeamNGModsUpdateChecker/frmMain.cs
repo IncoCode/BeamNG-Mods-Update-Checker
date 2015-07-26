@@ -483,6 +483,10 @@ namespace BeamNGModsUpdateChecker
                     item.Selected = true;
                 }
             }
+            if ( e.KeyData == Keys.Delete )
+            {
+                tsmiRemove.PerformClick();
+            }
         }
     }
 
