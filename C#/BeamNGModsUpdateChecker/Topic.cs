@@ -31,8 +31,7 @@ namespace BeamNGModsUpdateChecker
             this.Read = true;
             this.Attachments = new List<Attachment>();
 
-            var client = new RestClient( this.Link );
-            client.CookieContainer = cookieJar;
+            var client = new RestClient( this.Link ) { CookieContainer = cookieJar };
             var request = new RestRequest( Method.GET );
             IRestResponse response = client.Execute( request );
             string content = response.Content;

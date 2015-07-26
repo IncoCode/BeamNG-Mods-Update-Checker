@@ -1,7 +1,6 @@
 ﻿#region Using
 
 using System;
-using System.Threading;
 using System.Windows.Forms;
 
 #endregion

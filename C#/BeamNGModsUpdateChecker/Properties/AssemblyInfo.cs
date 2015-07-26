@@ -1,4 +1,4 @@
-#region Using
+﻿#region Using
 
 using System.Reflection;
 using System.Runtime.InteropServices;

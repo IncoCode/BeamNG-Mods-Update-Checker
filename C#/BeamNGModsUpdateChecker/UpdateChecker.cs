@@ -122,9 +122,9 @@ namespace BeamNGModsUpdateChecker
                     Path.GetDirectoryName(
                         ConfigurationManager.OpenExeConfiguration( ConfigurationUserLevel.PerUserRoamingAndLocal )
                             .FilePath ) ).FullName;
-            #if DEBUG
-                this._progPath = Application.StartupPath;
-            #endif
+#if DEBUG
+            this._progPath = Application.StartupPath;
+#endif
             this._threads = new List<Topic>();
             this.ThreadFilter = new ThreadFilter();
             this.LoadThreads();
