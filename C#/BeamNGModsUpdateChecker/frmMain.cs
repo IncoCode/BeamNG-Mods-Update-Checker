@@ -247,6 +247,12 @@ namespace BeamNGModsUpdateChecker
         {
             if ( this.lvThreads.SelectedItems.Count > 0 )
             {
+                if (
+                    MessageBox.Show( strings.deleteSelectedThreads, strings.warning, MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning ) != DialogResult.Yes )
+                {
+                    return;
+                }
                 for ( int i = 0; i < this.lvThreads.SelectedItems.Count; i++ )
                 {
                     string link = this.lvThreads.SelectedItems[ i ].SubItems[ 1 ].Text;

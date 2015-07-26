@@ -126,6 +126,9 @@
   <data name="copyright" xml:space="preserve">
     <value>Автор: Incognito.</value>
   </data>
+  <data name="deleteSelectedThreads" xml:space="preserve">
+    <value>Удалить выбранные темы?</value>
+  </data>
   <data name="error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
