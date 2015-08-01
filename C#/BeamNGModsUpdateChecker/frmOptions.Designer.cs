@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbMinimizeToTray = new System.Windows.Forms.CheckBox();
             this.btnOk = new System.Windows.Forms.Button();
+            this.cbAutomaticallyCheckForUpdates = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudUpdInterval)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,16 +85,24 @@
             // 
             // btnOk
             // 
-            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // cbAutomaticallyCheckForUpdates
+            // 
+            resources.ApplyResources(this.cbAutomaticallyCheckForUpdates, "cbAutomaticallyCheckForUpdates");
+            this.cbAutomaticallyCheckForUpdates.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbAutomaticallyCheckForUpdates.Name = "cbAutomaticallyCheckForUpdates";
+            this.cbAutomaticallyCheckForUpdates.UseVisualStyleBackColor = true;
             // 
             // FrmOptions
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbAutomaticallyCheckForUpdates);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cbMinimizeToTray);
             this.Controls.Add(this.label2);
@@ -119,5 +128,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbMinimizeToTray;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.CheckBox cbAutomaticallyCheckForUpdates;
     }
 }

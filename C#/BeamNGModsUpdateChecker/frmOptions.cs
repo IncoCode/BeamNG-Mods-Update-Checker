@@ -26,17 +26,11 @@ namespace BeamNGModsUpdateChecker
                     "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
                 if ( add && !this.IsStartupItem() )
                 {
-                    if ( rkApp != null )
-                    {
-                        rkApp.SetValue( "BeamNGModsUpdateChecker", Application.ExecutablePath );
-                    }
+                    rkApp?.SetValue( "BeamNGModsUpdateChecker", Application.ExecutablePath );
                 }
                 else if ( !add )
                 {
-                    if ( rkApp != null )
-                    {
-                        rkApp.DeleteValue( "BeamNGModsUpdateChecker", false );
-                    }
+                    rkApp?.DeleteValue( "BeamNGModsUpdateChecker", false );
                 }
             }
             catch
@@ -50,14 +44,7 @@ namespace BeamNGModsUpdateChecker
             {
                 RegistryKey rkApp = Registry.CurrentUser.OpenSubKey(
                     "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true );
-                if ( rkApp.GetValue( "BeamNGModsUpdateChecker" ) == null )
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return rkApp?.GetValue( "BeamNGModsUpdateChecker" ) != null;
             }
             catch
             {
@@ -69,6 +56,7 @@ namespace BeamNGModsUpdateChecker
         {
             this._settings.MinimizeOnStart = this.cbMinimizeToTray.Checked;
             this._settings.UpdInterval = (int)this.nudUpdInterval.Value;
+            this._settings.AutomaticallyCheckForUpdates = this.cbAutomaticallyCheckForUpdates.Checked;
             this.AddRemoveStartup( this.cbAutorun.Checked );
             this.Close();
         }
@@ -78,6 +66,7 @@ namespace BeamNGModsUpdateChecker
             this.cbAutorun.Checked = this.IsStartupItem();
             this.cbMinimizeToTray.Checked = this._settings.MinimizeOnStart;
             this.nudUpdInterval.Value = this._settings.UpdInterval;
+            this.cbAutomaticallyCheckForUpdates.Checked = this._settings.AutomaticallyCheckForUpdates;
         }
     }
 }

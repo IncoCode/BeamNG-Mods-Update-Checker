@@ -97,17 +97,7 @@ namespace BeamNGModsUpdateChecker
             }
         }
 
-        private void CheckUpdatesProgramRun()
-        {
-            this.CheckUpdates( true );
-        }
-
-        private void CheckUpdates()
-        {
-            this.CheckUpdates( false );
-        }
-
-        private void CheckUpdates( bool programRun )
+        private void CheckUpdates( bool programRun = false )
         {
             if ( this._isUpdating )
             {
@@ -284,10 +274,17 @@ namespace BeamNGModsUpdateChecker
 
         private void tmrUpd_Tick( object sender, EventArgs e )
         {
+            if ( !this._settings.AutomaticallyCheckForUpdates )
+            {
+                this.tmrUpd.Interval = 2000;
+                return;
+            }
             bool programRun = this.tmrUpd.Interval == 1000;
             this.tmrUpdProgress.Start();
             this.tmrUpd.Interval = this._settings.UpdInterval * 60 * 1000;
-            this._updThread = programRun ? new Thread( this.CheckUpdatesProgramRun ) : new Thread( this.CheckUpdates );
+            this._updThread = programRun
+                ? new Thread( () => { this.CheckUpdates( true ); } )
+                : new Thread( () => { this.CheckUpdates(); } );
             this._updThread.Start();
         }
 
@@ -393,7 +390,7 @@ namespace BeamNGModsUpdateChecker
         {
             this.tmrUpd.Stop();
             this.tmrUpdProgress.Start();
-            this._updThread = new Thread( this.CheckUpdates );
+            this._updThread = new Thread( () => { this.CheckUpdates(); } );
             this._updThread.Start();
             this.tmrUpd.Start();
         }

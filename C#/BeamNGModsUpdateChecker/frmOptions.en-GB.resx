@@ -142,6 +142,18 @@
   <data name="cbMinimizeToTray.Text" xml:space="preserve">
     <value>Minimize to tray on startup</value>
   </data>
+  <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="cbAutomaticallyCheckForUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
+  <data name="cbAutomaticallyCheckForUpdates.Text" xml:space="preserve">
+    <value>Automatically check for updates</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>185, 137</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAcAMDAAAAEAIACoJQAAdgAAABYWAAABACAAEAgAAB4mAAAQEAAAAQAgAGgEAAAuLgAAGBgAAAEA
